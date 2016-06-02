@@ -15,7 +15,8 @@ $ npm start
 This will start a simple http server on [localhost:8080](http://localhost:8080). It requires [http-server](https://www.npmjs.com/package/http-server) to be installed globally on your computer.
 
 ## Dev tools
-To run a single build of your code: `npm run build`\s\s
+To run a single build of your code: `npm run build`
+
 To run Webpack in watch mode:       `npm run watch`
 
 ## Important reads
