@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MainLayout from './MainLayout.js'
+// import MainLayout from './MainLayout.js'
+import ListLayout from './ListLayout.js'
 
 ReactDOM.render(
-  <MainLayout />,
+  <ListLayout />,
   document.getElementById('content')
 )

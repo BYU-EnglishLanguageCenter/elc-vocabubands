@@ -1,10 +1,11 @@
 import React from 'react'
-import Nav from './Nav.js'
 
 var List = React.createClass({
   render: function () {
     return (
-      <Nav />
+      <div className='list'>
+        <h1>List 1</h1>
+      </div>
     )
   }
 })
