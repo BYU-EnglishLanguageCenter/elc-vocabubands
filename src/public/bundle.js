@@ -57,13 +57,13 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _List = __webpack_require__(/*! ./List.js */ 168);
+	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 170);
 	
-	var _List2 = _interopRequireDefault(_List);
+	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_List2.default, null), document.getElementById('content'));
+	_reactDom2.default.render(_react2.default.createElement(_MainLayout2.default, null), document.getElementById('content'));
 
 /***/ },
 /* 1 */
@@ -20835,39 +20835,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 168 */
-/*!*************************!*\
-  !*** ./src/app/List.js ***!
-  \*************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Nav = __webpack_require__(/*! ./Nav.js */ 169);
-	
-	var _Nav2 = _interopRequireDefault(_Nav);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var List = _react2.default.createClass({
-	  displayName: 'List',
-	
-	  render: function render() {
-	    return _react2.default.createElement(_Nav2.default, null);
-	  }
-	});
-	
-	exports.default = List;
-
-/***/ },
+/* 168 */,
 /* 169 */
 /*!************************!*\
   !*** ./src/app/Nav.js ***!
@@ -20924,6 +20892,39 @@
 	});
 	
 	exports.default = Nav;
+
+/***/ },
+/* 170 */
+/*!*******************************!*\
+  !*** ./src/app/MainLayout.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Nav = __webpack_require__(/*! ./Nav.js */ 169);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var MainLayout = _react2.default.createClass({
+	  displayName: 'MainLayout',
+	
+	  render: function render() {
+	    return _react2.default.createElement(_Nav2.default, null);
+	  }
+	});
+	
+	exports.default = MainLayout;
 
 /***/ }
 /******/ ]);
