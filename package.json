@@ -4,6 +4,10 @@
   "description": "a language learning web app",
   "main": "index.js",
   "author": "ELC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kylehoover/elc-vocabubands.git"
+  },
   "license": "ISC",
   "dependencies": {
     "babel-loader": "^6.2.4",
