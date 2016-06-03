@@ -20896,32 +20896,38 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var data = [{ id: 1, word: 'detailed.j', support_words: 'comprehensive; complete;', definition: 'including a lot of information', building_words: 'precise; thorough' }, { id: 2, word: 'exclude.v', support_words: 'prevent', definition: 'to prevent someone from doing something; to leave out something', building_words: 'preclude; proscribe; disallow' }];
+	
 	var ListRow = _react2.default.createClass({
 	  displayName: 'ListRow',
+	
+	  propTypes: {
+	    children: _react2.default.PropTypes.object
+	  },
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'tr',
-	      null,
+	      { id: this.props.children.id },
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        'detailed.j'
+	        this.props.children.word
 	      ),
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        'comprehensive; complete;'
+	        this.props.children.support_words
 	      ),
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        'including a lot of information'
+	        this.props.children.definition
 	      ),
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        'precise; thorough'
+	        this.props.children.building_words
 	      )
 	    );
 	  }
@@ -20930,7 +20936,19 @@
 	var ListTable = _react2.default.createClass({
 	  displayName: 'ListTable',
 	
+	  propTypes: {
+	    data: _react2.default.PropTypes.array
+	  },
+	
 	  render: function render() {
+	    var listRows = this.props.data.map(function (row) {
+	      return _react2.default.createElement(
+	        ListRow,
+	        { key: row.id },
+	        row
+	      );
+	    });
+	
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'listTable' },
@@ -20968,8 +20986,7 @@
 	        _react2.default.createElement(
 	          'tbody',
 	          null,
-	          _react2.default.createElement(ListRow, null),
-	          _react2.default.createElement(ListRow, null)
+	          listRows
 	        )
 	      )
 	    );
@@ -20993,7 +21010,7 @@
 	        'List ',
 	        this.props.list_id
 	      ),
-	      _react2.default.createElement(ListTable, null)
+	      _react2.default.createElement(ListTable, { data: data })
 	    );
 	  }
 	});
