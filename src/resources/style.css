@@ -10,8 +10,13 @@ body {
 .list {
   width: 75%;
   margin: auto;
+  margin-top: 75px;
 }
 
 .navbar {
   border-radius: 0px;
+}
+
+.table {
+  font-weight: 100;
 }

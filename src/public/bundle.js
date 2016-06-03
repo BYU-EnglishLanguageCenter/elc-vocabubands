@@ -20870,7 +20870,7 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(_Nav2.default, null),
-	      _react2.default.createElement(_List2.default, null)
+	      _react2.default.createElement(_List2.default, { list_id: 1 })
 	    );
 	  }
 	});
@@ -20896,8 +20896,92 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var ListRow = _react2.default.createClass({
+	  displayName: 'ListRow',
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'tr',
+	      null,
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        'detailed.j'
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        'comprehensive; complete;'
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        'including a lot of information'
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        'precise; thorough'
+	      )
+	    );
+	  }
+	});
+	
+	var ListTable = _react2.default.createClass({
+	  displayName: 'ListTable',
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'listTable' },
+	      _react2.default.createElement(
+	        'table',
+	        { className: 'table table-striped' },
+	        _react2.default.createElement(
+	          'thead',
+	          null,
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Word'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Support Words'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Definition'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Building Words'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'tbody',
+	          null,
+	          _react2.default.createElement(ListRow, null),
+	          _react2.default.createElement(ListRow, null)
+	        )
+	      )
+	    );
+	  }
+	});
+	
 	var List = _react2.default.createClass({
 	  displayName: 'List',
+	
+	  propTypes: {
+	    list_id: _react2.default.PropTypes.number
+	  },
 	
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -20906,8 +20990,10 @@
 	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        'List 1'
-	      )
+	        'List ',
+	        this.props.list_id
+	      ),
+	      _react2.default.createElement(ListTable, null)
 	    );
 	  }
 	});

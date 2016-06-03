@@ -7,7 +7,7 @@ var ListLayout = React.createClass({
     return (
       <div>
         <Nav />
-        <List />
+        <List list_id={1}/>
       </div>
     )
   }
