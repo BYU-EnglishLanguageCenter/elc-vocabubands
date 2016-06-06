@@ -57,7 +57,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 170);
+	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 190);
 	
 	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
@@ -20836,7 +20836,8 @@
 
 /***/ },
 /* 168 */,
-/* 169 */
+/* 169 */,
+/* 170 */
 /*!************************!*\
   !*** ./src/app/Nav.js ***!
   \************************/
@@ -20894,7 +20895,26 @@
 	exports.default = Nav;
 
 /***/ },
-/* 170 */
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */
 /*!*******************************!*\
   !*** ./src/app/MainLayout.js ***!
   \*******************************/
@@ -20910,7 +20930,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Nav = __webpack_require__(/*! ./Nav.js */ 169);
+	var _Nav = __webpack_require__(/*! ./Nav.js */ 170);
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	

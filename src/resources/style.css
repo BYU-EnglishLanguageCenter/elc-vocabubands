@@ -10,3 +10,7 @@ body {
 .navbar {
   border-radius: 0px;
 }
+
+.navbar-brand {
+  font-size: 28px;
+}
