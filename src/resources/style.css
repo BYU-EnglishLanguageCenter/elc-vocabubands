@@ -9,8 +9,11 @@ body {
 
 .list {
   width: 75%;
-  margin: auto;
-  margin-top: 75px;
+  margin: 75px auto;
+}
+
+.listTable {
+  margin: 40px 0 80px 0;
 }
 
 .navbar {

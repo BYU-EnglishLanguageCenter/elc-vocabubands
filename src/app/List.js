@@ -1,3 +1,5 @@
+'use strict'
+
 import React from 'react'
 import axios from 'axios'
 
@@ -58,27 +60,32 @@ var List = React.createClass({
   },
 
   propTypes: {
-    listID: React.PropTypes.number
-  },
-
-  loadListData: function () {
-    axios.get('/resources/lists/list' + this.props.listID + '.json').then((response) => {
-      console.log(response)
-      this.setState({ data: response.data })
-    }).catch(function (response) {
-      console.log(response)
-    })
+    listID: React.PropTypes.number,
+    url: React.PropTypes.string
   },
 
   componentDidMount: function () {
     this.loadListData()
   },
 
+  loadListData: function () {
+    axios.get(this.props.url + 'list' + this.props.listID + '.json').then((response) => {
+      this.setState({ data: response.data })
+    }).catch((response) => {
+      console.log(response)
+    })
+  },
+
   render: function () {
     return (
       <div className='list'>
-        <h1>List {this.props.listID}</h1>
+        <h1>
+          List {this.props.listID}
+        </h1>
         <ListTable data={this.state.data} />
+        <button className='btn btn-primary' role='button'>
+          See all Lists
+        </button>
       </div>
     )
   }

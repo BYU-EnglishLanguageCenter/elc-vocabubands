@@ -7,7 +7,7 @@ var ListLayout = React.createClass({
     return (
       <div>
         <Nav />
-        <List listID={1} />
+        <List listID={1} url={'/resources/lists/'} />
       </div>
     )
   }
