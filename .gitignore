@@ -1,2 +1,5 @@
 # Dependency directory
 node_modules
+
+# Bundled js files
+src/public/bundle.*
