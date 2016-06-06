@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "word": "detailed.j",
+    "support_words": "comprehensive; complete;",
+    "definition": "including a lot of information",
+    "building_words": "precise; thorough"
+  },
+  {
+    "id": 2,
+    "word": "exclude.v",
+    "support_words": "prevent",
+    "definition": "to prevent someone from doing something; to leave out something",
+    "building_words": "preclude; proscribe; disallow"
+  }
+]

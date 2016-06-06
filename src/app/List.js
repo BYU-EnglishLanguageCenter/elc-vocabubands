@@ -1,9 +1,5 @@
 import React from 'react'
-
-var data = [
-  {id: 1, word: 'detailed.j', support_words: 'comprehensive; complete;', definition: 'including a lot of information', building_words: 'precise; thorough'},
-  {id: 2, word: 'exclude.v', support_words: 'prevent', definition: 'to prevent someone from doing something; to leave out something', building_words: 'preclude; proscribe; disallow'}
-]
+import axios from 'axios'
 
 var ListRow = React.createClass({
   propTypes: {
@@ -57,15 +53,32 @@ var ListTable = React.createClass({
 })
 
 var List = React.createClass({
+  getInitialState: function () {
+    return { data: [] }
+  },
+
   propTypes: {
-    list_id: React.PropTypes.number
+    listID: React.PropTypes.number
+  },
+
+  loadListData: function () {
+    axios.get('/resources/lists/list' + this.props.listID + '.json').then((response) => {
+      console.log(response)
+      this.setState({ data: response.data })
+    }).catch(function (response) {
+      console.log(response)
+    })
+  },
+
+  componentDidMount: function () {
+    this.loadListData()
   },
 
   render: function () {
     return (
       <div className='list'>
-        <h1>List {this.props.list_id}</h1>
-        <ListTable data={data}/>
+        <h1>List {this.props.listID}</h1>
+        <ListTable data={this.state.data} />
       </div>
     )
   }
