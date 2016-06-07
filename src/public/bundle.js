@@ -57,7 +57,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 190);
+	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 229);
 	
 	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
@@ -20856,7 +20856,89 @@
 /* 186 */,
 /* 187 */,
 /* 188 */,
-/* 189 */
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */
+/*!*******************************!*\
+  !*** ./src/app/MainLayout.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Home = __webpack_require__(/*! ./Home.js */ 252);
+	
+	var _Home2 = _interopRequireDefault(_Home);
+	
+	var _Nav = __webpack_require__(/*! ./Nav.js */ 230);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var MainLayout = _react2.default.createClass({
+	  displayName: 'MainLayout',
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'mainLayout' },
+	      _react2.default.createElement(_Nav2.default, null),
+	      _react2.default.createElement(_Home2.default, null)
+	    );
+	  }
+	});
+	
+	exports.default = MainLayout;
+
+/***/ },
+/* 230 */
 /*!************************!*\
   !*** ./src/app/Nav.js ***!
   \************************/
@@ -20914,10 +20996,31 @@
 	exports.default = Nav;
 
 /***/ },
-/* 190 */
-/*!*******************************!*\
-  !*** ./src/app/MainLayout.js ***!
-  \*******************************/
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */
+/*!*************************!*\
+  !*** ./src/app/Home.js ***!
+  \*************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20930,21 +21033,90 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Nav = __webpack_require__(/*! ./Nav.js */ 189);
+	var _AllLists = __webpack_require__(/*! ./AllLists.js */ 253);
 	
-	var _Nav2 = _interopRequireDefault(_Nav);
+	var _AllLists2 = _interopRequireDefault(_AllLists);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var MainLayout = _react2.default.createClass({
-	  displayName: 'MainLayout',
+	var data = [13, 14];
+	
+	var Home = _react2.default.createClass({
+	  displayName: 'Home',
 	
 	  render: function render() {
-	    return _react2.default.createElement(_Nav2.default, null);
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'home' },
+	      _react2.default.createElement(_AllLists2.default, { data: data })
+	    );
 	  }
 	});
 	
-	exports.default = MainLayout;
+	exports.default = Home;
+
+/***/ },
+/* 253 */
+/*!*****************************!*\
+  !*** ./src/app/AllLists.js ***!
+  \*****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListLink = _react2.default.createClass({
+	  displayName: 'ListLink',
+	
+	  propTypes: {
+	    listID: _react2.default.PropTypes.number
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'a',
+	      { className: 'btn btn-primary btn-lg listLink', role: 'button', href: '#' },
+	      'List ',
+	      this.props.listID
+	    );
+	  }
+	});
+	
+	var AllLists = _react2.default.createClass({
+	  displayName: 'AllLists',
+	
+	  propTypes: {
+	    data: _react2.default.PropTypes.array
+	  },
+	
+	  render: function render() {
+	    var listLinks = this.props.data.map(function (listID) {
+	      return _react2.default.createElement(ListLink, { listID: listID });
+	    });
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'allLists' },
+	      _react2.default.createElement(
+	        'h1',
+	        { id: 'all-lists-header' },
+	        'All Lists'
+	      ),
+	      listLinks
+	    );
+	  }
+	});
+	
+	exports.default = AllLists;
 
 /***/ }
 /******/ ]);
