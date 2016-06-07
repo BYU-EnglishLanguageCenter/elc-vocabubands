@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import axios from 'axios'
+import { Link } from 'react-router'
 
 var ListRow = React.createClass({
   propTypes: {
@@ -55,25 +55,9 @@ var ListTable = React.createClass({
 })
 
 var List = React.createClass({
-  getInitialState: function () {
-    return { data: [] }
-  },
-
   propTypes: {
-    listID: React.PropTypes.number,
-    url: React.PropTypes.string
-  },
-
-  componentDidMount: function () {
-    this.loadListData()
-  },
-
-  loadListData: function () {
-    axios.get(this.props.url + 'list' + this.props.listID + '.json').then((response) => {
-      this.setState({ data: response.data })
-    }).catch((response) => {
-      console.log(response)
-    })
+    data: React.PropTypes.array,
+    listID: React.PropTypes.string
   },
 
   render: function () {
@@ -82,10 +66,10 @@ var List = React.createClass({
         <h1>
           List {this.props.listID}
         </h1>
-        <ListTable data={this.state.data} />
-        <button className='btn btn-primary' role='button'>
+        <ListTable data={this.props.data} />
+        <Link to='/' className='btn btn-primary' role='button'>
           See all Lists
-        </button>
+        </Link>
       </div>
     )
   }

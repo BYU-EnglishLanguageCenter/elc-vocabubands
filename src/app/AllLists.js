@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import { Link } from 'react-router'
 
 var ListLink = React.createClass({
   propTypes: {
@@ -9,9 +10,9 @@ var ListLink = React.createClass({
 
   render: function () {
     return (
-      <a className='btn btn-primary btn-lg listLink' role='button' href='#'>
+      <Link to={'list/' + this.props.listID} className='btn btn-primary btn-lg listLink' role='button'>
         List {this.props.listID}
-      </a>
+      </Link>
     )
   }
 })
@@ -24,7 +25,7 @@ var AllLists = React.createClass({
   render: function () {
     var listLinks = this.props.data.map(function (listID) {
       return (
-        <ListLink listID={listID} />
+        <ListLink listID={listID} key={listID} />
       )
     })
 
