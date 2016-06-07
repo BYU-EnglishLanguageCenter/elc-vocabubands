@@ -63,9 +63,9 @@
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _ListLayout = __webpack_require__(/*! ./ListLayout */ 231);
+	var _ListContainer = __webpack_require__(/*! ./ListContainer */ 254);
 	
-	var _ListLayout2 = _interopRequireDefault(_ListLayout);
+	var _ListContainer2 = _interopRequireDefault(_ListContainer);
 	
 	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 252);
 	
@@ -80,7 +80,7 @@
 	    _reactRouter.Route,
 	    { path: '/', component: _MainLayout2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'list/:id', component: _ListLayout2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: 'list/:id', component: _ListContainer2.default })
 	  )
 	), document.getElementById('content'));
 
@@ -26652,47 +26652,7 @@
 	exports.default = AllLists;
 
 /***/ },
-/* 231 */
-/*!*******************************!*\
-  !*** ./src/app/ListLayout.js ***!
-  \*******************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _List = __webpack_require__(/*! ./List.js */ 232);
-	
-	var _List2 = _interopRequireDefault(_List);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ListLayout = _react2.default.createClass({
-	  displayName: 'ListLayout',
-	
-	  propTypes: {
-	    params: _react2.default.PropTypes.object
-	  },
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_List2.default, { listID: this.props.params.id, url: '/resources/lists/list' + this.props.params.id + '.json' })
-	    );
-	  }
-	});
-	
-	exports.default = ListLayout;
-
-/***/ },
+/* 231 */,
 /* 232 */
 /*!*************************!*\
   !*** ./src/app/List.js ***!
@@ -26708,10 +26668,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _axios = __webpack_require__(/*! axios */ 233);
-	
-	var _axios2 = _interopRequireDefault(_axios);
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 168);
 	
@@ -26815,27 +26771,9 @@
 	var List = _react2.default.createClass({
 	  displayName: 'List',
 	
-	  getInitialState: function getInitialState() {
-	    return { data: [] };
-	  },
-	
 	  propTypes: {
-	    listID: _react2.default.PropTypes.string,
-	    url: _react2.default.PropTypes.string
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    this.loadListData();
-	  },
-	
-	  loadListData: function loadListData() {
-	    var _this = this;
-	
-	    _axios2.default.get(this.props.url).then(function (response) {
-	      _this.setState({ data: response.data });
-	    }).catch(function (response) {
-	      console.log(response);
-	    });
+	    data: _react2.default.PropTypes.array,
+	    listID: _react2.default.PropTypes.string
 	  },
 	
 	  render: function render() {
@@ -26848,7 +26786,7 @@
 	        'List ',
 	        this.props.listID
 	      ),
-	      _react2.default.createElement(ListTable, { data: this.state.data }),
+	      _react2.default.createElement(ListTable, { data: this.props.data }),
 	      _react2.default.createElement(
 	        _reactRouter.Link,
 	        { to: '/', className: 'btn btn-primary', role: 'button' },
@@ -28146,10 +28084,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Home = __webpack_require__(/*! ./Home.js */ 229);
-	
-	var _Home2 = _interopRequireDefault(_Home);
-	
 	var _Nav = __webpack_require__(/*! ./Nav.js */ 253);
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
@@ -28168,7 +28102,7 @@
 	      'div',
 	      { className: 'mainLayout' },
 	      _react2.default.createElement(_Nav2.default, null),
-	      this.props.children
+	      this.props.children || 'Welcome to Vocabubands!'
 	    );
 	  }
 	});
@@ -28232,6 +28166,69 @@
 	});
 	
 	exports.default = Nav;
+
+/***/ },
+/* 254 */
+/*!**********************************!*\
+  !*** ./src/app/ListContainer.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _axios = __webpack_require__(/*! axios */ 233);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _List = __webpack_require__(/*! ./List.js */ 232);
+	
+	var _List2 = _interopRequireDefault(_List);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListContainer = _react2.default.createClass({
+	  displayName: 'ListContainer',
+	
+	  getInitialState: function getInitialState() {
+	    return { data: [] };
+	  },
+	
+	  propTypes: {
+	    params: _react2.default.PropTypes.object
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    this.loadListData();
+	  },
+	
+	  loadListData: function loadListData() {
+	    var _this = this;
+	
+	    _axios2.default.get('/resources/lists/list' + this.props.params.id + '.json').then(function (response) {
+	      _this.setState({ data: response.data });
+	    }).catch(function (response) {
+	      console.log(response);
+	    });
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_List2.default, { data: this.state.data, listID: this.props.params.id })
+	    );
+	  }
+	});
+	
+	exports.default = ListContainer;
 
 /***/ }
 /******/ ]);

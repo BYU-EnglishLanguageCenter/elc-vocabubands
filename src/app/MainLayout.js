@@ -1,5 +1,4 @@
 import React from 'react'
-import Home from './Home.js'
 import Nav from './Nav.js'
 
 var MainLayout = React.createClass({
@@ -11,7 +10,7 @@ var MainLayout = React.createClass({
     return (
       <div className='mainLayout'>
         <Nav />
-        {this.props.children}
+        {this.props.children || 'Welcome to Vocabubands!'}
       </div>
     )
   }
