@@ -1,0 +1,205 @@
+[
+ {
+   "id":1,
+   "word":"acceptable.j",
+   "support_words":"adequate; ",
+   "definition":"capable or worthy of being accepted",
+   "building_words":"valid; plausible; satisfactory; justified; justifiable"
+ },
+ {
+   "id":2,
+   "word":"accuracy.n",
+   "support_words":"",
+   "definition":"freedom from mistake or error; ability to work without making mistakes",
+   "building_words":"precision; rigor; veracity; soundness; "
+ },
+ {
+   "id":3,
+   "word":"bias.n",
+   "support_words":"",
+   "definition":"a strong interest in something, a tendency to believe that some X are better than others",
+   "building_words":"distortion; inequity; predisposition; preconception; "
+ },
+ {
+   "id":4,
+   "word":"commonly.r",
+   "support_words":"generally; normally; regularly; ",
+   "definition":"done by many people; occurring or appearing frequently",
+   "building_words":"mutually;  universally;  conventionally;  popularly; "
+ },
+ {
+   "id":5,
+   "word":"constraint.n",
+   "support_words":"limitation; limit; ",
+   "definition":"something that limits or restricts X",
+   "building_words":"parameter;  exigency;  stricture"
+ },
+ {
+   "id":6,
+   "word":"convert.v",
+   "support_words":"transform; alter; transfer; translate; ",
+   "definition":"to change X into a different form to be used in a different way",
+   "building_words":"tailor;  encode; "
+ },
+ {
+   "id":7,
+   "word":"discrimination.n",
+   "support_words":"contrast; insight; distinction; ",
+   "definition":"the practice of unfairly treating a person or group differently from others; the ability to recognize difference",
+   "building_words":"inequality;  differentiation;  demarcation"
+ },
+ {
+   "id":8,
+   "word":"distribute.v",
+   "support_words":"spread; ",
+   "definition":"to give or deliver something; to divide among members of a group",
+   "building_words":"export;  export;  allocate;  disseminate;  diffuse"
+ },
+ {
+   "id":9,
+   "word":"efficient.j",
+   "support_words":"effective; professional; ",
+   "definition":"capable of producing desired results without wasting materials, time, or energy",
+   "building_words":"functional;  systematic;  ordered"
+ },
+ {
+   "id":10,
+   "word":"evident.j",
+   "support_words":"apparent; distinct; obvious; ",
+   "definition":"clear to the sight or mind",
+   "building_words":"marked;  tangible;  overt;  noticeable;  conspicuous;  observable;  discernible;  distinguishable;  demonstrable"
+ },
+ {
+   "id":11,
+   "word":"extension.n",
+   "support_words":"",
+   "definition":"the act of making something longer or greater",
+   "building_words":"continuation;  enlargement;  intensification;  outgrowth;  perpetuation;  maximization; "
+ },
+ {
+   "id":12,
+   "word":"frequent.j",
+   "support_words":"numerous; normal; regular; ",
+   "definition":"happening often",
+   "building_words":"repeated; prevalent;  continual"
+ },
+ {
+   "id":13,
+   "word":"functional.j",
+   "support_words":"",
+   "definition":"designed to have a practical use, working properly, relating to the use or function of X",
+   "building_words":"applied; usable; anatomical;  utilitarian; "
+ },
+ {
+   "id":14,
+   "word":"greatly.r",
+   "support_words":"",
+   "definition":"to a great extent or degree",
+   "building_words":"substantially;  considerably;  extensively;  profoundly;  materially;  maximally; "
+ },
+ {
+   "id":15,
+   "word":"helpful.j",
+   "support_words":"useful; valuable; ",
+   "definition":"making it easier to do a job, deal with a problem, etc.�:�giving help",
+   "building_words":"productive;  beneficial;  constructive;  informative;  instructive;  invaluable;  advantageous;  illuminating;  salutary"
+ },
+ {
+   "id":16,
+   "word":"innovation.n",
+   "support_words":"",
+   "definition":"the act or process of introducing new ideas, devices, or methods.",
+   "building_words":"invention; advancement; "
+ },
+ {
+   "id":17,
+   "word":"logic.n",
+   "support_words":"sense; ",
+   "definition":"the science that studies the formal processes of thinking and reasoning; a proper or reasonable way of thinking",
+   "building_words":"rationale; rationality; coherence"
+ },
+ {
+   "id":18,
+   "word":"mainly.r",
+   "support_words":"primarily; essentially; mostly; ",
+   "definition":"most important",
+   "building_words":"predominantly; principally; chiefly"
+ },
+ {
+   "id":19,
+   "word":"maintenance.n",
+   "support_words":"conservation; ",
+   "definition":"the act of maintaining X",
+   "building_words":"preservation; livelihood; "
+ },
+ {
+   "id":20,
+   "word":"motivate.v",
+   "support_words":"influence; cause; inspire; prompt; ",
+   "definition":"to give someone a reason for doing something; to be a reason for something",
+   "building_words":"stimulate; underlie; activate;  occasion; "
+ },
+ {
+   "id":21,
+   "word":"obligation.n",
+   "support_words":"understanding;  requirement;  commitment;  commitment; ",
+   "definition":"something that you must do because of a law, rule, promise, etc.; something you must do because it is morally right",
+   "building_words":"necessity; appreciation; imperative;  compulsion; "
+ },
+ {
+   "id":22,
+   "word":"principal.j",
+   "support_words":"basic; primary;  fundamental; main; ",
+   "definition":"most important",
+   "building_words":"underlying; prevailing; focal; predominant; paramount;  overarching; overriding; cardinal; "
+ },
+ {
+   "id":23,
+   "word":"prominent.j",
+   "support_words":"famous; major; ",
+   "definition":"important and well-known; easily noticed or seen",
+   "building_words":"influential; notable; salient; marked; conspicuous; eminent; "
+ },
+ {
+   "id":24,
+   "word":"proposed.j",
+   "support_words":"",
+   "definition":"to suggest (always used before a noun)",
+   "building_words":"hypothetical; projected; intended"
+ },
+ {
+   "id":25,
+   "word":"radical.j",
+   "support_words":"essential; fundamental; ",
+   "definition":"very new and different from what is traditional or ordinary; having extreme political or social views",
+   "building_words":"progressive; revolutionary; "
+ },
+ {
+   "id":26,
+   "word":"restrict.v",
+   "support_words":"contain; control; limit;  origin; formation; ",
+   "definition":"to limit or prevent something",
+   "building_words":"stem; confine; constrain; circumscribe; delimit"
+ },
+ {
+   "id":27,
+   "word":"restriction.n",
+   "support_words":"limitation; check; limit; ",
+   "definition":"a law or rule that limits or controls; the act of limiting or controlling",
+   "building_words":"parameter; rigor; taboo; stricture; "
+ },
+ {
+   "id":28,
+   "word":"vital.j",
+   "support_words":"central; necessary; critical; essential; fundamental; crucial; ",
+   "definition":"extremely important: crucial; needed by your body in order to keep living; very lively or energetic",
+   "building_words":"required; integral; decisive; indispensable; imperative; paramount; invaluable; requisite; "
+ },
+ {
+   "id":29,
+   "word":"widespread.j",
+   "support_words":"general; extensive; ",
+   "definition":"common over a wide area or among many people",
+   "building_words":"prevalent; prevailing; pervasive; endemic; "
+ }
+]

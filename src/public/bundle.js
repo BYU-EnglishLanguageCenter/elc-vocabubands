@@ -59,13 +59,17 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 168);
 	
-	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 229);
+	var _Home = __webpack_require__(/*! ./Home.js */ 229);
 	
-	var _MainLayout2 = _interopRequireDefault(_MainLayout);
+	var _Home2 = _interopRequireDefault(_Home);
 	
 	var _ListLayout = __webpack_require__(/*! ./ListLayout */ 231);
 	
 	var _ListLayout2 = _interopRequireDefault(_ListLayout);
+	
+	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 252);
+	
+	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -75,7 +79,8 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: _MainLayout2.default },
-	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _ListLayout2.default })
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'list/:id', component: _ListLayout2.default })
 	  )
 	), document.getElementById('content'));
 
@@ -26544,9 +26549,9 @@
 
 /***/ },
 /* 229 */
-/*!*******************************!*\
-  !*** ./src/app/MainLayout.js ***!
-  \*******************************/
+/*!*************************!*\
+  !*** ./src/app/Home.js ***!
+  \*************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26559,40 +26564,33 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Home = __webpack_require__(/*! ./Home.js */ 252);
+	var _AllLists = __webpack_require__(/*! ./AllLists.js */ 230);
 	
-	var _Home2 = _interopRequireDefault(_Home);
-	
-	var _Nav = __webpack_require__(/*! ./Nav.js */ 230);
-	
-	var _Nav2 = _interopRequireDefault(_Nav);
+	var _AllLists2 = _interopRequireDefault(_AllLists);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var MainLayout = _react2.default.createClass({
-	  displayName: 'MainLayout',
+	var data = [13, 14];
 	
-	  propTypes: {
-	    children: _react2.default.PropTypes.object // IndexRoute in index.js
-	  },
+	var Home = _react2.default.createClass({
+	  displayName: 'Home',
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'mainLayout' },
-	      _react2.default.createElement(_Nav2.default, null),
-	      this.props.children
+	      { className: 'home' },
+	      _react2.default.createElement(_AllLists2.default, { data: data })
 	    );
 	  }
 	});
 	
-	exports.default = MainLayout;
+	exports.default = Home;
 
 /***/ },
 /* 230 */
-/*!************************!*\
-  !*** ./src/app/Nav.js ***!
-  \************************/
+/*!*****************************!*\
+  !*** ./src/app/AllLists.js ***!
+  \*****************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26605,46 +26603,53 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 168);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Nav = _react2.default.createClass({
-	  displayName: 'Nav',
+	var ListLink = _react2.default.createClass({
+	  displayName: 'ListLink',
+	
+	  propTypes: {
+	    listID: _react2.default.PropTypes.number
+	  },
 	
 	  render: function render() {
 	    return _react2.default.createElement(
-	      'nav',
-	      { className: 'navbar navbar-default', role: 'navigation' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'container-fluid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'navbar-header pull-left' },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'navbar-brand' },
-	            'ELC | Vocabubands'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'navbar-header pull-right' },
-	          _react2.default.createElement(
-	            'ul',
-	            { className: 'nav pull-left' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#', className: 'btn btn-default navbar-btn', id: 'login-btn', role: 'button' },
-	              'Login'
-	            )
-	          )
-	        )
-	      )
+	      _reactRouter.Link,
+	      { to: 'list/' + this.props.listID, className: 'btn btn-primary btn-lg listLink', role: 'button' },
+	      'List ',
+	      this.props.listID
 	    );
 	  }
 	});
 	
-	exports.default = Nav;
+	var AllLists = _react2.default.createClass({
+	  displayName: 'AllLists',
+	
+	  propTypes: {
+	    data: _react2.default.PropTypes.array
+	  },
+	
+	  render: function render() {
+	    var listLinks = this.props.data.map(function (listID) {
+	      return _react2.default.createElement(ListLink, { listID: listID, key: listID });
+	    });
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'allLists' },
+	      _react2.default.createElement(
+	        'h1',
+	        { id: 'all-lists-header' },
+	        'All Lists'
+	      ),
+	      listLinks
+	    );
+	  }
+	});
+	
+	exports.default = AllLists;
 
 /***/ },
 /* 231 */
@@ -26672,11 +26677,15 @@
 	var ListLayout = _react2.default.createClass({
 	  displayName: 'ListLayout',
 	
+	  propTypes: {
+	    params: _react2.default.PropTypes.object
+	  },
+	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_List2.default, { listID: 13, url: '/resources/lists/list13.json' })
+	      _react2.default.createElement(_List2.default, { listID: this.props.params.id, url: '/resources/lists/list' + this.props.params.id + '.json' })
 	    );
 	  }
 	});
@@ -26703,6 +26712,8 @@
 	var _axios = __webpack_require__(/*! axios */ 233);
 	
 	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 168);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26809,7 +26820,7 @@
 	  },
 	
 	  propTypes: {
-	    listID: _react2.default.PropTypes.number,
+	    listID: _react2.default.PropTypes.string,
 	    url: _react2.default.PropTypes.string
 	  },
 	
@@ -26839,8 +26850,8 @@
 	      ),
 	      _react2.default.createElement(ListTable, { data: this.state.data }),
 	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary', role: 'button' },
+	        _reactRouter.Link,
+	        { to: '/', className: 'btn btn-primary', role: 'button' },
 	        'See all Lists'
 	      )
 	    );
@@ -28120,9 +28131,9 @@
 
 /***/ },
 /* 252 */
-/*!*************************!*\
-  !*** ./src/app/Home.js ***!
-  \*************************/
+/*!*******************************!*\
+  !*** ./src/app/MainLayout.js ***!
+  \*******************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28135,33 +28146,40 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _AllLists = __webpack_require__(/*! ./AllLists.js */ 253);
+	var _Home = __webpack_require__(/*! ./Home.js */ 229);
 	
-	var _AllLists2 = _interopRequireDefault(_AllLists);
+	var _Home2 = _interopRequireDefault(_Home);
+	
+	var _Nav = __webpack_require__(/*! ./Nav.js */ 253);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var data = [13, 14];
+	var MainLayout = _react2.default.createClass({
+	  displayName: 'MainLayout',
 	
-	var Home = _react2.default.createClass({
-	  displayName: 'Home',
+	  propTypes: {
+	    children: _react2.default.PropTypes.object // IndexRoute in index.js
+	  },
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'home' },
-	      _react2.default.createElement(_AllLists2.default, { data: data })
+	      { className: 'mainLayout' },
+	      _react2.default.createElement(_Nav2.default, null),
+	      this.props.children
 	    );
 	  }
 	});
 	
-	exports.default = Home;
+	exports.default = MainLayout;
 
 /***/ },
 /* 253 */
-/*!*****************************!*\
-  !*** ./src/app/AllLists.js ***!
-  \*****************************/
+/*!************************!*\
+  !*** ./src/app/Nav.js ***!
+  \************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28176,49 +28194,44 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ListLink = _react2.default.createClass({
-	  displayName: 'ListLink',
-	
-	  propTypes: {
-	    listID: _react2.default.PropTypes.number
-	  },
+	var Nav = _react2.default.createClass({
+	  displayName: 'Nav',
 	
 	  render: function render() {
 	    return _react2.default.createElement(
-	      'a',
-	      { className: 'btn btn-primary btn-lg listLink', role: 'button', href: '#' },
-	      'List ',
-	      this.props.listID
-	    );
-	  }
-	});
-	
-	var AllLists = _react2.default.createClass({
-	  displayName: 'AllLists',
-	
-	  propTypes: {
-	    data: _react2.default.PropTypes.array
-	  },
-	
-	  render: function render() {
-	    var listLinks = this.props.data.map(function (listID) {
-	      return _react2.default.createElement(ListLink, { listID: listID });
-	    });
-	
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'allLists' },
+	      'nav',
+	      { className: 'navbar navbar-default', role: 'navigation' },
 	      _react2.default.createElement(
-	        'h1',
-	        { id: 'all-lists-header' },
-	        'All Lists'
-	      ),
-	      listLinks
+	        'div',
+	        { className: 'container-fluid' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'navbar-header pull-left' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'navbar-brand' },
+	            'ELC | Vocabubands'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'navbar-header pull-right' },
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'nav pull-left' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', className: 'btn btn-default navbar-btn', id: 'login-btn', role: 'button' },
+	              'Login'
+	            )
+	          )
+	        )
+	      )
 	    );
 	  }
 	});
 	
-	exports.default = AllLists;
+	exports.default = Nav;
 
 /***/ }
 /******/ ]);

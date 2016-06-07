@@ -2,6 +2,7 @@
 
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router'
 
 var ListRow = React.createClass({
   propTypes: {
@@ -60,7 +61,7 @@ var List = React.createClass({
   },
 
   propTypes: {
-    listID: React.PropTypes.number,
+    listID: React.PropTypes.string,
     url: React.PropTypes.string
   },
 
@@ -83,9 +84,9 @@ var List = React.createClass({
           List {this.props.listID}
         </h1>
         <ListTable data={this.state.data} />
-        <button className='btn btn-primary' role='button'>
+        <Link to='/' className='btn btn-primary' role='button'>
           See all Lists
-        </button>
+        </Link>
       </div>
     )
   }
