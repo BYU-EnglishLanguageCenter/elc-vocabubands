@@ -1,0 +1,30 @@
+id,word,support_words,definition,building_words
+1,acceptable.j,adequate; ,capable or worthy of being accepted,valid; plausible; satisfactory; justified; justifiable
+2,accuracy.n,,freedom from mistake or error; ability to work without making mistakes,precision; rigor; veracity; soundness; 
+3,bias.n,,"a strong interest in something, a tendency to believe that some X are better than others",distortion; inequity; predisposition; preconception; 
+4,commonly.r,generally; normally; regularly; ,done by many people; occurring or appearing frequently,mutually;  universally;  conventionally;  popularly; 
+5,constraint.n,limitation; limit; ,something that limits or restricts X,parameter;  exigency;  stricture
+6,convert.v,transform; alter; transfer; translate; ,to change X into a different form to be used in a different way,tailor;  encode; 
+7,discrimination.n,contrast; insight; distinction; ,the practice of unfairly treating a person or group differently from others; the ability to recognize difference,inequality;  differentiation;  demarcation
+8,distribute.v,spread; ,to give or deliver something; to divide among members of a group,export;  export;  allocate;  disseminate;  diffuse
+9,efficient.j,effective; professional; ,"capable of producing desired results without wasting materials, time, or energy",functional;  systematic;  ordered
+10,evident.j,apparent; distinct; obvious; ,clear to the sight or mind,marked;  tangible;  overt;  noticeable;  conspicuous;  observable;  discernible;  distinguishable;  demonstrable
+11,extension.n,,the act of making something longer or greater,continuation;  enlargement;  intensification;  outgrowth;  perpetuation;  maximization; 
+12,frequent.j,numerous; normal; regular; ,happening often,repeated; prevalent;  continual
+13,functional.j,,"designed to have a practical use, working properly, relating to the use or function of X",applied; usable; anatomical;  utilitarian; 
+14,greatly.r,,to a great extent or degree,substantially;  considerably;  extensively;  profoundly;  materially;  maximally; 
+15,helpful.j,useful; valuable; ,"making it easier to do a job, deal with a problem, etc.¾:¾giving help",productive;  beneficial;  constructive;  informative;  instructive;  invaluable;  advantageous;  illuminating;  salutary
+16,innovation.n,,"the act or process of introducing new ideas, devices, or methods.",invention; advancement; 
+17,logic.n,sense; ,the science that studies the formal processes of thinking and reasoning; a proper or reasonable way of thinking,rationale; rationality; coherence
+18,mainly.r,primarily; essentially; mostly; ,most important,predominantly; principally; chiefly
+19,maintenance.n,conservation; ,the act of maintaining X,preservation; livelihood; 
+20,motivate.v,influence; cause; inspire; prompt; ,to give someone a reason for doing something; to be a reason for something,stimulate; underlie; activate;  occasion; 
+21,obligation.n,understanding;  requirement;  commitment;  commitment; ,"something that you must do because of a law, rule, promise, etc.; something you must do because it is morally right",necessity; appreciation; imperative;  compulsion; 
+22,principal.j,basic; primary;  fundamental; main; ,most important,underlying; prevailing; focal; predominant; paramount;  overarching; overriding; cardinal; 
+23,prominent.j,famous; major; ,important and well-known; easily noticed or seen,influential; notable; salient; marked; conspicuous; eminent; 
+24,proposed.j,,to suggest (always used before a noun),hypothetical; projected; intended
+25,radical.j,essential; fundamental; ,very new and different from what is traditional or ordinary; having extreme political or social views,progressive; revolutionary; 
+26,restrict.v,contain; control; limit;  origin; formation; ,to limit or prevent something,stem; confine; constrain; circumscribe; delimit
+27,restriction.n,limitation; check; limit; ,a law or rule that limits or controls; the act of limiting or controlling,parameter; rigor; taboo; stricture; 
+28,vital.j,central; necessary; critical; essential; fundamental; crucial; ,extremely important: crucial; needed by your body in order to keep living; very lively or energetic,required; integral; decisive; indispensable; imperative; paramount; invaluable; requisite; 
+29,widespread.j,general; extensive; ,common over a wide area or among many people,prevalent; prevailing; pervasive; endemic; 

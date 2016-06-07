@@ -3,13 +3,28 @@ body {
   font-weight: 100;
 }
 
+#all-lists-header {
+  margin-bottom: 40px;
+}
+
 #login-btn {
   margin-top: 30%;
+}
+
+.home {
+  width: 40%;
+  margin: 125px auto 75px auto;
 }
 
 .list {
   width: 75%;
   margin: 75px auto;
+}
+
+.listLink {
+  width: 100%;
+  text-align: left;
+  margin: 15px 0;
 }
 
 .listTable {
