@@ -26559,6 +26559,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Home = __webpack_require__(/*! ./Home.js */ 252);
+	
+	var _Home2 = _interopRequireDefault(_Home);
+	
 	var _Nav = __webpack_require__(/*! ./Nav.js */ 230);
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
@@ -26575,7 +26579,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'mainLayout' },
 	      _react2.default.createElement(_Nav2.default, null),
 	      this.props.children
 	    );
@@ -28113,6 +28117,108 @@
 	  };
 	};
 
+
+/***/ },
+/* 252 */
+/*!*************************!*\
+  !*** ./src/app/Home.js ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _AllLists = __webpack_require__(/*! ./AllLists.js */ 253);
+	
+	var _AllLists2 = _interopRequireDefault(_AllLists);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var data = [13, 14];
+	
+	var Home = _react2.default.createClass({
+	  displayName: 'Home',
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'home' },
+	      _react2.default.createElement(_AllLists2.default, { data: data })
+	    );
+	  }
+	});
+	
+	exports.default = Home;
+
+/***/ },
+/* 253 */
+/*!*****************************!*\
+  !*** ./src/app/AllLists.js ***!
+  \*****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListLink = _react2.default.createClass({
+	  displayName: 'ListLink',
+	
+	  propTypes: {
+	    listID: _react2.default.PropTypes.number
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'a',
+	      { className: 'btn btn-primary btn-lg listLink', role: 'button', href: '#' },
+	      'List ',
+	      this.props.listID
+	    );
+	  }
+	});
+	
+	var AllLists = _react2.default.createClass({
+	  displayName: 'AllLists',
+	
+	  propTypes: {
+	    data: _react2.default.PropTypes.array
+	  },
+	
+	  render: function render() {
+	    var listLinks = this.props.data.map(function (listID) {
+	      return _react2.default.createElement(ListLink, { listID: listID });
+	    });
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'allLists' },
+	      _react2.default.createElement(
+	        'h1',
+	        { id: 'all-lists-header' },
+	        'All Lists'
+	      ),
+	      listLinks
+	    );
+	  }
+	});
+	
+	exports.default = AllLists;
 
 /***/ }
 /******/ ]);
