@@ -6,8 +6,9 @@ import ListLayout from './ListLayout'
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path='/' component={MainLayout} />
-    <Route path='list' component={ListLayout} />
+    <Route path='/' component={MainLayout}>
+      <IndexRoute component={ListLayout} />
+    </Route>
   </Router>,
   document.getElementById('content')
 )

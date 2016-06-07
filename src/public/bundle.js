@@ -72,8 +72,11 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _MainLayout2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: 'list', component: _ListLayout2.default })
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/', component: _MainLayout2.default },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _ListLayout2.default })
+	  )
 	), document.getElementById('content'));
 
 /***/ },
@@ -26556,8 +26559,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(/*! react-router */ 168);
-	
 	var _Nav = __webpack_require__(/*! ./Nav.js */ 230);
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
@@ -26567,16 +26568,16 @@
 	var MainLayout = _react2.default.createClass({
 	  displayName: 'MainLayout',
 	
+	  propTypes: {
+	    children: _react2.default.PropTypes.object // IndexRoute in index.js
+	  },
+	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_Nav2.default, null),
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: 'list' },
-	        'List 1'
-	      )
+	      this.props.children
 	    );
 	  }
 	});
@@ -26662,10 +26663,6 @@
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _Nav = __webpack_require__(/*! ./Nav.js */ 230);
-	
-	var _Nav2 = _interopRequireDefault(_Nav);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ListLayout = _react2.default.createClass({
@@ -26675,8 +26672,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_Nav2.default, null),
-	      _react2.default.createElement(_List2.default, { listID: 1, url: '/resources/lists/' })
+	      _react2.default.createElement(_List2.default, { listID: 13, url: '/resources/lists/list13.json' })
 	    );
 	  }
 	});
@@ -26820,7 +26816,7 @@
 	  loadListData: function loadListData() {
 	    var _this = this;
 	
-	    _axios2.default.get(this.props.url + 'list' + this.props.listID + '.json').then(function (response) {
+	    _axios2.default.get(this.props.url).then(function (response) {
 	      _this.setState({ data: response.data });
 	    }).catch(function (response) {
 	      console.log(response);

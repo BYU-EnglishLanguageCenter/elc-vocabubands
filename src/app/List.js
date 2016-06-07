@@ -69,7 +69,7 @@ var List = React.createClass({
   },
 
   loadListData: function () {
-    axios.get(this.props.url + 'list' + this.props.listID + '.json').then((response) => {
+    axios.get(this.props.url).then((response) => {
       this.setState({ data: response.data })
     }).catch((response) => {
       console.log(response)

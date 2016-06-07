@@ -1,13 +1,11 @@
 import React from 'react'
 import List from './List.js'
-import Nav from './Nav.js'
 
 var ListLayout = React.createClass({
   render: function () {
     return (
       <div>
-        <Nav />
-        <List listID={1} url={'/resources/lists/'} />
+        <List listID={13} url='/resources/lists/list13.json' />
       </div>
     )
   }
