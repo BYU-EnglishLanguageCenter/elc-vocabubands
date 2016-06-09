@@ -28007,8 +28007,16 @@
 	var ListRow = _react2.default.createClass({
 	  displayName: 'ListRow',
 	
+	  getInitialState: function getInitialState() {
+	    return { done: false };
+	  },
+	
 	  propTypes: {
 	    children: _react2.default.PropTypes.object
+	  },
+	
+	  handleClick: function handleClick() {
+	    this.setState({ done: !this.state.done });
 	  },
 	
 	  render: function render() {
@@ -28019,9 +28027,13 @@
 	    var definition = _props$children.definition;
 	    var building_words = _props$children.building_words;
 	
+	    var rowClass = this.state.done ? 'row-done' : 'row-normal';
+	    var butnClass = this.state.done ? 'butn-undo' : 'butn-done';
+	    var butnText = this.state.done ? 'Undo' : 'Done';
+	
 	    return _react2.default.createElement(
 	      'tr',
-	      { id: id },
+	      { className: rowClass, id: 'row' + id },
 	      _react2.default.createElement(
 	        'td',
 	        null,
@@ -28041,6 +28053,15 @@
 	        'td',
 	        null,
 	        building_words
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        { className: 'butn-cell-no-style' },
+	        _react2.default.createElement(
+	          'button',
+	          { className: butnClass, onClick: this.handleClick },
+	          butnText
+	        )
 	      )
 	    );
 	  }
