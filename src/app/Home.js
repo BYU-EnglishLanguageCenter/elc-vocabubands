@@ -1,11 +1,11 @@
 'use strict'
 
 import React from 'react'
-import AllLists from './AllLists.js'
+import AllLists from './AllLists'
 
-var data = [13, 14]
+const data = [13, 14]
 
-var Home = React.createClass({
+const Home = React.createClass({
   render: function () {
     return (
       <div className='home'>

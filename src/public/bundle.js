@@ -63,11 +63,11 @@
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _ListContainer = __webpack_require__(/*! ./ListContainer */ 254);
+	var _ListContainer = __webpack_require__(/*! ./ListContainer */ 231);
 	
 	var _ListContainer2 = _interopRequireDefault(_ListContainer);
 	
-	var _MainLayout = __webpack_require__(/*! ./MainLayout.js */ 252);
+	var _MainLayout = __webpack_require__(/*! ./MainLayout */ 252);
 	
 	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
@@ -26564,7 +26564,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _AllLists = __webpack_require__(/*! ./AllLists.js */ 230);
+	var _AllLists = __webpack_require__(/*! ./AllLists */ 230);
 	
 	var _AllLists2 = _interopRequireDefault(_AllLists);
 	
@@ -26652,11 +26652,10 @@
 	exports.default = AllLists;
 
 /***/ },
-/* 231 */,
-/* 232 */
-/*!*************************!*\
-  !*** ./src/app/List.js ***!
-  \*************************/
+/* 231 */
+/*!**********************************!*\
+  !*** ./src/app/ListContainer.js ***!
+  \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26669,146 +26668,63 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(/*! react-router */ 168);
+	var _axios = __webpack_require__(/*! axios */ 232);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _List = __webpack_require__(/*! ./List */ 251);
+	
+	var _List2 = _interopRequireDefault(_List);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ListRow = _react2.default.createClass({
-	  displayName: 'ListRow',
+	var ListContainer = _react2.default.createClass({
+	  displayName: 'ListContainer',
 	
-	  propTypes: {
-	    children: _react2.default.PropTypes.object
+	  getInitialState: function getInitialState() {
+	    return { data: [] };
 	  },
 	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'tr',
-	      { id: this.props.children.id },
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        this.props.children.word
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        this.props.children.support_words
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        this.props.children.definition
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        this.props.children.building_words
-	      )
-	    );
-	  }
-	});
-	
-	var ListTable = _react2.default.createClass({
-	  displayName: 'ListTable',
-	
 	  propTypes: {
-	    data: _react2.default.PropTypes.array
+	    params: _react2.default.PropTypes.object
 	  },
 	
-	  render: function render() {
-	    var listRows = this.props.data.map(function (row) {
-	      return _react2.default.createElement(
-	        ListRow,
-	        { key: row.id },
-	        row
-	      );
+	  componentDidMount: function componentDidMount() {
+	    this.loadListData();
+	  },
+	
+	  loadListData: function loadListData() {
+	    var _this = this;
+	
+	    _axios2.default.get('/resources/lists/list' + this.props.params.id + '.json').then(function (response) {
+	      _this.setState({ data: response.data });
+	    }).catch(function (response) {
+	      console.log(response);
 	    });
-	
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'listTable' },
-	      _react2.default.createElement(
-	        'table',
-	        { className: 'table table-striped' },
-	        _react2.default.createElement(
-	          'thead',
-	          null,
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Word'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Support Words'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Definition'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Building Words'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'tbody',
-	          null,
-	          listRows
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	var List = _react2.default.createClass({
-	  displayName: 'List',
-	
-	  propTypes: {
-	    data: _react2.default.PropTypes.array,
-	    listID: _react2.default.PropTypes.string
 	  },
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'list' },
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'List ',
-	        this.props.listID
-	      ),
-	      _react2.default.createElement(ListTable, { data: this.props.data }),
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/', className: 'btn btn-primary', role: 'button' },
-	        'See all Lists'
-	      )
+	      null,
+	      _react2.default.createElement(_List2.default, { data: this.state.data, listID: this.props.params.id })
 	    );
 	  }
 	});
 	
-	exports.default = List;
+	exports.default = ListContainer;
 
 /***/ },
-/* 233 */
+/* 232 */
 /*!**************************!*\
   !*** ./~/axios/index.js ***!
   \**************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/axios */ 234);
+	module.exports = __webpack_require__(/*! ./lib/axios */ 233);
 
 /***/ },
-/* 234 */
+/* 233 */
 /*!******************************!*\
   !*** ./~/axios/lib/axios.js ***!
   \******************************/
@@ -26816,14 +26732,14 @@
 
 	'use strict';
 	
-	var defaults = __webpack_require__(/*! ./defaults */ 235);
-	var utils = __webpack_require__(/*! ./utils */ 236);
-	var dispatchRequest = __webpack_require__(/*! ./core/dispatchRequest */ 238);
-	var InterceptorManager = __webpack_require__(/*! ./core/InterceptorManager */ 247);
-	var isAbsoluteURL = __webpack_require__(/*! ./helpers/isAbsoluteURL */ 248);
-	var combineURLs = __webpack_require__(/*! ./helpers/combineURLs */ 249);
-	var bind = __webpack_require__(/*! ./helpers/bind */ 250);
-	var transformData = __webpack_require__(/*! ./helpers/transformData */ 242);
+	var defaults = __webpack_require__(/*! ./defaults */ 234);
+	var utils = __webpack_require__(/*! ./utils */ 235);
+	var dispatchRequest = __webpack_require__(/*! ./core/dispatchRequest */ 237);
+	var InterceptorManager = __webpack_require__(/*! ./core/InterceptorManager */ 246);
+	var isAbsoluteURL = __webpack_require__(/*! ./helpers/isAbsoluteURL */ 247);
+	var combineURLs = __webpack_require__(/*! ./helpers/combineURLs */ 248);
+	var bind = __webpack_require__(/*! ./helpers/bind */ 249);
+	var transformData = __webpack_require__(/*! ./helpers/transformData */ 241);
 	
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -26912,7 +26828,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(/*! ./helpers/spread */ 251);
+	axios.spread = __webpack_require__(/*! ./helpers/spread */ 250);
 	
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -26940,7 +26856,7 @@
 
 
 /***/ },
-/* 235 */
+/* 234 */
 /*!*********************************!*\
   !*** ./~/axios/lib/defaults.js ***!
   \*********************************/
@@ -26948,8 +26864,8 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./utils */ 236);
-	var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ 237);
+	var utils = __webpack_require__(/*! ./utils */ 235);
+	var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ 236);
 	
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -27021,7 +26937,7 @@
 
 
 /***/ },
-/* 236 */
+/* 235 */
 /*!******************************!*\
   !*** ./~/axios/lib/utils.js ***!
   \******************************/
@@ -27307,7 +27223,7 @@
 
 
 /***/ },
-/* 237 */
+/* 236 */
 /*!****************************************************!*\
   !*** ./~/axios/lib/helpers/normalizeHeaderName.js ***!
   \****************************************************/
@@ -27315,7 +27231,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ../utils */ 236);
+	var utils = __webpack_require__(/*! ../utils */ 235);
 	
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -27328,7 +27244,7 @@
 
 
 /***/ },
-/* 238 */
+/* 237 */
 /*!*********************************************!*\
   !*** ./~/axios/lib/core/dispatchRequest.js ***!
   \*********************************************/
@@ -27353,10 +27269,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(/*! ../adapters/xhr */ 239);
+	        adapter = __webpack_require__(/*! ../adapters/xhr */ 238);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(/*! ../adapters/http */ 239);
+	        adapter = __webpack_require__(/*! ../adapters/http */ 238);
 	      }
 	
 	      if (typeof adapter === 'function') {
@@ -27372,7 +27288,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 239 */
+/* 238 */
 /*!*************************************!*\
   !*** ./~/axios/lib/adapters/xhr.js ***!
   \*************************************/
@@ -27380,13 +27296,13 @@
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
-	var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ 240);
-	var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ 241);
-	var transformData = __webpack_require__(/*! ./../helpers/transformData */ 242);
-	var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ 243);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(/*! ./../helpers/btoa */ 244);
-	var settle = __webpack_require__(/*! ../helpers/settle */ 245);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
+	var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ 239);
+	var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ 240);
+	var transformData = __webpack_require__(/*! ./../helpers/transformData */ 241);
+	var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ 242);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(/*! ./../helpers/btoa */ 243);
+	var settle = __webpack_require__(/*! ../helpers/settle */ 244);
 	
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -27483,7 +27399,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(/*! ./../helpers/cookies */ 246);
+	    var cookies = __webpack_require__(/*! ./../helpers/cookies */ 245);
 	
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -27544,7 +27460,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 240 */
+/* 239 */
 /*!*****************************************!*\
   !*** ./~/axios/lib/helpers/buildURL.js ***!
   \*****************************************/
@@ -27552,7 +27468,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -27621,7 +27537,7 @@
 
 
 /***/ },
-/* 241 */
+/* 240 */
 /*!*********************************************!*\
   !*** ./~/axios/lib/helpers/parseHeaders.js ***!
   \*********************************************/
@@ -27629,7 +27545,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
 	
 	/**
 	 * Parse headers into an object
@@ -27667,7 +27583,7 @@
 
 
 /***/ },
-/* 242 */
+/* 241 */
 /*!**********************************************!*\
   !*** ./~/axios/lib/helpers/transformData.js ***!
   \**********************************************/
@@ -27675,7 +27591,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -27696,7 +27612,7 @@
 
 
 /***/ },
-/* 243 */
+/* 242 */
 /*!************************************************!*\
   !*** ./~/axios/lib/helpers/isURLSameOrigin.js ***!
   \************************************************/
@@ -27704,7 +27620,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -27773,7 +27689,7 @@
 
 
 /***/ },
-/* 244 */
+/* 243 */
 /*!*************************************!*\
   !*** ./~/axios/lib/helpers/btoa.js ***!
   \*************************************/
@@ -27818,7 +27734,7 @@
 
 
 /***/ },
-/* 245 */
+/* 244 */
 /*!***************************************!*\
   !*** ./~/axios/lib/helpers/settle.js ***!
   \***************************************/
@@ -27845,7 +27761,7 @@
 
 
 /***/ },
-/* 246 */
+/* 245 */
 /*!****************************************!*\
   !*** ./~/axios/lib/helpers/cookies.js ***!
   \****************************************/
@@ -27853,7 +27769,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -27907,7 +27823,7 @@
 
 
 /***/ },
-/* 247 */
+/* 246 */
 /*!************************************************!*\
   !*** ./~/axios/lib/core/InterceptorManager.js ***!
   \************************************************/
@@ -27915,7 +27831,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 236);
+	var utils = __webpack_require__(/*! ./../utils */ 235);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -27968,7 +27884,7 @@
 
 
 /***/ },
-/* 248 */
+/* 247 */
 /*!**********************************************!*\
   !*** ./~/axios/lib/helpers/isAbsoluteURL.js ***!
   \**********************************************/
@@ -27991,7 +27907,7 @@
 
 
 /***/ },
-/* 249 */
+/* 248 */
 /*!********************************************!*\
   !*** ./~/axios/lib/helpers/combineURLs.js ***!
   \********************************************/
@@ -28012,7 +27928,7 @@
 
 
 /***/ },
-/* 250 */
+/* 249 */
 /*!*************************************!*\
   !*** ./~/axios/lib/helpers/bind.js ***!
   \*************************************/
@@ -28032,7 +27948,7 @@
 
 
 /***/ },
-/* 251 */
+/* 250 */
 /*!***************************************!*\
   !*** ./~/axios/lib/helpers/spread.js ***!
   \***************************************/
@@ -28068,6 +27984,159 @@
 
 
 /***/ },
+/* 251 */
+/*!*************************!*\
+  !*** ./src/app/List.js ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 168);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListRow = _react2.default.createClass({
+	  displayName: 'ListRow',
+	
+	  propTypes: {
+	    children: _react2.default.PropTypes.object
+	  },
+	
+	  render: function render() {
+	    var _props$children = this.props.children;
+	    var id = _props$children.id;
+	    var word = _props$children.word;
+	    var support_words = _props$children.support_words;
+	    var definition = _props$children.definition;
+	    var building_words = _props$children.building_words;
+	
+	    return _react2.default.createElement(
+	      'tr',
+	      { id: id },
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        word
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        support_words
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        definition
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        building_words
+	      )
+	    );
+	  }
+	});
+	
+	var ListTable = _react2.default.createClass({
+	  displayName: 'ListTable',
+	
+	  propTypes: {
+	    data: _react2.default.PropTypes.array
+	  },
+	
+	  render: function render() {
+	    var listRows = this.props.data.map(function (row) {
+	      return _react2.default.createElement(
+	        ListRow,
+	        { key: row.id },
+	        row
+	      );
+	    });
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'listTable' },
+	      _react2.default.createElement(
+	        'table',
+	        { className: 'table table-striped' },
+	        _react2.default.createElement(
+	          'thead',
+	          null,
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Word'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Support Words'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Definition'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Building Words'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'tbody',
+	          null,
+	          listRows
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var List = _react2.default.createClass({
+	  displayName: 'List',
+	
+	  propTypes: {
+	    data: _react2.default.PropTypes.array,
+	    listID: _react2.default.PropTypes.string
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'list' },
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'List ',
+	        this.props.listID
+	      ),
+	      _react2.default.createElement(ListTable, { data: this.props.data }),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/', className: 'btn btn-primary', role: 'button' },
+	        'See all Lists'
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = List;
+
+/***/ },
 /* 252 */
 /*!*******************************!*\
   !*** ./src/app/MainLayout.js ***!
@@ -28084,7 +28153,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Nav = __webpack_require__(/*! ./Nav.js */ 253);
+	var _Nav = __webpack_require__(/*! ./Nav */ 253);
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
@@ -28166,69 +28235,6 @@
 	});
 	
 	exports.default = Nav;
-
-/***/ },
-/* 254 */
-/*!**********************************!*\
-  !*** ./src/app/ListContainer.js ***!
-  \**********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _axios = __webpack_require__(/*! axios */ 233);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
-	var _List = __webpack_require__(/*! ./List.js */ 232);
-	
-	var _List2 = _interopRequireDefault(_List);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ListContainer = _react2.default.createClass({
-	  displayName: 'ListContainer',
-	
-	  getInitialState: function getInitialState() {
-	    return { data: [] };
-	  },
-	
-	  propTypes: {
-	    params: _react2.default.PropTypes.object
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    this.loadListData();
-	  },
-	
-	  loadListData: function loadListData() {
-	    var _this = this;
-	
-	    _axios2.default.get('/resources/lists/list' + this.props.params.id + '.json').then(function (response) {
-	      _this.setState({ data: response.data });
-	    }).catch(function (response) {
-	      console.log(response);
-	    });
-	  },
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_List2.default, { data: this.state.data, listID: this.props.params.id })
-	    );
-	  }
-	});
-	
-	exports.default = ListContainer;
 
 /***/ }
 /******/ ]);

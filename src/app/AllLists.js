@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-var ListLink = React.createClass({
+const ListLink = React.createClass({
   propTypes: {
     listID: React.PropTypes.number
   },
@@ -17,7 +17,7 @@ var ListLink = React.createClass({
   }
 })
 
-var AllLists = React.createClass({
+const AllLists = React.createClass({
   propTypes: {
     data: React.PropTypes.array
   },

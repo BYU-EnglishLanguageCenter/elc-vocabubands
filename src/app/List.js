@@ -3,24 +3,25 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-var ListRow = React.createClass({
+const ListRow = React.createClass({
   propTypes: {
     children: React.PropTypes.object
   },
 
   render: function () {
+    const { id, word, support_words, definition, building_words } = this.props.children
     return (
-      <tr id={this.props.children.id}>
-        <td>{this.props.children.word}</td>
-        <td>{this.props.children.support_words}</td>
-        <td>{this.props.children.definition}</td>
-        <td>{this.props.children.building_words}</td>
+      <tr id={id}>
+        <td>{word}</td>
+        <td>{support_words}</td>
+        <td>{definition}</td>
+        <td>{building_words}</td>
       </tr>
     )
   }
 })
 
-var ListTable = React.createClass({
+const ListTable = React.createClass({
   propTypes: {
     data: React.PropTypes.array
   },
@@ -54,7 +55,7 @@ var ListTable = React.createClass({
   }
 })
 
-var List = React.createClass({
+const List = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     listID: React.PropTypes.string

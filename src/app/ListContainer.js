@@ -2,9 +2,9 @@
 
 import React from 'react'
 import axios from 'axios'
-import List from './List.js'
+import List from './List'
 
-var ListContainer = React.createClass({
+const ListContainer = React.createClass({
   getInitialState: function () {
     return { data: [] }
   },

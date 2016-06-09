@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-var Nav = React.createClass({
+const Nav = React.createClass({
   render: function () {
     return (
       <nav className='navbar navbar-default' role='navigation'>

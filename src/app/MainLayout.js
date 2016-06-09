@@ -1,7 +1,7 @@
 import React from 'react'
-import Nav from './Nav.js'
+import Nav from './Nav'
 
-var MainLayout = React.createClass({
+const MainLayout = React.createClass({
   propTypes: {
     children: React.PropTypes.object // IndexRoute in index.js
   },
