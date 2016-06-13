@@ -11,6 +11,25 @@ body {
   margin-top: 30%;
 }
 
+.butn-cell-no-style {
+  background-color: #fff;
+  border: #fff;
+}
+
+.butn-done {
+  background-color: #dfece3;
+  border: #fff;
+  color: #000;
+  outline: none;
+}
+
+.butn-undo {
+  background-color: #cea9a9;
+  border: #fff;
+  color: #000;
+  outline: none;
+}
+
 .home {
   width: 40%;
   margin: 125px auto 75px auto;
@@ -37,6 +56,14 @@ body {
 
 .navbar-brand {
   font-size: 28px;
+}
+
+.row-normal {
+
+}
+
+.row-done {
+  background-color: #b9b9b9 !important;
 }
 
 .table {

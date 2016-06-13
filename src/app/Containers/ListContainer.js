@@ -2,7 +2,7 @@
 
 import React from 'react'
 import axios from 'axios'
-import List from './List'
+import List from '../Components/List'
 
 const ListContainer = React.createClass({
   getInitialState: function () {
