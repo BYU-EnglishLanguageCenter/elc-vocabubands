@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
+import ListLinkContainer from '../containers/ListLinkContainer'
 import ListLink from './ListLink'
 
 const AllLists = ({ data }) => (
