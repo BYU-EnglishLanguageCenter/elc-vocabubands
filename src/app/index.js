@@ -3,9 +3,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import Home from './Home.js'
-import ListContainer from './ListContainer'
-import MainLayout from './MainLayout'
+import Home from './Components/Home'
+import ListContainer from './Containers/ListContainer'
+import MainLayout from './Components/MainLayout'
 
 ReactDOM.render(
   <Router history={browserHistory}>
