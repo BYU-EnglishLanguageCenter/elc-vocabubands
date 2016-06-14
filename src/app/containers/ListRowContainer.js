@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import ListRow from '../Components/ListRow'
+import ListRow from '../components/ListRow'
 
 const ListRowContainer = React.createClass({
   getInitialState: function () {

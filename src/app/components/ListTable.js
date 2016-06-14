@@ -1,7 +1,7 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
-import ListRowContainer from '../Containers/ListRowContainer'
+import ListRowContainer from '../containers/ListRowContainer'
 
 const ListTable = ({data}) => (
   <div className='listTable'>

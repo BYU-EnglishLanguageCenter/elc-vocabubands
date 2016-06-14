@@ -10,7 +10,7 @@ const AllLists = ({ data }) => (
       All Lists
     </h1>
     {data.map(listID =>
-      <ListLink key={listID} listID={listID} />
+      <ListLinkContainer key={listID} listID={listID} />
     )}
   </div>
 )
