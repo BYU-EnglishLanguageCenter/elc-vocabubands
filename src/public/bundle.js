@@ -67,15 +67,15 @@
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _ListContainer = __webpack_require__(/*! ./containers/ListContainer */ 253);
+	var _ListContainer = __webpack_require__(/*! ./containers/ListContainer */ 275);
 	
 	var _ListContainer2 = _interopRequireDefault(_ListContainer);
 	
-	var _MainLayout = __webpack_require__(/*! ./components/MainLayout */ 258);
+	var _MainLayout = __webpack_require__(/*! ./components/MainLayout */ 280);
 	
 	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
-	var _reducers = __webpack_require__(/*! ./reducers/reducers */ 260);
+	var _reducers = __webpack_require__(/*! ./reducers/reducers */ 282);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -28140,7 +28140,7 @@
 	
 	var _ListLinkContainer2 = _interopRequireDefault(_ListLinkContainer);
 	
-	var _ListLink = __webpack_require__(/*! ./ListLink */ 252);
+	var _ListLink = __webpack_require__(/*! ./ListLink */ 272);
 	
 	var _ListLink2 = _interopRequireDefault(_ListLink);
 	
@@ -28181,21 +28181,21 @@
 	  value: true
 	});
 	
-	var _axios = __webpack_require__(/*! axios */ 262);
+	var _axios = __webpack_require__(/*! axios */ 252);
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
 	
-	var _runtime = __webpack_require__(/*! regenerator-runtime/runtime */ 281);
+	var _runtime = __webpack_require__(/*! regenerator-runtime/runtime */ 271);
 	
 	var _runtime2 = _interopRequireDefault(_runtime);
 	
-	var _ListLink = __webpack_require__(/*! ../components/ListLink */ 252);
+	var _ListLink = __webpack_require__(/*! ../components/ListLink */ 272);
 	
 	var _ListLink2 = _interopRequireDefault(_ListLink);
 	
-	var _actionCreators = __webpack_require__(/*! ../actions/actionCreators */ 282);
+	var _actionCreators = __webpack_require__(/*! ../actions/actionCreators */ 273);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28251,491 +28251,15 @@
 
 /***/ },
 /* 252 */
-/*!****************************************!*\
-  !*** ./src/app/components/ListLink.js ***!
-  \****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(/*! react-router */ 190);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ListLink = function ListLink(_ref) {
-	  var listID = _ref.listID;
-	  var onClick = _ref.onClick;
-	  return _react2.default.createElement(
-	    _reactRouter.Link,
-	    { to: 'list/' + listID, className: 'btn btn-primary btn-lg listLink', onClick: onClick, role: 'button' },
-	    'List ',
-	    listID
-	  );
-	};
-	
-	ListLink.propTypes = {
-	  listID: _react.PropTypes.number.isRequired
-	};
-	
-	exports.default = ListLink;
-
-/***/ },
-/* 253 */
-/*!*********************************************!*\
-  !*** ./src/app/containers/ListContainer.js ***!
-  \*********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
-	
-	var _List = __webpack_require__(/*! ../components/List */ 254);
-	
-	var _List2 = _interopRequireDefault(_List);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	//import axios from 'axios'
-	
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return {
-	    data: state.listData,
-	    listID: ownProps.params.id
-	  };
-	};
-	
-	var ListContainer = (0, _reactRedux.connect)(mapStateToProps)(_List2.default);
-	
-	exports.default = ListContainer;
-
-/***/ },
-/* 254 */
-/*!************************************!*\
-  !*** ./src/app/components/List.js ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(/*! react-router */ 190);
-	
-	var _ListTable = __webpack_require__(/*! ./ListTable */ 255);
-	
-	var _ListTable2 = _interopRequireDefault(_ListTable);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var List = function List(_ref) {
-	  var data = _ref.data;
-	  var listID = _ref.listID;
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'list' },
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'List ',
-	      listID
-	    ),
-	    _react2.default.createElement(_ListTable2.default, { data: data }),
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: '/', className: 'btn btn-primary', role: 'button' },
-	      'See all Lists'
-	    )
-	  );
-	};
-	
-	List.propTypes = {
-	  data: _react.PropTypes.array.isRequired,
-	  listID: _react.PropTypes.string.isRequired
-	};
-	
-	exports.default = List;
-
-/***/ },
-/* 255 */
-/*!*****************************************!*\
-  !*** ./src/app/components/ListTable.js ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _ListRowContainer = __webpack_require__(/*! ../containers/ListRowContainer */ 256);
-	
-	var _ListRowContainer2 = _interopRequireDefault(_ListRowContainer);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ListTable = function ListTable(_ref) {
-	  var data = _ref.data;
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'listTable' },
-	    _react2.default.createElement(
-	      'table',
-	      { className: 'table table-striped' },
-	      _react2.default.createElement(
-	        'thead',
-	        null,
-	        _react2.default.createElement(
-	          'tr',
-	          null,
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Word'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Support Words'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Definition'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Building Words'
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'tbody',
-	        null,
-	        data.map(function (row) {
-	          return _react2.default.createElement(_ListRowContainer2.default, _extends({ key: row.id }, row));
-	        })
-	      )
-	    )
-	  );
-	};
-	
-	ListTable.propTypes = {
-	  data: _react.PropTypes.array.isRequired
-	};
-	
-	exports.default = ListTable;
-
-/***/ },
-/* 256 */
-/*!************************************************!*\
-  !*** ./src/app/containers/ListRowContainer.js ***!
-  \************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _ListRow = __webpack_require__(/*! ../components/ListRow */ 257);
-	
-	var _ListRow2 = _interopRequireDefault(_ListRow);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ListRowContainer = _react2.default.createClass({
-	  displayName: 'ListRowContainer',
-	
-	  getInitialState: function getInitialState() {
-	    return { done: false };
-	  },
-	
-	  handleClick: function handleClick() {
-	    this.setState({ done: !this.state.done });
-	  },
-	
-	  render: function render() {
-	    return _react2.default.createElement(_ListRow2.default, _extends({}, this.props, { done: this.state.done, onClick: this.handleClick }));
-	  }
-	});
-	
-	exports.default = ListRowContainer;
-
-/***/ },
-/* 257 */
-/*!***************************************!*\
-  !*** ./src/app/components/ListRow.js ***!
-  \***************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ListRow = function ListRow(_ref) {
-	  var id = _ref.id;
-	  var word = _ref.word;
-	  var support_words = _ref.support_words;
-	  var definition = _ref.definition;
-	  var building_words = _ref.building_words;
-	  var done = _ref.done;
-	  var onClick = _ref.onClick;
-	
-	  var rowClass = done ? 'row-done' : 'row-normal';
-	  var butnClass = done ? 'butn-undo' : 'butn-done';
-	  var butnText = done ? 'Undo' : 'Done';
-	
-	  return _react2.default.createElement(
-	    'tr',
-	    { className: rowClass, id: 'row' + id },
-	    _react2.default.createElement(
-	      'td',
-	      null,
-	      word
-	    ),
-	    _react2.default.createElement(
-	      'td',
-	      null,
-	      support_words
-	    ),
-	    _react2.default.createElement(
-	      'td',
-	      null,
-	      definition
-	    ),
-	    _react2.default.createElement(
-	      'td',
-	      null,
-	      building_words
-	    ),
-	    _react2.default.createElement(
-	      'td',
-	      { className: 'butn-cell-no-style' },
-	      _react2.default.createElement(
-	        'button',
-	        { className: butnClass, onClick: onClick },
-	        butnText
-	      )
-	    )
-	  );
-	};
-	
-	ListRow.propTypes = {
-	  id: _react.PropTypes.number,
-	  word: _react.PropTypes.string,
-	  support_words: _react.PropTypes.string,
-	  definition: _react.PropTypes.string,
-	  building_words: _react.PropTypes.string,
-	  done: _react.PropTypes.bool,
-	  onClick: _react.PropTypes.func
-	};
-	
-	exports.default = ListRow;
-
-/***/ },
-/* 258 */
-/*!******************************************!*\
-  !*** ./src/app/components/MainLayout.js ***!
-  \******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Nav = __webpack_require__(/*! ./Nav */ 259);
-	
-	var _Nav2 = _interopRequireDefault(_Nav);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var MainLayout = function MainLayout(_ref) {
-	  var children = _ref.children;
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'mainLayout' },
-	    _react2.default.createElement(_Nav2.default, null),
-	    children || 'Welcome to Vocabubands!'
-	  );
-	};
-	
-	MainLayout.propTypes = {
-	  children: _react.PropTypes.object
-	};
-	
-	exports.default = MainLayout;
-
-/***/ },
-/* 259 */
-/*!***********************************!*\
-  !*** ./src/app/components/Nav.js ***!
-  \***********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Nav = function Nav() {
-	  return _react2.default.createElement(
-	    'nav',
-	    { className: 'navbar navbar-default', role: 'navigation' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'container-fluid' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'navbar-header pull-left' },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'navbar-brand' },
-	          'ELC | Vocabubands'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'navbar-header pull-right' },
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'nav pull-left' },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#', className: 'btn btn-default navbar-btn', id: 'login-btn', role: 'button' },
-	            'Login'
-	          )
-	        )
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = Nav;
-
-/***/ },
-/* 260 */
-/*!**************************************!*\
-  !*** ./src/app/reducers/reducers.js ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _actionTypes = __webpack_require__(/*! ../actions/actionTypes */ 261);
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	var initialState = {
-	  listData: []
-	};
-	
-	var listData = function listData() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case _actionTypes.LOAD_LIST_DATA:
-	      return Object.assign({}, state, {
-	        listData: [].concat(_toConsumableArray(action.data))
-	      });
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = listData;
-
-/***/ },
-/* 261 */
-/*!****************************************!*\
-  !*** ./src/app/actions/actionTypes.js ***!
-  \****************************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var LOAD_LIST_DATA = exports.LOAD_LIST_DATA = 'LOAD_LIST_DATA';
-	var ROW_DONE = exports.ROW_DONE = 'ROW_DONE';
-	var ROW_UNDO = exports.ROW_UNDO = 'ROW_UNDO';
-
-/***/ },
-/* 262 */
 /*!**************************!*\
   !*** ./~/axios/index.js ***!
   \**************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/axios */ 263);
+	module.exports = __webpack_require__(/*! ./lib/axios */ 253);
 
 /***/ },
-/* 263 */
+/* 253 */
 /*!******************************!*\
   !*** ./~/axios/lib/axios.js ***!
   \******************************/
@@ -28743,14 +28267,14 @@
 
 	'use strict';
 	
-	var defaults = __webpack_require__(/*! ./defaults */ 264);
-	var utils = __webpack_require__(/*! ./utils */ 265);
-	var dispatchRequest = __webpack_require__(/*! ./core/dispatchRequest */ 267);
-	var InterceptorManager = __webpack_require__(/*! ./core/InterceptorManager */ 276);
-	var isAbsoluteURL = __webpack_require__(/*! ./helpers/isAbsoluteURL */ 277);
-	var combineURLs = __webpack_require__(/*! ./helpers/combineURLs */ 278);
-	var bind = __webpack_require__(/*! ./helpers/bind */ 279);
-	var transformData = __webpack_require__(/*! ./helpers/transformData */ 271);
+	var defaults = __webpack_require__(/*! ./defaults */ 254);
+	var utils = __webpack_require__(/*! ./utils */ 255);
+	var dispatchRequest = __webpack_require__(/*! ./core/dispatchRequest */ 257);
+	var InterceptorManager = __webpack_require__(/*! ./core/InterceptorManager */ 266);
+	var isAbsoluteURL = __webpack_require__(/*! ./helpers/isAbsoluteURL */ 267);
+	var combineURLs = __webpack_require__(/*! ./helpers/combineURLs */ 268);
+	var bind = __webpack_require__(/*! ./helpers/bind */ 269);
+	var transformData = __webpack_require__(/*! ./helpers/transformData */ 261);
 	
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -28839,7 +28363,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(/*! ./helpers/spread */ 280);
+	axios.spread = __webpack_require__(/*! ./helpers/spread */ 270);
 	
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -28867,7 +28391,7 @@
 
 
 /***/ },
-/* 264 */
+/* 254 */
 /*!*********************************!*\
   !*** ./~/axios/lib/defaults.js ***!
   \*********************************/
@@ -28875,8 +28399,8 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./utils */ 265);
-	var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ 266);
+	var utils = __webpack_require__(/*! ./utils */ 255);
+	var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ 256);
 	
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -28948,7 +28472,7 @@
 
 
 /***/ },
-/* 265 */
+/* 255 */
 /*!******************************!*\
   !*** ./~/axios/lib/utils.js ***!
   \******************************/
@@ -29234,7 +28758,7 @@
 
 
 /***/ },
-/* 266 */
+/* 256 */
 /*!****************************************************!*\
   !*** ./~/axios/lib/helpers/normalizeHeaderName.js ***!
   \****************************************************/
@@ -29242,7 +28766,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ../utils */ 265);
+	var utils = __webpack_require__(/*! ../utils */ 255);
 	
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -29255,7 +28779,7 @@
 
 
 /***/ },
-/* 267 */
+/* 257 */
 /*!*********************************************!*\
   !*** ./~/axios/lib/core/dispatchRequest.js ***!
   \*********************************************/
@@ -29280,10 +28804,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(/*! ../adapters/xhr */ 268);
+	        adapter = __webpack_require__(/*! ../adapters/xhr */ 258);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(/*! ../adapters/http */ 268);
+	        adapter = __webpack_require__(/*! ../adapters/http */ 258);
 	      }
 	
 	      if (typeof adapter === 'function') {
@@ -29299,7 +28823,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 268 */
+/* 258 */
 /*!*************************************!*\
   !*** ./~/axios/lib/adapters/xhr.js ***!
   \*************************************/
@@ -29307,13 +28831,13 @@
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
-	var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ 269);
-	var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ 270);
-	var transformData = __webpack_require__(/*! ./../helpers/transformData */ 271);
-	var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ 272);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(/*! ./../helpers/btoa */ 273);
-	var settle = __webpack_require__(/*! ../helpers/settle */ 274);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
+	var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ 259);
+	var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ 260);
+	var transformData = __webpack_require__(/*! ./../helpers/transformData */ 261);
+	var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ 262);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(/*! ./../helpers/btoa */ 263);
+	var settle = __webpack_require__(/*! ../helpers/settle */ 264);
 	
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -29410,7 +28934,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(/*! ./../helpers/cookies */ 275);
+	    var cookies = __webpack_require__(/*! ./../helpers/cookies */ 265);
 	
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -29471,7 +28995,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 269 */
+/* 259 */
 /*!*****************************************!*\
   !*** ./~/axios/lib/helpers/buildURL.js ***!
   \*****************************************/
@@ -29479,7 +29003,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -29548,7 +29072,7 @@
 
 
 /***/ },
-/* 270 */
+/* 260 */
 /*!*********************************************!*\
   !*** ./~/axios/lib/helpers/parseHeaders.js ***!
   \*********************************************/
@@ -29556,7 +29080,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
 	
 	/**
 	 * Parse headers into an object
@@ -29594,7 +29118,7 @@
 
 
 /***/ },
-/* 271 */
+/* 261 */
 /*!**********************************************!*\
   !*** ./~/axios/lib/helpers/transformData.js ***!
   \**********************************************/
@@ -29602,7 +29126,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -29623,7 +29147,7 @@
 
 
 /***/ },
-/* 272 */
+/* 262 */
 /*!************************************************!*\
   !*** ./~/axios/lib/helpers/isURLSameOrigin.js ***!
   \************************************************/
@@ -29631,7 +29155,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29700,7 +29224,7 @@
 
 
 /***/ },
-/* 273 */
+/* 263 */
 /*!*************************************!*\
   !*** ./~/axios/lib/helpers/btoa.js ***!
   \*************************************/
@@ -29745,7 +29269,7 @@
 
 
 /***/ },
-/* 274 */
+/* 264 */
 /*!***************************************!*\
   !*** ./~/axios/lib/helpers/settle.js ***!
   \***************************************/
@@ -29772,7 +29296,7 @@
 
 
 /***/ },
-/* 275 */
+/* 265 */
 /*!****************************************!*\
   !*** ./~/axios/lib/helpers/cookies.js ***!
   \****************************************/
@@ -29780,7 +29304,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29834,7 +29358,7 @@
 
 
 /***/ },
-/* 276 */
+/* 266 */
 /*!************************************************!*\
   !*** ./~/axios/lib/core/InterceptorManager.js ***!
   \************************************************/
@@ -29842,7 +29366,7 @@
 
 	'use strict';
 	
-	var utils = __webpack_require__(/*! ./../utils */ 265);
+	var utils = __webpack_require__(/*! ./../utils */ 255);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -29895,7 +29419,7 @@
 
 
 /***/ },
-/* 277 */
+/* 267 */
 /*!**********************************************!*\
   !*** ./~/axios/lib/helpers/isAbsoluteURL.js ***!
   \**********************************************/
@@ -29918,7 +29442,7 @@
 
 
 /***/ },
-/* 278 */
+/* 268 */
 /*!********************************************!*\
   !*** ./~/axios/lib/helpers/combineURLs.js ***!
   \********************************************/
@@ -29939,7 +29463,7 @@
 
 
 /***/ },
-/* 279 */
+/* 269 */
 /*!*************************************!*\
   !*** ./~/axios/lib/helpers/bind.js ***!
   \*************************************/
@@ -29959,7 +29483,7 @@
 
 
 /***/ },
-/* 280 */
+/* 270 */
 /*!***************************************!*\
   !*** ./~/axios/lib/helpers/spread.js ***!
   \***************************************/
@@ -29995,7 +29519,7 @@
 
 
 /***/ },
-/* 281 */
+/* 271 */
 /*!******************************************!*\
   !*** ./~/regenerator-runtime/runtime.js ***!
   \******************************************/
@@ -30673,7 +30197,45 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 282 */
+/* 272 */
+/*!****************************************!*\
+  !*** ./src/app/components/ListLink.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 190);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListLink = function ListLink(_ref) {
+	  var listID = _ref.listID;
+	  var onClick = _ref.onClick;
+	  return _react2.default.createElement(
+	    _reactRouter.Link,
+	    { to: 'list/' + listID, className: 'btn btn-primary btn-lg listLink', onClick: onClick, role: 'button' },
+	    'List ',
+	    listID
+	  );
+	};
+	
+	ListLink.propTypes = {
+	  listID: _react.PropTypes.number.isRequired
+	};
+	
+	exports.default = ListLink;
+
+/***/ },
+/* 273 */
 /*!*******************************************!*\
   !*** ./src/app/actions/actionCreators.js ***!
   \*******************************************/
@@ -30686,7 +30248,7 @@
 	});
 	exports.rowUndo = exports.rowDone = exports.loadListData = undefined;
 	
-	var _actionTypes = __webpack_require__(/*! ./actionTypes */ 261);
+	var _actionTypes = __webpack_require__(/*! ./actionTypes */ 274);
 	
 	var loadListData = exports.loadListData = function loadListData(data) {
 	  return {
@@ -30708,6 +30270,449 @@
 	    id: id
 	  };
 	};
+
+/***/ },
+/* 274 */
+/*!****************************************!*\
+  !*** ./src/app/actions/actionTypes.js ***!
+  \****************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var LOAD_LIST_DATA = exports.LOAD_LIST_DATA = 'LOAD_LIST_DATA';
+	var ROW_DONE = exports.ROW_DONE = 'ROW_DONE';
+	var ROW_UNDO = exports.ROW_UNDO = 'ROW_UNDO';
+
+/***/ },
+/* 275 */
+/*!*********************************************!*\
+  !*** ./src/app/containers/ListContainer.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
+	
+	var _List = __webpack_require__(/*! ../components/List */ 276);
+	
+	var _List2 = _interopRequireDefault(_List);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return {
+	    data: state.listData,
+	    listID: ownProps.params.id
+	  };
+	};
+	
+	var ListContainer = (0, _reactRedux.connect)(mapStateToProps)(_List2.default);
+	
+	exports.default = ListContainer;
+
+/***/ },
+/* 276 */
+/*!************************************!*\
+  !*** ./src/app/components/List.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 190);
+	
+	var _ListTable = __webpack_require__(/*! ./ListTable */ 277);
+	
+	var _ListTable2 = _interopRequireDefault(_ListTable);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var List = function List(_ref) {
+	  var data = _ref.data;
+	  var listID = _ref.listID;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'list' },
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      'List ',
+	      listID
+	    ),
+	    _react2.default.createElement(_ListTable2.default, { data: data }),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/', className: 'btn btn-primary', role: 'button' },
+	      'See all Lists'
+	    )
+	  );
+	};
+	
+	List.propTypes = {
+	  data: _react.PropTypes.array.isRequired,
+	  listID: _react.PropTypes.string.isRequired
+	};
+	
+	exports.default = List;
+
+/***/ },
+/* 277 */
+/*!*****************************************!*\
+  !*** ./src/app/components/ListTable.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ListRowContainer = __webpack_require__(/*! ../containers/ListRowContainer */ 278);
+	
+	var _ListRowContainer2 = _interopRequireDefault(_ListRowContainer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListTable = function ListTable(_ref) {
+	  var data = _ref.data;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'listTable' },
+	    _react2.default.createElement(
+	      'table',
+	      { className: 'table table-striped' },
+	      _react2.default.createElement(
+	        'thead',
+	        null,
+	        _react2.default.createElement(
+	          'tr',
+	          null,
+	          _react2.default.createElement(
+	            'th',
+	            null,
+	            'Word'
+	          ),
+	          _react2.default.createElement(
+	            'th',
+	            null,
+	            'Support Words'
+	          ),
+	          _react2.default.createElement(
+	            'th',
+	            null,
+	            'Definition'
+	          ),
+	          _react2.default.createElement(
+	            'th',
+	            null,
+	            'Building Words'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'tbody',
+	        null,
+	        data.map(function (row) {
+	          return _react2.default.createElement(_ListRowContainer2.default, _extends({ key: row.id }, row));
+	        })
+	      )
+	    )
+	  );
+	};
+	
+	ListTable.propTypes = {
+	  data: _react.PropTypes.array.isRequired
+	};
+	
+	exports.default = ListTable;
+
+/***/ },
+/* 278 */
+/*!************************************************!*\
+  !*** ./src/app/containers/ListRowContainer.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
+	
+	var _ListRow = __webpack_require__(/*! ../components/ListRow */ 279);
+	
+	var _ListRow2 = _interopRequireDefault(_ListRow);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// const ListRowContainer = React.createClass({
+	//   getInitialState: function () {
+	//     return { done: false }
+	//   },
+	//
+	//   handleClick: function () {
+	//     this.setState({ done: !this.state.done })
+	//   },
+	//
+	//   render: function () {
+	//     return (
+	//       <ListRow {...this.props} done={this.state.done} onClick={this.handleClick} />
+	//     )
+	//   }
+	// })
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return _extends({}, ownProps);
+	};
+	
+	var ListRowContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(_ListRow2.default);
+	
+	exports.default = ListRowContainer;
+
+/***/ },
+/* 279 */
+/*!***************************************!*\
+  !*** ./src/app/components/ListRow.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ListRow = function ListRow(_ref) {
+	  var id = _ref.id;
+	  var word = _ref.word;
+	  var support_words = _ref.support_words;
+	  var definition = _ref.definition;
+	  var building_words = _ref.building_words;
+	  var done = _ref.done;
+	  var onClick = _ref.onClick;
+	
+	  var rowClass = done ? 'row-done' : 'row-normal';
+	  var butnClass = done ? 'butn-undo' : 'butn-done';
+	  var butnText = done ? 'Undo' : 'Done';
+	
+	  return _react2.default.createElement(
+	    'tr',
+	    { className: rowClass, id: 'row' + id },
+	    _react2.default.createElement(
+	      'td',
+	      null,
+	      word
+	    ),
+	    _react2.default.createElement(
+	      'td',
+	      null,
+	      support_words
+	    ),
+	    _react2.default.createElement(
+	      'td',
+	      null,
+	      definition
+	    ),
+	    _react2.default.createElement(
+	      'td',
+	      null,
+	      building_words
+	    ),
+	    _react2.default.createElement(
+	      'td',
+	      { className: 'butn-cell-no-style' },
+	      _react2.default.createElement(
+	        'button',
+	        { className: butnClass, onClick: onClick },
+	        butnText
+	      )
+	    )
+	  );
+	};
+	
+	ListRow.propTypes = {
+	  id: _react.PropTypes.number,
+	  word: _react.PropTypes.string,
+	  support_words: _react.PropTypes.string,
+	  definition: _react.PropTypes.string,
+	  building_words: _react.PropTypes.string,
+	  done: _react.PropTypes.bool,
+	  onClick: _react.PropTypes.func
+	};
+	
+	ListRow.defaultProps = {
+	  done: false
+	};
+	
+	exports.default = ListRow;
+
+/***/ },
+/* 280 */
+/*!******************************************!*\
+  !*** ./src/app/components/MainLayout.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Nav = __webpack_require__(/*! ./Nav */ 281);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var MainLayout = function MainLayout(_ref) {
+	  var children = _ref.children;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'mainLayout' },
+	    _react2.default.createElement(_Nav2.default, null),
+	    children || 'Welcome to Vocabubands!'
+	  );
+	};
+	
+	MainLayout.propTypes = {
+	  children: _react.PropTypes.object
+	};
+	
+	exports.default = MainLayout;
+
+/***/ },
+/* 281 */
+/*!***********************************!*\
+  !*** ./src/app/components/Nav.js ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Nav = function Nav() {
+	  return _react2.default.createElement(
+	    'nav',
+	    { className: 'navbar navbar-default', role: 'navigation' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'container-fluid' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'navbar-header pull-left' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'navbar-brand' },
+	          'ELC | Vocabubands'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'navbar-header pull-right' },
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'nav pull-left' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', className: 'btn btn-default navbar-btn', id: 'login-btn', role: 'button' },
+	            'Login'
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = Nav;
+
+/***/ },
+/* 282 */
+/*!**************************************!*\
+  !*** ./src/app/reducers/reducers.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _actionTypes = __webpack_require__(/*! ../actions/actionTypes */ 274);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var initialState = {
+	  listData: []
+	};
+	
+	var listData = function listData() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _actionTypes.LOAD_LIST_DATA:
+	      return Object.assign({}, state, {
+	        listData: [].concat(_toConsumableArray(action.data))
+	      });
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = listData;
 
 /***/ }
 /******/ ]);
