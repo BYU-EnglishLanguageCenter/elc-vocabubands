@@ -36,15 +36,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   // var gen = func()
   // console.log(gen.next().value)
 
-  var promise = new Promise(function (resolve, reject) {
-    axios.get('/resources/lists/list13.json').then((response) => {
-      resolve(response.data)
-    }).catch((response) => {
-      console.log(response)
-    })
-  })
-
-  promise.then((res) => console.log(res))
+  // var promise = new Promise(function (resolve, reject) {
+  //   axios.get('/resources/lists/list13.json').then((response) => {
+  //     resolve(response.data)
+  //   }).catch((response) => {
+  //     console.log(response)
+  //   })
+  // })
+  //
+  // promise.then((res) => console.log(res))
 
   return {
     listID: ownProps.listID,

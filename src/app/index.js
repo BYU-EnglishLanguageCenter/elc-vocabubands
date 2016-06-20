@@ -2,15 +2,18 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import configureStore from './configureStore'
 import Home from './components/Home'
 import ListContainer from './containers/ListContainer'
 import MainLayout from './components/MainLayout'
-import listData from './reducers/reducers'
 
-const store = createStore(listData)
+const initialState = {
+  listData: []
+}
+
+const store = configureStore(initialState)
 
 ReactDOM.render(
   <Provider store={store}>

@@ -57,11 +57,13 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _redux = __webpack_require__(/*! redux */ 168);
-	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 190);
+	
+	var _configureStore = __webpack_require__(/*! ./configureStore */ 283);
+	
+	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
 	var _Home = __webpack_require__(/*! ./components/Home */ 249);
 	
@@ -75,13 +77,13 @@
 	
 	var _MainLayout2 = _interopRequireDefault(_MainLayout);
 	
-	var _reducers = __webpack_require__(/*! ./reducers/reducers */ 282);
-	
-	var _reducers2 = _interopRequireDefault(_reducers);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = (0, _redux.createStore)(_reducers2.default);
+	var initialState = {
+	  listData: []
+	};
+	
+	var store = (0, _configureStore2.default)(initialState);
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -216,31 +218,6 @@
 	// shim for using process in browser
 	
 	var process = module.exports = {};
-	
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-	
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-	
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
-	  }
-	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -265,7 +242,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = setTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -282,7 +259,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    clearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -294,7 +271,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        setTimeout(drainQueue, 0);
 	    }
 	};
 	
@@ -22423,11 +22400,11 @@
 	    arity: true
 	};
 	
-	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics) {
+	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
 	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
 	        var keys = Object.getOwnPropertyNames(sourceComponent);
-	        for (var i = 0; i < keys.length; ++i) {
-	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]] && (!customStatics || !customStatics[keys[i]])) {
+	        for (var i=0; i<keys.length; ++i) {
+	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
 	                try {
 	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
 	                } catch (error) {
@@ -28225,17 +28202,15 @@
 	  // var gen = func()
 	  // console.log(gen.next().value)
 	
-	  var promise = new Promise(function (resolve, reject) {
-	    _axios2.default.get('/resources/lists/list13.json').then(function (response) {
-	      resolve(response.data);
-	    }).catch(function (response) {
-	      console.log(response);
-	    });
-	  });
-	
-	  promise.then(function (res) {
-	    return console.log(res);
-	  });
+	  // var promise = new Promise(function (resolve, reject) {
+	  //   axios.get('/resources/lists/list13.json').then((response) => {
+	  //     resolve(response.data)
+	  //   }).catch((response) => {
+	  //     console.log(response)
+	  //   })
+	  // })
+	  //
+	  // promise.then((res) => console.log(res))
 	
 	  return {
 	    listID: ownProps.listID,
@@ -30465,10 +30440,6 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
 	
 	var _ListRow = __webpack_require__(/*! ../components/ListRow */ 279);
@@ -30690,6 +30661,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _actionTypes = __webpack_require__(/*! ../actions/actionTypes */ 274);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -30698,13 +30671,13 @@
 	  listData: []
 	};
 	
-	var listData = function listData() {
+	var reducer = function reducer() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
 	    case _actionTypes.LOAD_LIST_DATA:
-	      return Object.assign({}, state, {
+	      return _extends({}, state, {
 	        listData: [].concat(_toConsumableArray(action.data))
 	      });
 	    default:
@@ -30712,7 +30685,35 @@
 	  }
 	};
 	
-	exports.default = listData;
+	exports.default = reducer;
+
+/***/ },
+/* 283 */
+/*!***********************************!*\
+  !*** ./src/app/configureStore.js ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(/*! redux */ 168);
+	
+	var _reducers = __webpack_require__(/*! ./reducers/reducers.js */ 282);
+	
+	var _reducers2 = _interopRequireDefault(_reducers);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var configureStore = function configureStore(initialState) {
+	  var store = (0, _redux.createStore)(_reducers2.default, initialState, window.devToolsExtension && window.devToolsExtension());
+	  return store;
+	};
+	
+	exports.default = configureStore;
 
 /***/ }
 /******/ ]);

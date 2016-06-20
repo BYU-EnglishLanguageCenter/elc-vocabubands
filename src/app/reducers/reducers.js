@@ -4,10 +4,11 @@ const initialState = {
   listData: []
 }
 
-const listData = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_LIST_DATA:
-      return Object.assign({}, state, {
+      return ({
+        ...state,
         listData: [
           ...action.data
         ]
@@ -17,4 +18,4 @@ const listData = (state = initialState, action) => {
   }
 }
 
-export default listData
+export default reducer
