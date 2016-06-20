@@ -2,29 +2,23 @@
 
 import { connect } from 'react-redux'
 import ListRow from '../components/ListRow'
+import { rowDone } from '../actions/actionCreators'
 
-// const ListRowContainer = React.createClass({
-//   getInitialState: function () {
-//     return { done: false }
-//   },
-//
-//   handleClick: function () {
-//     this.setState({ done: !this.state.done })
-//   },
-//
-//   render: function () {
-//     return (
-//       <ListRow {...this.props} done={this.state.done} onClick={this.handleClick} />
-//     )
-//   }
-// })
-
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    ...ownProps
+    ...ownProps,
+    done: state.rowsDone.indexOf(ownProps.id) !== -1
   }
 }
 
-const ListRowContainer = connect(null, mapDispatchToProps)(ListRow)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onClick: () => {
+      dispatch(rowDone(ownProps.id))
+    }
+  }
+}
+
+const ListRowContainer = connect(mapStateToProps, mapDispatchToProps)(ListRow)
 
 export default ListRowContainer

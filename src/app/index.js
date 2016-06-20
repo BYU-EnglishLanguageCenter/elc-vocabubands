@@ -10,7 +10,9 @@ import ListContainer from './containers/ListContainer'
 import MainLayout from './components/MainLayout'
 
 const initialState = {
-  listData: []
+  listID: 0,
+  listData: [],
+  rowsDone: []
 }
 
 const store = configureStore(initialState)

@@ -21,35 +21,10 @@ var data = [
 // }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  // function * func () {
-  //   var data = [5]
-    // axios.get('/resources/lists/list13.json').then((response) => {
-    //   console.log(response)
-    //   data = [3, 4]
-    // }).catch((response) => {
-    //   data[0] = 1
-    // })
-  //
-  //   yield data
-  // }
-  //
-  // var gen = func()
-  // console.log(gen.next().value)
-
-  // var promise = new Promise(function (resolve, reject) {
-  //   axios.get('/resources/lists/list13.json').then((response) => {
-  //     resolve(response.data)
-  //   }).catch((response) => {
-  //     console.log(response)
-  //   })
-  // })
-  //
-  // promise.then((res) => console.log(res))
-
   return {
     listID: ownProps.listID,
     onClick: () => {
-      dispatch(loadListData(data))
+      dispatch(loadListData(data, ownProps.listID))
     }
   }
 }

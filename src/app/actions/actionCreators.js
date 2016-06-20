@@ -1,9 +1,10 @@
 import { LOAD_LIST_DATA, ROW_DONE, ROW_UNDO } from './actionTypes'
 
-export const loadListData = (data) => {
+export const loadListData = (data, id) => {
   return {
     type: LOAD_LIST_DATA,
-    data
+    data,
+    id
   }
 }
 

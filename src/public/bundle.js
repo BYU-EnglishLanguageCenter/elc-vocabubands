@@ -80,7 +80,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var initialState = {
-	  listData: []
+	  listID: 0,
+	  listData: [],
+	  rowsDone: []
 	};
 	
 	var store = (0, _configureStore2.default)(initialState);
@@ -28187,35 +28189,10 @@
 	// }
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-	  // function * func () {
-	  //   var data = [5]
-	  // axios.get('/resources/lists/list13.json').then((response) => {
-	  //   console.log(response)
-	  //   data = [3, 4]
-	  // }).catch((response) => {
-	  //   data[0] = 1
-	  // })
-	  //
-	  //   yield data
-	  // }
-	  //
-	  // var gen = func()
-	  // console.log(gen.next().value)
-	
-	  // var promise = new Promise(function (resolve, reject) {
-	  //   axios.get('/resources/lists/list13.json').then((response) => {
-	  //     resolve(response.data)
-	  //   }).catch((response) => {
-	  //     console.log(response)
-	  //   })
-	  // })
-	  //
-	  // promise.then((res) => console.log(res))
-	
 	  return {
 	    listID: ownProps.listID,
 	    onClick: function onClick() {
-	      dispatch((0, _actionCreators.loadListData)(data));
+	      dispatch((0, _actionCreators.loadListData)(data, ownProps.listID));
 	    }
 	  };
 	};
@@ -30225,10 +30202,11 @@
 	
 	var _actionTypes = __webpack_require__(/*! ./actionTypes */ 274);
 	
-	var loadListData = exports.loadListData = function loadListData(data) {
+	var loadListData = exports.loadListData = function loadListData(data, id) {
 	  return {
 	    type: _actionTypes.LOAD_LIST_DATA,
-	    data: data
+	    data: data,
+	    id: id
 	  };
 	};
 	
@@ -30446,29 +30424,25 @@
 	
 	var _ListRow2 = _interopRequireDefault(_ListRow);
 	
+	var _actionCreators = __webpack_require__(/*! ../actions/actionCreators */ 273);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// const ListRowContainer = React.createClass({
-	//   getInitialState: function () {
-	//     return { done: false }
-	//   },
-	//
-	//   handleClick: function () {
-	//     this.setState({ done: !this.state.done })
-	//   },
-	//
-	//   render: function () {
-	//     return (
-	//       <ListRow {...this.props} done={this.state.done} onClick={this.handleClick} />
-	//     )
-	//   }
-	// })
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-	  return _extends({}, ownProps);
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return _extends({}, ownProps, {
+	    done: state.rowsDone.indexOf(ownProps.id) !== -1
+	  });
 	};
 	
-	var ListRowContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(_ListRow2.default);
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    onClick: function onClick() {
+	      dispatch((0, _actionCreators.rowDone)(ownProps.id));
+	    }
+	  };
+	};
+	
+	var ListRowContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ListRow2.default);
 	
 	exports.default = ListRowContainer;
 
@@ -30667,18 +30641,23 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
-	var initialState = {
-	  listData: []
-	};
-	
-	var reducer = function reducer() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
-	  var action = arguments[1];
-	
+	var reducer = function reducer(state, action) {
 	  switch (action.type) {
 	    case _actionTypes.LOAD_LIST_DATA:
 	      return _extends({}, state, {
-	        listData: [].concat(_toConsumableArray(action.data))
+	        listID: action.id,
+	        listData: [].concat(_toConsumableArray(action.data)),
+	        rowsDone: []
+	      });
+	    case _actionTypes.ROW_DONE:
+	      var index = state.rowsDone.indexOf(action.id);
+	      if (index === -1) {
+	        return _extends({}, state, {
+	          rowsDone: [].concat(_toConsumableArray(state.rowsDone), [action.id])
+	        });
+	      }
+	      return _extends({}, state, {
+	        rowsDone: [].concat(_toConsumableArray(state.rowsDone.slice(0, index)), _toConsumableArray(state.rowsDone.slice(index + 1)))
 	      });
 	    default:
 	      return state;
