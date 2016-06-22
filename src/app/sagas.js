@@ -1,3 +1,5 @@
+'use strict'
+
 import { delay, takeEvery } from 'redux-saga'
 
 export function * test () {
