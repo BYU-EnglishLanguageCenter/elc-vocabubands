@@ -86,7 +86,7 @@
 	};
 	
 	var store = (0, _configureStore2.default)(initialState);
-	store.runSaga(_sagas.test);
+	store.runSaga(_sagas.watchFetch);
 	
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -30107,6 +30107,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	var FETCH_LIST_DATA = exports.FETCH_LIST_DATA = 'FETCH_LIST_DATA';
 	var LOAD_LIST_DATA = exports.LOAD_LIST_DATA = 'LOAD_LIST_DATA';
 	var ROW_DONE = exports.ROW_DONE = 'ROW_DONE';
 
@@ -30239,7 +30240,7 @@
 	  return {
 	    listID: ownProps.listID,
 	    onClick: function onClick() {
-	      dispatch((0, _actionCreators.loadListData)(data, ownProps.listID));
+	      dispatch((0, _actionCreators.fetchListData)(ownProps.listID));
 	    }
 	  };
 	};
@@ -32245,9 +32246,16 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.rowUndo = exports.rowDone = exports.loadListData = undefined;
+	exports.rowDone = exports.loadListData = exports.fetchListData = undefined;
 	
 	var _actionTypes = __webpack_require__(/*! ./actionTypes */ 263);
+	
+	var fetchListData = exports.fetchListData = function fetchListData(id) {
+	  return {
+	    type: _actionTypes.FETCH_LIST_DATA,
+	    id: id
+	  };
+	};
 	
 	var loadListData = exports.loadListData = function loadListData(data, id) {
 	  return {
@@ -32260,13 +32268,6 @@
 	var rowDone = exports.rowDone = function rowDone(id) {
 	  return {
 	    type: _actionTypes.ROW_DONE,
-	    id: id
-	  };
-	};
-	
-	var rowUndo = exports.rowUndo = function rowUndo(id) {
-	  return {
-	    type: _actionTypes.ROW_UNDO,
 	    id: id
 	  };
 	};
@@ -32665,26 +32666,75 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.test = test;
+	exports.watchFetch = watchFetch;
+	
+	var _axios = __webpack_require__(/*! axios */ 267);
+	
+	var _axios2 = _interopRequireDefault(_axios);
 	
 	var _reduxSaga = __webpack_require__(/*! redux-saga */ 250);
 	
-	var _marked = [test].map(regeneratorRuntime.mark);
+	var _effects = __webpack_require__(/*! redux-saga/effects */ 297);
 	
-	function test() {
-	  return regeneratorRuntime.wrap(function test$(_context) {
+	var _actionTypes = __webpack_require__(/*! ./actions/actionTypes */ 263);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var _marked = [fetch, watchFetch].map(regeneratorRuntime.mark);
+	
+	var getData = function getData(id) {
+	  _axios2.default.get('/resources/lists/list13.json').then(function (response) {
+	    return response;
+	  }).catch(function (err) {
+	    return err;
+	  });
+	};
+	
+	function fetch(action) {
+	  var response;
+	  return regeneratorRuntime.wrap(function fetch$(_context) {
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
-	          console.log('Sagas is working');
+	          _context.next = 2;
+	          return (0, _effects.call)(getData, action.id);
 	
-	        case 1:
+	        case 2:
+	          response = _context.sent;
+	          _context.next = 5;
+	          return console.log(response);
+	
+	        case 5:
 	        case 'end':
 	          return _context.stop();
 	      }
 	    }
 	  }, _marked[0], this);
 	}
+	
+	function watchFetch() {
+	  return regeneratorRuntime.wrap(function watchFetch$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          return _context2.delegateYield((0, _reduxSaga.takeEvery)(_actionTypes.FETCH_LIST_DATA, fetch), 't0', 1);
+	
+	        case 1:
+	        case 'end':
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this);
+	}
+
+/***/ },
+/* 297 */
+/*!*********************************!*\
+  !*** ./~/redux-saga/effects.js ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! ./lib/effects */ 260)
 
 /***/ }
 /******/ ]);

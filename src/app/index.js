@@ -9,7 +9,7 @@ import configureStore from './configureStore'
 import Home from './components/Home'
 import ListContainer from './containers/ListContainer'
 import MainLayout from './components/MainLayout'
-import { test } from './sagas'
+import { watchFetch } from './sagas'
 
 const initialState = {
   listID: 0,
@@ -18,7 +18,7 @@ const initialState = {
 }
 
 const store = configureStore(initialState)
-store.runSaga(test)
+store.runSaga(watchFetch)
 
 render(
   <Provider store={store}>

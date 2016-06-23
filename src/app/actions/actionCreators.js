@@ -1,4 +1,11 @@
-import { LOAD_LIST_DATA, ROW_DONE, ROW_UNDO } from './actionTypes'
+import { FETCH_LIST_DATA, LOAD_LIST_DATA, ROW_DONE } from './actionTypes'
+
+export const fetchListData = (id) => {
+  return {
+    type: FETCH_LIST_DATA,
+    id
+  }
+}
 
 export const loadListData = (data, id) => {
   return {
@@ -11,13 +18,6 @@ export const loadListData = (data, id) => {
 export const rowDone = (id) => {
   return {
     type: ROW_DONE,
-    id
-  }
-}
-
-export const rowUndo = (id) => {
-  return {
-    type: ROW_UNDO,
     id
   }
 }

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import regenerator from 'regenerator-runtime/runtime'
 import ListLink from '../components/ListLink'
-import { loadListData } from '../actions/actionCreators'
+import { fetchListData } from '../actions/actionCreators'
 
 var data = [
   {id: 1, word: 'detailed.j', support_words: 'comprehensive; complete;', definition: 'including a lot of information', building_words: 'precise; thorough'},
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     listID: ownProps.listID,
     onClick: () => {
-      dispatch(loadListData(data, ownProps.listID))
+      dispatch(fetchListData(ownProps.listID))
     }
   }
 }
