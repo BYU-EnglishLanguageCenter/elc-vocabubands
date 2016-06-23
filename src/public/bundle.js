@@ -30208,10 +30208,6 @@
 	  value: true
 	});
 	
-	var _axios = __webpack_require__(/*! axios */ 267);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 168);
 	
 	var _runtime = __webpack_require__(/*! regenerator-runtime/runtime */ 286);
@@ -30225,16 +30221,6 @@
 	var _actionCreators = __webpack_require__(/*! ../actions/actionCreators */ 288);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var data = [{ id: 1, word: 'detailed.j', support_words: 'comprehensive; complete;', definition: 'including a lot of information', building_words: 'precise; thorough' }, { id: 2, word: 'exclude.v', support_words: 'prevent', definition: 'to prevent someone from doing something; to leave out something', building_words: 'preclude; proscribe; disallow' }, { id: 3, word: 'word.n', support_words: 'other words', definition: 'describes a thing', building_words: 'more words' }];
-	//
-	// const getListData = (id) => {
-	//   axios.get('/resources/lists/list' + id + '.json').then((response) => {
-	//     console.log(response)
-	//   }).catch((response) => {
-	//     console.log(response)
-	//   })
-	// }
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 	  return {
@@ -32678,16 +32664,14 @@
 	
 	var _actionTypes = __webpack_require__(/*! ./actions/actionTypes */ 263);
 	
+	var _actionCreators = __webpack_require__(/*! ./actions/actionCreators */ 288);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var _marked = [fetch, watchFetch].map(regeneratorRuntime.mark);
 	
 	var getData = function getData(id) {
-	  _axios2.default.get('/resources/lists/list13.json').then(function (response) {
-	    return response;
-	  }).catch(function (err) {
-	    return err;
-	  });
+	  return _axios2.default.get('/resources/lists/list13.json');
 	};
 	
 	function fetch(action) {
@@ -32702,7 +32686,7 @@
 	        case 2:
 	          response = _context.sent;
 	          _context.next = 5;
-	          return console.log(response);
+	          return (0, _effects.put)((0, _actionCreators.loadListData)(response.data, action.id));
 	
 	        case 5:
 	        case 'end':
