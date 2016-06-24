@@ -1,31 +1,22 @@
 'use strict'
 
 import axios from 'axios'
+import { graphql } from 'graphql'
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 import { FETCH_LIST_DATA } from './actions/actionTypes'
 import { fetchFailed, loadListData } from './actions/actionCreators'
-
-import { graphql, GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql'
-
-var schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-      hello: {
-        type: GraphQLString,
-        resolve () {
-          return 'hello'
-        }
-      }
-    }
-  })
-})
+import schema from './schema'
 
 export function * start () {
-  var query = '{ hello }'
+  const query = `
+    {
+      hi(id: 3)
+    }
+  `
+
   graphql(schema, query).then(result => {
-    console.log(result)
+    console.log(result.data)
   })
 }
 
