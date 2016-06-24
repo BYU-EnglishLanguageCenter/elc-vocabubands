@@ -32,4 +32,8 @@ ListRow.propTypes = {
   onClick: PropTypes.func
 }
 
+ListRow.defaultProps = {
+  done: false
+}
+
 export default ListRow

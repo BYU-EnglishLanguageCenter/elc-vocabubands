@@ -1,7 +1,7 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
-import ListLink from './ListLink'
+import ListLinkContainer from '../containers/ListLinkContainer'
 
 const AllLists = ({ data }) => (
   <div className='allLists'>
@@ -9,7 +9,7 @@ const AllLists = ({ data }) => (
       All Lists
     </h1>
     {data.map(listID =>
-      <ListLink key={listID} listID={listID} />
+      <ListLinkContainer listID={listID} key={listID} />
     )}
   </div>
 )
