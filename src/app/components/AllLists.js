@@ -2,7 +2,6 @@
 
 import React, { PropTypes } from 'react'
 import ListLinkContainer from '../containers/ListLinkContainer'
-import ListLink from './ListLink'
 
 const AllLists = ({ data }) => (
   <div className='allLists'>
@@ -10,7 +9,7 @@ const AllLists = ({ data }) => (
       All Lists
     </h1>
     {data.map(listID =>
-      <ListLinkContainer key={listID} listID={listID} />
+      <ListLinkContainer listID={listID} key={listID} />
     )}
   </div>
 )

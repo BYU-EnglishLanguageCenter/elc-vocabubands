@@ -4,10 +4,10 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import ListTable from './ListTable'
 
-const List = ({ data, listID }) => (
+const List = ({ data, id, context }) => (
   <div className='list'>
     <h1>
-      List {listID}
+      List {id}
     </h1>
     <ListTable data={data} />
     <Link to='/' className='btn btn-primary'role='button'>
@@ -18,7 +18,7 @@ const List = ({ data, listID }) => (
 
 List.propTypes = {
   data: PropTypes.array.isRequired,
-  listID: PropTypes.string.isRequired
+  id: PropTypes.number.isRequired
 }
 
 export default List

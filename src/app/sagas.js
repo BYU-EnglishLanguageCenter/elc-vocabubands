@@ -4,15 +4,19 @@ import axios from 'axios'
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 import { FETCH_LIST_DATA } from './actions/actionTypes'
-import { loadListData } from './actions/actionCreators'
+import { fetchFailed, loadListData } from './actions/actionCreators'
 
-const getData = (id) => {
-  return axios.get('/resources/lists/list13.json')
+export const getData = (id) => {
+  return axios.get(`/resources/lists/list${id}.json`)
 }
 
-function * fetch (action) {
-  const response = yield call(getData, action.id)
-  yield put(loadListData(response.data, action.id))
+export function * fetch (action) {
+  try {
+    const response = yield call(getData, action.id)
+    yield put(loadListData(response.data, action.id))
+  } catch (err) {
+    yield put(fetchFailed(err))
+  }
 }
 
 export function * watchFetch () {

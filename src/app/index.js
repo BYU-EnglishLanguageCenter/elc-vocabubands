@@ -12,7 +12,7 @@ import MainLayout from './components/MainLayout'
 import { watchFetch } from './sagas'
 
 const initialState = {
-  listID: 0,
+  currentList: 0,
   listData: [],
   rowsDone: []
 }
