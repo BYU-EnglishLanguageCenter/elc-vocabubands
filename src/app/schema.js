@@ -1,6 +1,6 @@
 'use strict'
 
-import { GraphQLSchema, GraphQLObjectType, GraphQLInt, GraphQLString } from 'graphql'
+import { GraphQLSchema, GraphQLObjectType, GraphQLInt } from 'graphql'
 import listType from './types'
 import data from './data'
 
@@ -11,16 +11,11 @@ var schema = new GraphQLSchema({
       list: {
         type: listType,
         args: {
-          id: { type: GraphQLInt }
+          id: {
+            type: GraphQLInt
+          }
         },
-        resolve: (root, args) => Promise.resolve(5)
-      },
-      hi: {
-        type: GraphQLString,
-        args: {
-          id: { type: GraphQLInt }
-        },
-        resolve: (root, args) => Promise.resolve('hi there friend')
+        resolve: (root, args) => data[args.id]
       }
     }
   })

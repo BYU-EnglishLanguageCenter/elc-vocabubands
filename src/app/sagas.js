@@ -11,12 +11,23 @@ import schema from './schema'
 export function * start () {
   const query = `
     {
-      hi(id: 3)
+      list(id: 13) {
+        id
+        data {
+          ...RowData
+        }
+      }
+    }
+
+    fragment RowData on Row {
+      id
+      word
+      definition
     }
   `
 
   graphql(schema, query).then(result => {
-    console.log(result.data)
+    console.log(result)
   })
 }
 
