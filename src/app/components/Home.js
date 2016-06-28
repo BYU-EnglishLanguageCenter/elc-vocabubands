@@ -1,13 +1,11 @@
 'use strict'
 
 import React from 'react'
-import AllLists from './AllLists'
-
-const data = [13, 14]
+import AllListsContainer from '../containers/AllListsContainer'
 
 const Home = () => (
   <div className='home'>
-    <AllLists data={data} />
+    <AllListsContainer />
   </div>
 )
 

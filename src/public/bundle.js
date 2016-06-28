@@ -84,7 +84,8 @@
 	var initialState = {
 	  currentList: 0,
 	  listData: [],
-	  rowsDone: []
+	  rowsDone: [],
+	  allLists: []
 	};
 	
 	var store = (0, _configureStore2.default)(initialState);
@@ -30074,12 +30075,24 @@
 	
 	var reducer = function reducer(state, action) {
 	  switch (action.type) {
+	    case _actionTypes.FETCH_FAILED:
+	      return _extends({}, state, {
+	        currentList: 0,
+	        error: action.err
+	      });
+	
+	    case _actionTypes.LOAD_AVL:
+	      return _extends({}, state, {
+	        allLists: [].concat(_toConsumableArray(action.data))
+	      });
+	
 	    case _actionTypes.LOAD_LIST_DATA:
 	      return _extends({}, state, {
 	        currentList: action.id,
 	        listData: [].concat(_toConsumableArray(action.data)),
 	        rowsDone: []
 	      });
+	
 	    case _actionTypes.ROW_DONE:
 	      var index = state.rowsDone.indexOf(action.id);
 	      if (index === -1) {
@@ -30090,11 +30103,7 @@
 	      return _extends({}, state, {
 	        rowsDone: [].concat(_toConsumableArray(state.rowsDone.slice(0, index)), _toConsumableArray(state.rowsDone.slice(index + 1)))
 	      });
-	    case _actionTypes.FETCH_FAILED:
-	      return _extends({}, state, {
-	        currentList: 0,
-	        error: action.err
-	      });
+	
 	    default:
 	      return state;
 	  }
@@ -30116,6 +30125,7 @@
 	});
 	var FETCH_FAILED = exports.FETCH_FAILED = 'FETCH_FAILED';
 	var FETCH_LIST_DATA = exports.FETCH_LIST_DATA = 'FETCH_LIST_DATA';
+	var LOAD_AVL = exports.LOAD_AVL = 'LOAD_AVL';
 	var LOAD_LIST_DATA = exports.LOAD_LIST_DATA = 'LOAD_LIST_DATA';
 	var ROW_DONE = exports.ROW_DONE = 'ROW_DONE';
 
@@ -30136,19 +30146,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _AllLists = __webpack_require__(/*! ./AllLists */ 265);
+	var _AllListsContainer = __webpack_require__(/*! ../containers/AllListsContainer */ 515);
 	
-	var _AllLists2 = _interopRequireDefault(_AllLists);
+	var _AllListsContainer2 = _interopRequireDefault(_AllListsContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var data = [13, 14];
 	
 	var Home = function Home() {
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'home' },
-	    _react2.default.createElement(_AllLists2.default, { data: data })
+	    _react2.default.createElement(_AllListsContainer2.default, null)
 	  );
 	};
 	
@@ -30967,7 +30975,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.rowDone = exports.loadListData = exports.fetchListData = exports.fetchFailed = undefined;
+	exports.rowDone = exports.loadListData = exports.loadAVL = exports.fetchListData = exports.fetchFailed = undefined;
 	
 	var _actionTypes = __webpack_require__(/*! ./actionTypes */ 263);
 	
@@ -30982,6 +30990,13 @@
 	  return {
 	    type: _actionTypes.FETCH_LIST_DATA,
 	    id: id
+	  };
+	};
+	
+	var loadAVL = exports.loadAVL = function loadAVL(data) {
+	  return {
+	    type: _actionTypes.LOAD_AVL,
+	    data: data
 	  };
 	};
 	
@@ -31346,6 +31361,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 190);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Nav = function Nav() {
@@ -31359,8 +31376,8 @@
 	        'div',
 	        { className: 'navbar-header pull-left' },
 	        _react2.default.createElement(
-	          'a',
-	          { className: 'navbar-brand' },
+	          _reactRouter.Link,
+	          { to: '/', className: 'navbar-brand', id: 'nav-title' },
 	          'ELC | Vocabubands'
 	        )
 	      ),
@@ -31416,36 +31433,41 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [start, fetch, watchFetch, rootSaga].map(regeneratorRuntime.mark);
+	var _marked = [init, fetch, watchFetch, rootSaga].map(regeneratorRuntime.mark);
 	
-	function start() {
-	  var mutation;
-	  return regeneratorRuntime.wrap(function start$(_context) {
+	var getData = exports.getData = function getData(id) {
+	  var query = '\n    query {\n      list(id: ' + id + ') {\n        data {\n          ...RowData\n        }\n      }\n    }\n\n    fragment RowData on Row {\n      id\n      word\n      support_words\n      definition\n      building_words\n    }\n  ';
+	
+	  return (0, _graphql.graphql)(_schema2.default, query);
+	};
+	
+	var getLists = function getLists() {
+	  var query = '\n    query {\n      allLists {\n        avl\n      }\n    }\n  ';
+	
+	  return (0, _graphql.graphql)(_schema2.default, query);
+	};
+	
+	function init() {
+	  var response;
+	  return regeneratorRuntime.wrap(function init$(_context) {
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
-	          mutation = '\n    mutation {\n      update\n    }\n  ';
-	
-	
-	          (0, _graphql.graphql)(_schema2.default, mutation).then(function (result) {
-	            return console.log(result);
-	          }).catch(function (err) {
-	            return console.log(err);
-	          });
+	          _context.next = 2;
+	          return (0, _effects.call)(getLists);
 	
 	        case 2:
+	          response = _context.sent;
+	          _context.next = 5;
+	          return (0, _effects.put)((0, _actionCreators.loadAVL)(response.data.allLists.avl));
+	
+	        case 5:
 	        case 'end':
 	          return _context.stop();
 	      }
 	    }
 	  }, _marked[0], this);
 	}
-	
-	var getData = exports.getData = function getData(id) {
-	  var query = '\n    {\n      list(id: ' + id + ') {\n        data {\n          ...RowData\n        }\n      }\n    }\n\n    fragment RowData on Row {\n      id\n      word\n      support_words\n      definition\n      building_words\n    }\n  ';
-	
-	  return (0, _graphql.graphql)(_schema2.default, query);
-	};
 	
 	function fetch(action) {
 	  var response;
@@ -31503,7 +31525,7 @@
 	      switch (_context4.prev = _context4.next) {
 	        case 0:
 	          _context4.next = 2;
-	          return [start(), watchFetch()];
+	          return [init(), watchFetch()];
 	
 	        case 2:
 	        case 'end':
@@ -47129,8 +47151,6 @@
 	
 	var _types = __webpack_require__(/*! ./types */ 511);
 	
-	var _types2 = _interopRequireDefault(_types);
-	
 	var _data = __webpack_require__(/*! ./data */ 513);
 	
 	var _data2 = _interopRequireDefault(_data);
@@ -47143,15 +47163,22 @@
 	  name: 'Query',
 	  fields: {
 	    list: {
-	      type: _types2.default,
+	      type: _types.ListType,
 	      args: {
 	        id: {
 	          type: new _graphql.GraphQLNonNull(_graphql.GraphQLInt)
 	        }
 	      },
-	      resolve: function resolve(root, _ref) {
+	      resolve: function resolve(parent, _ref) {
 	        var id = _ref.id;
 	        return _data2.default[id];
+	      }
+	    },
+	
+	    allLists: {
+	      type: _types.AllListsType,
+	      resolve: function resolve(parent, args) {
+	        return _data2.default['lists'];
 	      }
 	    }
 	  }
@@ -47186,6 +47213,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.AllListsType = exports.ListType = undefined;
 	
 	var _graphql = __webpack_require__(/*! graphql */ 297);
 	
@@ -47210,7 +47238,7 @@
 	  }
 	});
 	
-	var ListType = new _graphql.GraphQLObjectType({
+	var ListType = exports.ListType = new _graphql.GraphQLObjectType({
 	  name: 'List',
 	  fields: {
 	    id: {
@@ -47222,7 +47250,14 @@
 	  }
 	});
 	
-	exports.default = ListType;
+	var AllListsType = exports.AllListsType = new _graphql.GraphQLObjectType({
+	  name: 'AllLists',
+	  fields: {
+	    avl: {
+	      type: new _graphql.GraphQLList(_graphql.GraphQLInt)
+	    }
+	  }
+	});
 
 /***/ },
 /* 512 */,
@@ -47238,6 +47273,9 @@
 	  value: true
 	});
 	var data = {
+	  'lists': {
+	    'avl': [13, 14]
+	  },
 	  '13': {
 	    'id': 13,
 	    'data': [{
@@ -47597,6 +47635,38 @@
 	};
 	
 	exports.default = data;
+
+/***/ },
+/* 514 */,
+/* 515 */
+/*!*************************************************!*\
+  !*** ./src/app/containers/AllListsContainer.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 168);
+	
+	var _AllLists = __webpack_require__(/*! ../components/AllLists */ 265);
+	
+	var _AllLists2 = _interopRequireDefault(_AllLists);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return {
+	    data: state.allLists
+	  };
+	};
+	
+	var AllListsContainer = (0, _reactRedux.connect)(mapStateToProps)(_AllLists2.default);
+	
+	exports.default = AllListsContainer;
 
 /***/ }
 /******/ ]);

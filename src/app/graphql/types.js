@@ -23,7 +23,7 @@ const RowType = new GraphQLObjectType({
   }
 })
 
-const ListType = new GraphQLObjectType({
+export const ListType = new GraphQLObjectType({
   name: 'List',
   fields: {
     id: {
@@ -35,4 +35,11 @@ const ListType = new GraphQLObjectType({
   }
 })
 
-export default ListType
+export const AllListsType = new GraphQLObjectType({
+  name: 'AllLists',
+  fields: {
+    avl: {
+      type: new GraphQLList(GraphQLInt)
+    }
+  }
+})

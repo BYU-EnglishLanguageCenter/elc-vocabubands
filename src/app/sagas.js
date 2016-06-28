@@ -4,22 +4,12 @@ import { graphql } from 'graphql'
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 import { FETCH_LIST_DATA } from './actions/actionTypes'
-import { fetchFailed, loadListData } from './actions/actionCreators'
+import { fetchFailed, loadAVL, loadListData } from './actions/actionCreators'
 import schema from './graphql/schema'
-
-function * start () {
-  const mutation = `
-    mutation {
-      update
-    }
-  `
-
-  graphql(schema, mutation).then(result => console.log(result)).catch(err => console.log(err))
-}
 
 export const getData = (id) => {
   const query = `
-    {
+    query {
       list(id: ${id}) {
         data {
           ...RowData
@@ -39,6 +29,23 @@ export const getData = (id) => {
   return graphql(schema, query)
 }
 
+const getLists = () => {
+  const query = `
+    query {
+      allLists {
+        avl
+      }
+    }
+  `
+
+  return graphql(schema, query)
+}
+
+function * init () {
+  const response = yield call(getLists)
+  yield put(loadAVL(response.data.allLists.avl))
+}
+
 export function * fetch (action) {
   try {
     const response = yield call(getData, action.id)
@@ -55,7 +62,7 @@ export function * watchFetch () {
 
 export default function * rootSaga () {
   yield [
-    start(),
+    init(),
     watchFetch()
   ]
 }

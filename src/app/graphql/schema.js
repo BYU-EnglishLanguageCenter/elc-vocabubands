@@ -1,7 +1,7 @@
 'use strict'
 
 import { GraphQLSchema, GraphQLObjectType, GraphQLInt, GraphQLNonNull } from 'graphql'
-import ListType from './types'
+import { ListType, AllListsType } from './types'
 import data from './data'
 
 let count = 0
@@ -16,7 +16,12 @@ var QueryType = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLInt)
         }
       },
-      resolve: (root, { id }) => data[id]
+      resolve: (parent, { id }) => data[id]
+    },
+
+    allLists: {
+      type: AllListsType,
+      resolve: (parent, args) => data['lists']
     }
   }
 })

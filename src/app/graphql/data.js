@@ -1,6 +1,9 @@
 'use strict'
 
 const data = {
+  'lists': {
+    'avl': [13, 14]
+  },
   '13': {
     'id': 13,
     'data': [

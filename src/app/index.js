@@ -14,7 +14,8 @@ import rootSaga from './sagas'
 const initialState = {
   currentList: 0,
   listData: [],
-  rowsDone: []
+  rowsDone: [],
+  allLists: []
 }
 
 const store = configureStore(initialState)
