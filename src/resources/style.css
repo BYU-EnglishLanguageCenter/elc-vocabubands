@@ -11,6 +11,11 @@ body {
   margin-top: 30%;
 }
 
+#nav-title:hover,
+#nav-title:visited {
+  color: #777;
+}
+
 .butn-cell-no-style {
   background-color: #fff;
   border: #fff;

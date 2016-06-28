@@ -1,7 +1,22 @@
-import { FETCH_FAILED, LOAD_LIST_DATA, ROW_DONE } from '../actions/actionTypes'
+import { FETCH_FAILED, LOAD_AVL, LOAD_LIST_DATA, ROW_DONE } from '../actions/actionTypes'
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case FETCH_FAILED:
+      return {
+        ...state,
+        currentList: 0,
+        error: action.err
+      }
+
+    case LOAD_AVL:
+      return {
+        ...state,
+        allLists: [
+          ...action.data
+        ]
+      }
+
     case LOAD_LIST_DATA:
       return {
         ...state,
@@ -11,6 +26,7 @@ const reducer = (state, action) => {
         ],
         rowsDone: []
       }
+
     case ROW_DONE:
       const index = state.rowsDone.indexOf(action.id)
       if (index === -1) {
@@ -29,12 +45,7 @@ const reducer = (state, action) => {
           ...state.rowsDone.slice(index + 1)
         ]
       }
-    case FETCH_FAILED:
-      return {
-        ...state,
-        currentList: 0,
-        error: action.err
-      }
+
     default:
       return state
   }
