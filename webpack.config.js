@@ -1,5 +1,5 @@
-var webpack = require('webpack')
 var path = require('path')
+require('webpack')
 
 var APP_DIR = path.resolve(__dirname, 'src/app')
 var BUILD_DIR = path.resolve(__dirname, 'src/public')

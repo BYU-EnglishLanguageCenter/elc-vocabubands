@@ -1,7 +1,6 @@
 'use strict'
 
 import { connect } from 'react-redux'
-import regenerator from 'regenerator-runtime/runtime'
 import ListLink from '../components/ListLink'
 import { fetchListData } from '../actions/actionCreators'
 
