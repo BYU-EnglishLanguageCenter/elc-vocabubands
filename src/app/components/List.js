@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import ListTable from './ListTable'
 
-const List = ({ data, id, context }) => (
+const List = ({ data, id }) => (
   <div className='list'>
     <h1>
       List {id}

@@ -21,7 +21,7 @@ $ npm test
 
 ## Dev Tools
 To run a single build of your code: `npm run build`  
-To run Webpack in watch mode:       `npm run watch`
+To run Webpack in watch mode: `npm run watch`
 
 ## Important Reads
 [Setting Up a React.js Environment Using Npm, Babel 6 and Webpack](https://www.codementor.io/reactjs/tutorial/beginner-guide-setup-reactjs-environment-npm-babel-6-webpack)  
