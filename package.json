@@ -35,7 +35,7 @@
   },
   "scripts": {
     "build": "webpack -d",
-    "start": "http-server src/",
+    "start": "node app.js",
     "test": "babel-node src/app/test.js | tap-spec",
     "watch": "webpack -d --watch"
   }

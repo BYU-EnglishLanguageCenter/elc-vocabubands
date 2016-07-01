@@ -12,3 +12,12 @@ router.get('/', function * (next) {
     bundleSrc: '/bundle.js'
   })
 })
+
+router.get('/list*', function * (next) {
+  let ctx = this
+
+  ctx.render('base', {
+    pageTitle: 'Vocabubands',
+    bundleSrc: '/bundle.js'
+  })
+})
