@@ -1,4 +1,4 @@
-import { FETCH_FAILED, FETCH_LIST_DATA, LOAD_AVL, LOAD_LIST_DATA, ROW_DONE } from './actionTypes'
+import { FETCH_FAILED, FETCH_LIST_DATA, LOAD_AVL, LOAD_LIST_DATA, ROW_DONE } from './TYPES'
 
 export const fetchFailed = (err) => {
   return {

@@ -3,7 +3,7 @@
 import { graphql } from 'graphql'
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
-import { FETCH_LIST_DATA } from './actions/actionTypes'
+import { FETCH_LIST_DATA } from './actions/TYPES'
 import { fetchFailed, loadAVL, loadListData } from './actions/actionCreators'
 import schema from './graphql/schema'
 
