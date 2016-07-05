@@ -18,6 +18,11 @@
     "babel-preset-react": "^6.5.0",
     "graphql": "^0.6.0",
     "http-server": "^0.9.0",
+    "koa": "^1.2.0",
+    "koa-logger": "^1.3.0",
+    "koa-pug": "^3.0.0-0",
+    "koa-router": "^5.4.0",
+    "koa-static": "^2.0.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
@@ -30,7 +35,7 @@
   },
   "scripts": {
     "build": "webpack -d",
-    "start": "http-server src/",
+    "start": "node app.js",
     "test": "babel-node src/app/test.js | tap-spec",
     "watch": "webpack -d --watch"
   }

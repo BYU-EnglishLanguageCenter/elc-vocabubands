@@ -12,14 +12,7 @@ import ListContainer from './containers/ListContainer'
 import MainLayout from './components/MainLayout'
 import rootSaga from './sagas'
 
-const initialState = {
-  currentList: 0,
-  listData: [],
-  rowsDone: [],
-  allLists: []
-}
-
-const store = configureStore(initialState)
+const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
 
 render(
@@ -31,5 +24,5 @@ render(
       </Route>
     </Router>
   </Provider>,
-  document.getElementById('content')
+  document.getElementById('root')
 )

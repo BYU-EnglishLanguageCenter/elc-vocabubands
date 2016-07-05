@@ -12,7 +12,7 @@ $ npm install
 ```
 $ npm start
 ```
-This will start a simple [http-server](https://www.npmjs.com/package/http-server) on [localhost:8080](http://localhost:8080). Note: refreshing on any page other than index.html will result in a failed get request; see [here](https://github.com/reactjs/react-router/blob/master/docs/guides/Histories.md) for more information.
+Point your broswer to [localhost:8080](http://localhost:8080).
 
 ## Run Tests
 ```
