@@ -17,7 +17,7 @@ const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
 
 const history = syncHistoryWithStore(browserHistory, store)
-//history.listen(location => store.dispatch({ type: 'ROUTE_CHANGE' }))
+// history.listen(location => store.dispatch({ type: 'ROUTE_CHANGE' }))
 
 const enter = () => {
   store.dispatch({ type: 'ROUTE_CHANGE' })
