@@ -5,8 +5,8 @@ import List from '../components/List'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: state.listData,
-    id: state.currentList
+    id: ownProps.params.id,
+    type: state.listType
   }
 }
 

@@ -5,7 +5,8 @@ import AllLists from '../components/AllLists'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: state.allLists
+    data: state.allLists,
+    type: state.listType
   }
 }
 

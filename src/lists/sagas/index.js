@@ -6,11 +6,6 @@ import { FETCH_ALL_LISTS, FETCH_LIST_DATA } from '../actions/TYPES'
 import { fetchFailed, loadAllLists, loadListData } from '../actions/actionCreators'
 import { getListData, getAllLists } from './queries'
 
-// function * init () {
-//   const response = yield call(getLists)
-//   yield put(loadAVL(response.data.allLists.avl))
-// }
-
 export function * fetchList (action) {
   try {
     const response = yield call(getListData, action.id)

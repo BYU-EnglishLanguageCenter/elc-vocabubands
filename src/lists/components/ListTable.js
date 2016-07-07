@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react'
 import ListRowContainer from '../containers/ListRowContainer'
 
-const ListTable = ({data}) => (
+const ListTable = ({ data }) => (
   <div className='listTable'>
     <table className='table table-striped'>
       <thead>

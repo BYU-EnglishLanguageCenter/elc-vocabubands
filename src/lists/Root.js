@@ -23,9 +23,12 @@ const history = syncHistoryWithStore(browserHistory, store)
 const Root = () => (
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/lists' component={MainLayout} >
+      <Route path='lists' component={MainLayout}>
         <IndexRoute component={Home} />
-        <Route path='avl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('avl')) }} />
+        <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
+          <IndexRoute component={AllListsContainer} />
+          <Route path=':id' component={ListContainer} />
+        </Route>
         <Route path='pre-avl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
       </Route>
     </Router>

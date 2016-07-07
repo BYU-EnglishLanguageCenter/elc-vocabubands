@@ -2,23 +2,23 @@
 
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import ListTable from './ListTable'
+import ListTableContainer from '../containers/ListTableContainer'
 
-const List = ({ data, id }) => (
+const List = ({ id, type }) => (
   <div className='list'>
     <h1>
       List {id}
     </h1>
-    <ListTable data={data} />
-    <Link to='/lists/avl' className='btn btn-primary'role='button'>
+    <ListTableContainer />
+    <Link to={`/lists/${type}`} className='btn btn-primary'role='button'>
       See all Lists
     </Link>
   </div>
 )
 
 List.propTypes = {
-  data: PropTypes.array.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 }
 
 export default List
