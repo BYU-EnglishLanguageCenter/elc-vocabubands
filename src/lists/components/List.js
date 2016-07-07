@@ -10,7 +10,7 @@ const List = ({ data, id }) => (
       List {id}
     </h1>
     <ListTable data={data} />
-    <Link to='/' className='btn btn-primary'role='button'>
+    <Link to='/lists/avl' className='btn btn-primary'role='button'>
       See all Lists
     </Link>
   </div>

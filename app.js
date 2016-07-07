@@ -20,7 +20,7 @@ pug.use(app)
 app.use(listsRouter.routes())
 app.use(listsRouter.allowedMethods())
 
-app.use(serve(__dirname + '/src/public'))
+app.use(serve(__dirname + '/public'))
 
 app.listen(8080)
 console.log('Listening on http://localhost:8080')

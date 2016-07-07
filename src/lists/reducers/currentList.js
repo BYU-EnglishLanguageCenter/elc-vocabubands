@@ -9,8 +9,6 @@ const currentList = (state = 0, action) => {
       return 0
     case LOAD_LIST_DATA:
       return action.id
-    case LOCATION_CHANGE:
-      return 22
     default:
       return state
   }

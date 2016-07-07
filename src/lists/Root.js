@@ -1,7 +1,6 @@
 'use strict'
 
 import React from 'react'
-import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
@@ -20,18 +19,19 @@ const history = syncHistoryWithStore(browserHistory, store)
 // history.listen(location => store.dispatch({ type: 'ROUTE_CHANGE' }))
 
 const enter = () => {
-  store.dispatch({ type: 'ROUTE_CHANGE' })
-  console.log()
+  store.dispatch({ type: 'ENTERED_LIST' })
+  console.log(store.getState().routing.locationBeforeTransitions)
 }
 
-render(
+const Root = () => (
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/' component={MainLayout} >
+      <Route path='/lists/avl' component={MainLayout} >
         <IndexRoute component={Home} />
-        <Route path='list/:id' component={ListContainer} />
+        <Route path=':id' component={ListContainer} onEnter={enter} />
       </Route>
     </Router>
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
+
+export default Root
