@@ -3,7 +3,7 @@
 import { graphql } from 'graphql'
 import schema from '../graphql/schema'
 
-export const getData = (id) => {
+export const getListData = (id) => {
   const query = `
     query {
       list(id: ${id}) {
@@ -25,11 +25,11 @@ export const getData = (id) => {
   return graphql(schema, query)
 }
 
-export const getLists = () => {
+export const getAllLists = (type) => {
   const query = `
     query {
       allLists {
-        avl
+        ${type}
       }
     }
   `

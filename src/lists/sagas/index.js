@@ -2,18 +2,18 @@
 
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
-import { FETCH_LIST_DATA } from '../actions/TYPES'
-import { fetchFailed, loadAVL, loadListData } from '../actions/actionCreators'
-import { getData, getLists } from './queries'
+import { FETCH_ALL_LISTS, FETCH_LIST_DATA } from '../actions/TYPES'
+import { fetchFailed, loadAllLists, loadListData } from '../actions/actionCreators'
+import { getListData, getAllLists } from './queries'
 
-function * init () {
-  const response = yield call(getLists)
-  yield put(loadAVL(response.data.allLists.avl))
-}
+// function * init () {
+//   const response = yield call(getLists)
+//   yield put(loadAVL(response.data.allLists.avl))
+// }
 
-export function * fetch (action) {
+export function * fetchList (action) {
   try {
-    const response = yield call(getData, action.id)
+    const response = yield call(getListData, action.id)
     yield put(loadListData(response.data.list.data, action.id))
   } catch (err) {
     console.log(err)
@@ -21,13 +21,26 @@ export function * fetch (action) {
   }
 }
 
-export function * watchFetch () {
-  yield * takeEvery(FETCH_LIST_DATA, fetch)
+export function * watchFetchList () {
+  yield * takeEvery(FETCH_LIST_DATA, fetchList)
+}
+
+function * fetchAllLists (action) {
+  try {
+    const response = yield call(getAllLists, action.listType)
+    yield put(loadAllLists(response.data.allLists, action.listType))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+function * watchFetchAllLists () {
+  yield * takeEvery(FETCH_ALL_LISTS, fetchAllLists)
 }
 
 export default function * rootSaga () {
   yield [
-    init(),
-    watchFetch()
+    watchFetchAllLists(),
+    watchFetchList()
   ]
 }

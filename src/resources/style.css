@@ -7,6 +7,12 @@ body {
   margin-bottom: 40px;
 }
 
+#list-types li {
+  list-style-type: none;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
 #login-btn {
   margin-top: 30%;
 }
@@ -35,7 +41,7 @@ body {
   outline: none;
 }
 
-.home {
+.allLists, .home {
   width: 40%;
   margin: 125px auto 75px auto;
 }

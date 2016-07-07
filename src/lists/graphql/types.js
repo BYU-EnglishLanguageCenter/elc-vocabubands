@@ -40,6 +40,9 @@ export const AllListsType = new GraphQLObjectType({
   fields: {
     avl: {
       type: new GraphQLList(GraphQLInt)
+    },
+    preavl: {
+      type: new GraphQLList(GraphQLInt)
     }
   }
 })

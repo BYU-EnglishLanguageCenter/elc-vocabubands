@@ -8,27 +8,25 @@ import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
 import Home from './components/Home'
-import ListContainer from './containers/ListContainer'
 import MainLayout from './components/MainLayout'
+import AllListsContainer from './containers/AllListsContainer'
+import ListContainer from './containers/ListContainer'
 import rootSaga from './sagas'
+
+import { fetchAllLists } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
 
 const history = syncHistoryWithStore(browserHistory, store)
-// history.listen(location => store.dispatch({ type: 'ROUTE_CHANGE' }))
-
-const enter = () => {
-  store.dispatch({ type: 'ENTERED_LIST' })
-  console.log(store.getState().routing.locationBeforeTransitions)
-}
 
 const Root = () => (
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/lists/avl' component={MainLayout} >
+      <Route path='/lists' component={MainLayout} >
         <IndexRoute component={Home} />
-        <Route path=':id' component={ListContainer} onEnter={enter} />
+        <Route path='avl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('avl')) }} />
+        <Route path='pre-avl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
       </Route>
     </Router>
   </Provider>

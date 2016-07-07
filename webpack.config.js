@@ -13,7 +13,7 @@ const config = {
   output: {
     path: BUILD_DIR,
     filename: '[name]-bundle.js',
-    publicPath: 'http://localhost:8080/js/'
+    publicPath: '/js/'
   },
   module: {
     loaders: [
