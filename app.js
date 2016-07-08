@@ -4,6 +4,7 @@ const koa = require('koa')
 const logger = require('koa-logger')
 const serve = require('koa-static')
 const Pug = require('koa-pug')
+const authRouter = require('./routes/auth')
 const listsRouter = require('./routes/lists')
 
 const app = koa()
@@ -16,6 +17,9 @@ const pug = new Pug({
 })
 
 pug.use(app)
+
+app.use(authRouter.routes())
+app.use(authRouter.allowedMethods())
 
 app.use(listsRouter.routes())
 app.use(listsRouter.allowedMethods())

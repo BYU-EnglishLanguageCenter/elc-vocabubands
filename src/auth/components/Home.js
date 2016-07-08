@@ -1,0 +1,11 @@
+'use strict'
+
+import React from 'react'
+
+const Home = () => (
+  <div className='home'>
+    Home
+  </div>
+)
+
+export default Home

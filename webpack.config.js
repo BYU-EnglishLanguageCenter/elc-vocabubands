@@ -8,6 +8,7 @@ const config = {
   context: APP_DIR,
   devtool: '#source-map',
   entry: {
+    auth: ['./auth.js'],
     lists: ['./lists.js']
   },
   output: {

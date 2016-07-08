@@ -11,18 +11,6 @@ const initialState = {
   rowsDone: []
 }
 
-// router.get('/', function * (next) {
-//   let ctx = this
-//
-//   const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
-//
-//   ctx.render('base', {
-//     pageTitle: 'Vocabubands',
-//     bundleSrc: '/bundle.js',
-//     html: html
-//   })
-// })
-
 router.get('/lists*', function * (next) {
   let ctx = this
 
@@ -34,9 +22,3 @@ router.get('/lists*', function * (next) {
     html: html
   })
 })
-
-// router.get('/logout', function * (next) {
-//   let ctx = this
-//
-//   ctx.redirect('/')
-// })
