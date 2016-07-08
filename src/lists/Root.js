@@ -29,7 +29,7 @@ const Root = () => (
           <IndexRoute component={AllListsContainer} />
           <Route path=':id' component={ListContainer} />
         </Route>
-        <Route path='pre-avl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
+        <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
       </Route>
     </Router>
   </Provider>

@@ -8,7 +8,7 @@ const Home = () => (
     <h1>Select a list type:</h1>
     <ul id='list-types'>
       <li><Link to='/lists/avl'>AVL</Link></li>
-      <li><Link to='/lists/pre-avl'>Pre-AVL</Link></li>
+      <li><Link to='/lists/preavl'>Pre-AVL</Link></li>
     </ul>
   </div>
 )

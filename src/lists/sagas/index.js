@@ -2,8 +2,9 @@
 
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
+import { LOCATION_CHANGE } from 'react-router-redux'
 import { FETCH_ALL_LISTS, FETCH_LIST_DATA } from '../actions/TYPES'
-import { fetchFailed, loadAllLists, loadListData } from '../actions/actionCreators'
+import { fetchFailed, fetchListData, loadAllLists, loadListData } from '../actions/actionCreators'
 import { getListData, getAllLists } from './queries'
 
 export function * fetchList (action) {
@@ -33,9 +34,27 @@ function * watchFetchAllLists () {
   yield * takeEvery(FETCH_ALL_LISTS, fetchAllLists)
 }
 
+function * locationChange (action) {
+  const path = action.payload.pathname
+
+  if (path.length > 7) {
+    const sub = path.substring(7)
+
+    if (sub.indexOf('/') !== -1 && sub.substring(sub.indexOf('/')).length !== 1) {
+      const listID = sub.substring(sub.indexOf('/') + 1)
+      yield put(fetchListData(listID))
+    }
+  }
+}
+
+function * watchLocationChange () {
+  yield * takeEvery(LOCATION_CHANGE, locationChange)
+}
+
 export default function * rootSaga () {
   yield [
     watchFetchAllLists(),
-    watchFetchList()
+    watchFetchList(),
+    watchLocationChange()
   ]
 }
