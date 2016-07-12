@@ -4,15 +4,16 @@ const router = require('koa-router')()
 
 module.exports = router
 
-const initialState = {
-  currentList: 0,
-  allLists: [],
-  listData: [],
-  rowsDone: []
-}
-
 router.get('/lists*', function * (next) {
   let ctx = this
+
+  const initialState = {
+    currentList: 0,
+    isAuthenticated: ctx.session.isAuthenticated === 'true',
+    allLists: [],
+    listData: [],
+    rowsDone: []
+  }
 
   const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
 

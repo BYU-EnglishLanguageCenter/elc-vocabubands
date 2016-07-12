@@ -2,6 +2,7 @@
 
 const koa = require('koa')
 const logger = require('koa-logger')
+const session = require('koa-session')
 const serve = require('koa-static')
 const Pug = require('koa-pug')
 const authRouter = require('./routes/auth')
@@ -17,6 +18,9 @@ const pug = new Pug({
 })
 
 pug.use(app)
+
+app.keys = ['vcb']
+app.use(session(app))
 
 app.use(authRouter.routes())
 app.use(authRouter.allowedMethods())
