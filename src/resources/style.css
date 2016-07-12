@@ -7,6 +7,10 @@ body {
   margin-bottom: 40px;
 }
 
+#home-login {
+  margin-top: 50px;
+}
+
 #list-types li {
   list-style-type: none;
   font-size: 25px;
@@ -20,6 +24,10 @@ body {
 #nav-title:hover,
 #nav-title:visited {
   color: #777;
+}
+
+.align-center {
+  text-align: center;
 }
 
 .butn-cell-no-style {
