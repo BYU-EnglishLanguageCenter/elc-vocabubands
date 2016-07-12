@@ -7,6 +7,16 @@ body {
   margin-bottom: 40px;
 }
 
+#home-login {
+  margin-top: 50px;
+}
+
+#list-types li {
+  list-style-type: none;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
 #login-btn {
   margin-top: 30%;
 }
@@ -14,6 +24,10 @@ body {
 #nav-title:hover,
 #nav-title:visited {
   color: #777;
+}
+
+.align-center {
+  text-align: center;
 }
 
 .butn-cell-no-style {
@@ -35,7 +49,7 @@ body {
   outline: none;
 }
 
-.home {
+.allLists, .home {
   width: 40%;
   margin: 125px auto 75px auto;
 }
