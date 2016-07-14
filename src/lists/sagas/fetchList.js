@@ -9,7 +9,7 @@ import { FETCH_LIST_DATA } from '../actions/TYPES'
 function * fetchList (action) {
   try {
     const response = yield call(getListData, action.id)
-    yield put(loadListData(response.data.list.data, action.id))
+    yield put(loadListData(response.data.data.list.data, action.id))
   } catch (err) {
     console.log(err)
     yield put(fetchFailed(err))

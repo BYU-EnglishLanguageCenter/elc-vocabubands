@@ -1,12 +1,15 @@
 'use strict'
 
 const koa = require('koa')
+const graphqlHTTP = require('koa-graphql')
 const logger = require('koa-logger')
+const mount = require('koa-mount')
+const Pug = require('koa-pug')
 const session = require('koa-session')
 const serve = require('koa-static')
-const Pug = require('koa-pug')
 const authRouter = require('./routes/auth')
 const listsRouter = require('./routes/lists')
+const schema = require('./graphql/schema')
 
 const app = koa()
 
@@ -18,6 +21,11 @@ const pug = new Pug({
 })
 
 pug.use(app)
+
+app.use(mount('/graphql', graphqlHTTP({
+  schema: schema,
+  pretty: true
+})))
 
 app.keys = ['vcb']
 app.use(session(app))

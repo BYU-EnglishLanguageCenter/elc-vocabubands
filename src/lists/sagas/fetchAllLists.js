@@ -9,7 +9,7 @@ import { FETCH_ALL_LISTS } from '../actions/TYPES'
 function * fetchAllLists (action) {
   try {
     const response = yield call(getAllLists, action.listType)
-    yield put(loadAllLists(response.data.allLists, action.listType))
+    yield put(loadAllLists(response.data.data.allLists, action.listType))
   } catch (err) {
     console.log(err)
   }

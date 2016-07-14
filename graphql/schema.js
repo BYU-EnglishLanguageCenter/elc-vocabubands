@@ -1,8 +1,20 @@
 'use strict'
 
-import { GraphQLSchema, GraphQLObjectType, GraphQLInt, GraphQLNonNull } from 'graphql'
-import { ListType, AllListsType } from './types'
-import data from './data'
+// import { GraphQLSchema, GraphQLObjectType, GraphQLInt, GraphQLNonNull } from 'graphql'
+// import { ListType, AllListsType } from './types'
+// import data from './data'
+
+const graphql = require('graphql')
+const GraphQLInt = graphql.GraphQLInt
+const GraphQLNonNull = graphql.GraphQLNonNull
+const GraphQLObjectType = graphql.GraphQLObjectType
+const GraphQLSchema = graphql.GraphQLSchema
+
+const types = require('./types')
+const AllListsType = types.AllListsType
+const ListType = types.ListType
+
+const data = require('./data')
 
 let count = 0
 
@@ -36,7 +48,7 @@ var MutationType = new GraphQLObjectType({
   }
 })
 
-export default new GraphQLSchema({
+module.exports = new GraphQLSchema({
   query: QueryType,
   mutation: MutationType
 })
