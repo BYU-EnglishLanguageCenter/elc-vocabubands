@@ -9,7 +9,7 @@ const session = require('koa-session')
 const serve = require('koa-static')
 const authRouter = require('./routes/auth')
 const listsRouter = require('./routes/lists')
-const schema = require('./graphql/schema')
+const schema = require('./graphql')
 
 const app = koa()
 

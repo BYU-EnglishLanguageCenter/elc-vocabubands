@@ -1,7 +1,5 @@
 'use strict'
 
-// import { GraphQLObjectType, GraphQLList, GraphQLInt, GraphQLString, GraphQLNonNull } from 'graphql'
-
 const graphql = require('graphql')
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
@@ -30,7 +28,7 @@ const RowType = new GraphQLObjectType({
   }
 })
 
-const ListType = new GraphQLObjectType({
+const List = new GraphQLObjectType({
   name: 'List',
   fields: {
     id: {
@@ -42,19 +40,4 @@ const ListType = new GraphQLObjectType({
   }
 })
 
-const AllListsType = new GraphQLObjectType({
-  name: 'AllLists',
-  fields: {
-    avl: {
-      type: new GraphQLList(GraphQLInt)
-    },
-    preavl: {
-      type: new GraphQLList(GraphQLInt)
-    }
-  }
-})
-
-module.exports = {
-  ListType: ListType,
-  AllListsType: AllListsType
-}
+module.exports = List
