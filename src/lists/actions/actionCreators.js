@@ -24,8 +24,7 @@ export const fetchListData = (id) => {
 export const loadAllLists = (data, listType) => {
   return {
     type: LOAD_ALL_LISTS,
-    data,
-    listType
+    data
   }
 }
 

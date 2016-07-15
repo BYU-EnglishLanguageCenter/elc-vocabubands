@@ -3,7 +3,7 @@
 import axios from 'axios'
 
 export const getAllLists = (type) => {
-  return axios.get(`/graphql?query={allLists{${type}}}`)
+  return axios.get(`/graphql?query={allLists(type:"${type}"){type,list_ids}}`)
 }
 
 export const getListData = (id) => {

@@ -7,6 +7,6 @@ const listSchema = mongoose.Schema({
   data: Array
 })
 
-const List = mongoose.model('List', listSchema)
+const ListModel = mongoose.model('List', listSchema)
 
-module.exports = List
+module.exports = ListModel

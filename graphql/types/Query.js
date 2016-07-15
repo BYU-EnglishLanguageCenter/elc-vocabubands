@@ -4,10 +4,11 @@ const graphql = require('graphql')
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
+const GraphQLString = graphql.GraphQLString
 const AllListsType = require('./AllLists')
 const ListType = require('./List')
-const data = require('../data')
 
+const AllListsModel = require('../../models/AllLists')
 const ListModel = require('../../models/List')
 
 const Query = new GraphQLObjectType({
@@ -15,7 +16,12 @@ const Query = new GraphQLObjectType({
   fields: {
     allLists: {
       type: AllListsType,
-      resolve: (parent, args) => data['lists']
+      args: {
+        type: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve: (parent, { type }) => AllListsModel.findOne({type: type})
     },
 
     list: {

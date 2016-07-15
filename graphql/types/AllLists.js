@@ -4,14 +4,15 @@ const graphql = require('graphql')
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
 const GraphQLObjectType = graphql.GraphQLObjectType
+const GraphQLString = graphql.GraphQLString
 
 const AllLists = new GraphQLObjectType({
   name: 'AllLists',
   fields: {
-    avl: {
-      type: new GraphQLList(GraphQLInt)
+    type: {
+      type: GraphQLString
     },
-    preavl: {
+    list_ids: {
       type: new GraphQLList(GraphQLInt)
     }
   }
