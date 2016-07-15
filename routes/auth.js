@@ -1,7 +1,8 @@
 'use strict'
 
-const router = require('koa-router')()
 const cas = require('byu-cas')
+const router = require('koa-router')()
+const UserModel = require('../models/User')
 
 module.exports = router
 
@@ -19,18 +20,31 @@ router.get('/', function * (next) {
 
     try {
       const response = yield cas.validate(ticket, service)
+      const user = yield UserModel.findOne({net_id: response.username})
+
+      // add new user if they don't exist -- would be better to redirect to a register page
+      if (user == null) {
+        const newUser = new UserModel({
+          name: '',
+          net_id: response.username,
+          type: 'student'
+        })
+
+        newUser.save()
+      }
+
       ctx.session.isAuthenticated = 'true'
       ctx.session.user = response.username
       ctx.redirect(redirect)
     } catch (err) {
       console.log(err)
     }
-  } else {
-    ctx.render('base', {
-      pageTitle: 'Vocabubands',
-      bundleSrc: '/js/auth-bundle.js'
-    })
   }
+
+  ctx.render('base', {
+    pageTitle: 'Vocabubands',
+    bundleSrc: '/js/auth-bundle.js'
+  })
 })
 
 router.get('/logout', function * (next) {
