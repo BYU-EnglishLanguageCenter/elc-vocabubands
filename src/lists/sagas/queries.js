@@ -7,5 +7,5 @@ export const getAllLists = (type) => {
 }
 
 export const getListData = (id) => {
-  return axios.get(`/graphql?query={list(id:${id}){data{id,word,support_words,definition,building_words}}}`)
+  return axios.get(`/graphql?query={list(id:${id}){id,data{id,word,support_words,definition,building_words}}}`)
 }
