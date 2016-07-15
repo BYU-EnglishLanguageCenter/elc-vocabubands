@@ -8,7 +8,9 @@ process.stdout.write('Importing dependencies ... '.cyan)
 const koa = require('koa')
 const graphqlHTTP = require('koa-graphql')
 const logger = require('koa-logger')
+const mongoose = require('mongoose')
 const mount = require('koa-mount')
+const Promise = require('bluebird')
 const Pug = require('koa-pug')
 const session = require('koa-session')
 const serve = require('koa-static')
@@ -32,6 +34,14 @@ const pug = new Pug({
   noCache: true
 })
 pug.use(app)
+
+console.log(checkMark.green)
+process.stdout.write('Initializing database connection ... '.cyan)
+
+mongoose.connect('mongodb://localhost/vocabubands')
+mongoose.Promise = Promise
+const db = mongoose.connection
+db.on('error', (err) => { console.log('\nconnection error: ' + err) })
 
 console.log(checkMark.green)
 process.stdout.write('Mounting graphql server ... '.cyan)

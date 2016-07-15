@@ -4,11 +4,11 @@ const graphql = require('graphql')
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
-
 const AllListsType = require('./AllLists')
 const ListType = require('./List')
-
 const data = require('../data')
+
+const ListModel = require('../../models/List')
 
 const Query = new GraphQLObjectType({
   name: 'Query',
@@ -17,7 +17,7 @@ const Query = new GraphQLObjectType({
       type: AllListsType,
       resolve: (parent, args) => data['lists']
     },
-    
+
     list: {
       type: ListType,
       args: {
@@ -25,7 +25,7 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLInt)
         }
       },
-      resolve: (parent, { id }) => data[id]
+      resolve: (parent, { id }) => ListModel.findOne({id: id})
     }
   }
 })
