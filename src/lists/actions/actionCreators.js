@@ -21,19 +21,17 @@ export const fetchListData = (id) => {
   }
 }
 
-export const loadAllLists = (data, listType) => {
+export const loadAllLists = (data) => {
   return {
     type: LOAD_ALL_LISTS,
-    data,
-    listType
+    data
   }
 }
 
-export const loadListData = (data, id) => {
+export const loadListData = (data) => {
   return {
     type: LOAD_LIST_DATA,
-    data,
-    id
+    data
   }
 }
 

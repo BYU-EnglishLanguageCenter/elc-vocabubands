@@ -20,10 +20,14 @@ store.runSaga(rootSaga)
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+const Main = (props) => (
+  <MainLayout showLogout {...props} />
+)
+
 const Root = () => (
   <Provider store={store}>
     <Router history={history}>
-      <Route path='lists' component={MainLayout}>
+      <Route path='lists' component={Main}>
         <IndexRoute component={Home} />
         <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
           <IndexRoute component={AllListsContainer} />

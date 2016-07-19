@@ -1,38 +1,11 @@
 'use strict'
 
-import { graphql } from 'graphql'
-import schema from '../graphql/schema'
-
-export const getListData = (id) => {
-  const query = `
-    query {
-      list(id: ${id}) {
-        data {
-          ...RowData
-        }
-      }
-    }
-
-    fragment RowData on Row {
-      id
-      word
-      support_words
-      definition
-      building_words
-    }
-  `
-
-  return graphql(schema, query)
-}
+import axios from 'axios'
 
 export const getAllLists = (type) => {
-  const query = `
-    query {
-      allLists {
-        ${type}
-      }
-    }
-  `
+  return axios.get(`/graphql?query={allLists(type:"${type}"){type,list_ids}}`)
+}
 
-  return graphql(schema, query)
+export const getListData = (id) => {
+  return axios.get(`/graphql?query={list(id:${id}){id,data{id,word,support_words,definition,building_words}}}`)
 }

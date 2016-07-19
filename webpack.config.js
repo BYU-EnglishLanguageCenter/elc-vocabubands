@@ -9,7 +9,8 @@ const config = {
   devtool: '#source-map',
   entry: {
     auth: ['./auth.js'],
-    lists: ['./lists.js']
+    lists: ['./lists.js'],
+    users: ['./users.js']
   },
   output: {
     path: BUILD_DIR,

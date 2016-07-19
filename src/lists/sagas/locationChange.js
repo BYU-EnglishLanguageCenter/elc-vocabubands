@@ -11,7 +11,7 @@ function * locationChange (action) {
   if (path.length > 7) {
     const sub = path.substring(7)
 
-    if (sub.indexOf('/') !== -1 && sub.substring(sub.indexOf('/')).length !== 1) {
+    if (sub.indexOf('/') !== -1 && sub.substring(sub.indexOf('/')).length > 1) {
       const listID = sub.substring(sub.indexOf('/') + 1)
       yield put(fetchListData(listID))
     }
