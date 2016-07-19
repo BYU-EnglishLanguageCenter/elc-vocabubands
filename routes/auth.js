@@ -10,10 +10,10 @@ router.get('/', function * (next) {
   let ctx = this
 
   const query = ctx.request.querystring
-  const redirect = '/lists'
+  const successRedirect = '/lists'
 
-  if (ctx.session.isAuthenticated === 'true') {
-    ctx.redirect(redirect)
+  if (ctx.session.isAuthenticated) {
+    ctx.redirect(successRedirect)
   } else if (query && query.length > 7) {
     const ticket = query.substring(query.indexOf('=') + 1)
     const service = 'http://localhost:8080'
@@ -25,28 +25,25 @@ router.get('/', function * (next) {
 
       // add new user if they don't exist
       if (user === null) {
-        console.log('not here')
         ctx.redirect('/users/new')
       } else {
         ctx.session.isAuthenticated = 'true'
-        ctx.redirect(redirect)
+        ctx.redirect(successRedirect)
       }
     } catch (err) {
       console.log(err)
     }
+  } else {
+    ctx.render('base', {
+      pageTitle: 'Vocabubands',
+      bundleSrc: '/js/auth-bundle.js'
+    })
   }
-
-  ctx.render('base', {
-    pageTitle: 'Vocabubands',
-    bundleSrc: '/js/auth-bundle.js'
-  })
 })
 
 router.get('/logout', function * (next) {
   let ctx = this
-
   ctx.session = null
-
   ctx.redirect('/')
   // ctx.redirect('https://cas.byu.edu/cas/logout?url=localhost:8080')
 })

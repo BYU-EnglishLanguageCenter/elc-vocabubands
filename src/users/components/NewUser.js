@@ -45,8 +45,10 @@ class NewUser extends Component {
       elements[index].disabled = true
     }
 
+    console.log(this.state.level)
+
     axios.post(`/graphql?query=mutation{addNewUser(user:{first_name:"${this.state.firstName}",last_name:"${this.state.lastName}",level:"${this.state.level}"}){first_name}}`).then(response => {
-      console.log(response)
+      window.location.assign('https://cas.byu.edu/cas/login?service=http://localhost:8080')
     }).catch(err => {
       console.log(err)
     })
@@ -68,19 +70,30 @@ class NewUser extends Component {
             <label htmlFor='firstName'>
               First Name
             </label>
-            <input type='text' className='form-control' id='firstName' placeholder='John' value={this.state.firstName} onChange={this.firstNameChange} required />
+            <input type='text' className='form-control' id='firstName' value={this.state.firstName} onChange={this.firstNameChange} required />
           </div>
           <div className='form-group'>
             <label htmlFor='lastName'>
               Last Name
             </label>
-            <input type='text' className='form-control' id='lastName' placeholder='Doe' value={this.state.lastName} onChange={this.lastNameChange} required />
+            <input type='text' className='form-control' id='lastName' value={this.state.lastName} onChange={this.lastNameChange} required />
           </div>
           <div className='form-group'>
             <label htmlFor='level'>
-              Enrollment Level
+              Select your enrollment level
             </label>
-            <input type='text' className='form-control' id='level' placeholder='e.g. FB, AA, UP' value={this.state.level} onChange={this.levelChange} />
+            <select className='form-control' id='level' onChange={this.levelChange}>
+              <option value=''>--------</option>
+              <option value='FP'>Foundations Prep</option>
+              <option value='FA'>Foundations A</option>
+              <option value='FB'>Foundations B</option>
+              <option value='FC'>Foundations C</option>
+              <option value='GAP'>Academic Prep</option>
+              <option value='AA'>Academic A</option>
+              <option value='AB'>Academic B</option>
+              <option value='UP'>University Prep</option>
+              <option value=''>None</option>
+            </select>
           </div>
           <input type='submit' className='btn btn-primary' value='Submit' />
         </form>
