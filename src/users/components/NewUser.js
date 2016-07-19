@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class NewUser extends Component {
   constructor (props) {
@@ -36,10 +37,19 @@ class NewUser extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    console.log('submit')
-    console.log(this.state.firstName)
-    console.log(this.state.lastName)
-    console.log(this.state.level)
+
+    const elements = [...e.target.elements]
+    let index
+
+    for (index in elements) {
+      elements[index].disabled = true
+    }
+
+    axios.post(`/graphql?query=mutation{addNewUser(user:{first_name:"${this.state.firstName}",last_name:"${this.state.lastName}",level:"${this.state.level}"}){first_name}}`).then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render () {

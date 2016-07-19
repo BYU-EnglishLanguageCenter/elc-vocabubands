@@ -5,11 +5,10 @@ const GraphQLInt = graphql.GraphQLInt
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
-const AllListsType = require('./AllLists')
-const ListType = require('./List')
-
 const AllListsModel = require('../../models/AllLists')
+const AllListsType = require('./AllLists')
 const ListModel = require('../../models/List')
+const ListType = require('./List')
 
 const Query = new GraphQLObjectType({
   name: 'Query',

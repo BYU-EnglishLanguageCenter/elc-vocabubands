@@ -28,7 +28,7 @@ const RowType = new GraphQLObjectType({
   }
 })
 
-const List = new GraphQLObjectType({
+const ListType = new GraphQLObjectType({
   name: 'List',
   fields: {
     id: {
@@ -40,4 +40,4 @@ const List = new GraphQLObjectType({
   }
 })
 
-module.exports = List
+module.exports = ListType

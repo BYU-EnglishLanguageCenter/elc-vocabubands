@@ -6,7 +6,7 @@ const GraphQLList = graphql.GraphQLList
 const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
 
-const AllLists = new GraphQLObjectType({
+const AllListsType = new GraphQLObjectType({
   name: 'AllLists',
   fields: {
     type: {
@@ -18,4 +18,4 @@ const AllLists = new GraphQLObjectType({
   }
 })
 
-module.exports = AllLists
+module.exports = AllListsType
