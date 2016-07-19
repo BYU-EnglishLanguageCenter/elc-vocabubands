@@ -27,6 +27,9 @@ router.get('/', function * (next) {
       if (user === null) {
         ctx.redirect('/users/new')
       } else {
+        if (user.type === 'admin') {
+          ctx.session.isAdmin = 'true'
+        }
         ctx.session.isAuthenticated = 'true'
         ctx.redirect(successRedirect)
       }

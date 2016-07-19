@@ -2,13 +2,20 @@
 
 const graphql = require('graphql')
 const GraphQLInt = graphql.GraphQLInt
+const GraphQLList = graphql.GraphQLList
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
-const AllListsModel = require('../../models/AllLists')
+
+// graphql types
 const AllListsType = require('./AllLists')
-const ListModel = require('../../models/List')
 const ListType = require('./List')
+const UserType = require('./User')
+
+// mongodb models
+const AllListsModel = require('../../models/AllLists')
+const ListModel = require('../../models/List')
+const UserModel = require('../../models/User')
 
 const Query = new GraphQLObjectType({
   name: 'Query',
@@ -33,6 +40,17 @@ const Query = new GraphQLObjectType({
         }
       },
       resolve: (parent, { id }) => ListModel.findOne({id: id})
+    },
+
+    users: {
+      type: new GraphQLList(UserType),
+      resolve: (parent, args, session) => {
+        if (session.isAdmin) {
+          return UserModel.find({})
+        } else {
+          return null
+        }
+      }
     }
   }
 })

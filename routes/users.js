@@ -5,28 +5,44 @@ const UserModel = require('../models/User')
 
 module.exports = router
 
-router.get('/users*', function * (next) {
+router.get('/users', function * (next) {
   let ctx = this
-
   const errorRedirect = '/'
 
-  if (ctx.session.isAuthenticated) {
-    const user = yield UserModel.findOne({net_id: ctx.session.user})
+  if (ctx.session.isAdmin) {
+    const users = yield UserModel.find({})
 
-    if (user !== null && user.type === 'admin') {
-      ctx.render('base', {
-        title: 'Vocabubands',
-        bundleSrc: '/js/users-bundle.js'
-      })
-    } else {
-      ctx.redirect(errorRedirect)
+    const initialState = {
+      users: users
     }
-  } else if (ctx.session.user && ctx.request.path === '/users/new') {
+
+    const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
+
+    ctx.render('base', {
+      title: 'Vocabubands',
+      bundleSrc: '/js/users-bundle.js',
+      html: html
+    })
+  } else {
+    ctx.redirect(errorRedirect)
+  }
+})
+
+router.get('/users/new', function * (next) {
+  let ctx = this
+  const errorRedirect = '/'
+
+  if (ctx.session.isAdmin) {
     ctx.render('base', {
       title: 'Vocabubands',
       bundleSrc: '/js/users-bundle.js'
     })
-  } else {
+  } else if (ctx.session.isAuthenticated) {
     ctx.redirect(errorRedirect)
+  } else if (ctx.session.user) {
+    ctx.render('base', {
+      title: 'Vocabubands',
+      bundleSrc: '/js/users-bundle.js'
+    })
   }
 })
