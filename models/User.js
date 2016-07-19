@@ -3,9 +3,11 @@
 const mongoose = require('mongoose')
 
 const UserSchema = mongoose.Schema({
-  name: String,
+  first_name: String,
+  last_name: String,
   net_id: String,
-  type: String
+  type: String,
+  level: String
 })
 
 const UserModel = mongoose.model('User', UserSchema)

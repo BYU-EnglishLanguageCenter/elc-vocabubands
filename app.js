@@ -16,6 +16,7 @@ const session = require('koa-session')
 const serve = require('koa-static')
 const authRouter = require('./routes/auth')
 const listsRouter = require('./routes/lists')
+const usersRouter = require('./routes/users')
 const schema = require('./graphql')
 
 console.log(checkMark.green)
@@ -63,6 +64,9 @@ app.use(authRouter.allowedMethods())
 
 app.use(listsRouter.routes())
 app.use(listsRouter.allowedMethods())
+
+app.use(usersRouter.routes())
+app.use(usersRouter.allowedMethods())
 
 app.use(serve(__dirname + '/public'))
 

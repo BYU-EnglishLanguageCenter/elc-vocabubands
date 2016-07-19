@@ -24,13 +24,7 @@ router.get('/', function * (next) {
 
       // add new user if they don't exist -- would be better to redirect to a register page
       if (user == null) {
-        const newUser = new UserModel({
-          name: '',
-          net_id: response.username,
-          type: 'student'
-        })
-
-        newUser.save()
+        // redirect to /user/new
       }
 
       ctx.session.isAuthenticated = 'true'
