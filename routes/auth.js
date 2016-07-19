@@ -20,16 +20,17 @@ router.get('/', function * (next) {
 
     try {
       const response = yield cas.validate(ticket, service)
+      ctx.session.user = response.username
       const user = yield UserModel.findOne({net_id: response.username})
 
-      // add new user if they don't exist -- would be better to redirect to a register page
-      if (user == null) {
-        // redirect to /user/new
+      // add new user if they don't exist
+      if (user === null) {
+        console.log('not here')
+        ctx.redirect('/users/new')
+      } else {
+        ctx.session.isAuthenticated = 'true'
+        ctx.redirect(redirect)
       }
-
-      ctx.session.isAuthenticated = 'true'
-      ctx.session.user = response.username
-      ctx.redirect(redirect)
     } catch (err) {
       console.log(err)
     }

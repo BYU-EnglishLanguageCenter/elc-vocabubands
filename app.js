@@ -45,18 +45,26 @@ const db = mongoose.connection
 db.on('error', (err) => { console.log('\nconnection error: ' + err) })
 
 console.log(checkMark.green)
-process.stdout.write('Mounting graphql server ... '.cyan)
-
-app.use(mount('/graphql', graphqlHTTP({
-  schema: schema,
-  pretty: true
-})))
-
-console.log(checkMark.green)
 
 app.keys = ['vcb']
 app.use(session(app))
 
+process.stdout.write('Mounting graphql server ... '.cyan)
+
+app.use(mount('/graphql', graphqlHTTP((request, context) => ({
+  schema: schema,
+  context: context.session,
+  pretty: true
+}))))
+
+// app.use(function * (next) {
+//   let ctx = this
+//   console.log(ctx.session)
+//   yield next
+//   console.log(ctx.session)
+// })
+
+console.log(checkMark.green)
 process.stdout.write('Registering routes ... '.cyan)
 
 app.use(authRouter.routes())

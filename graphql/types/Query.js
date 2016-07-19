@@ -20,7 +20,9 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { type }) => AllListsModel.findOne({type: type})
+      resolve: (parent, { type }) => {
+        return AllListsModel.findOne({type: type})
+      }
     },
 
     list: {

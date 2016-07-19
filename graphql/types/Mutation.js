@@ -17,11 +17,11 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(UserInputType)
         }
       },
-      resolve: (root, { user }) => {
+      resolve: (root, { user }, session) => {
         const newUser = new UserModel({
           first_name: user.first_name,
           last_name: user.last_name,
-          net_id: 'netid',
+          net_id: session.user,
           level: user.level,
           type: 'student'
         })
