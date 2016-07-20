@@ -4,9 +4,9 @@ import React, { PropTypes } from 'react'
 import UserRow from './UserRow'
 
 const Users = ({ users }) => {
-  const userRows = users.map(user => {
+  const userRows = users.map(user =>
     <UserRow key={user._id} {...user} />
-  })
+  )
 
   return (
     <div className='users-table'>
