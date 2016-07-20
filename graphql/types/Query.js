@@ -1,5 +1,6 @@
 'use strict'
 
+const mongoose = require('mongoose')
 const graphql = require('graphql')
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
@@ -42,11 +43,17 @@ const Query = new GraphQLObjectType({
       resolve: (parent, { id }) => ListModel.findOne({id: id})
     },
 
-    users: {
-      type: new GraphQLList(UserType),
-      resolve: (parent, args, session) => {
+    user: {
+      type: UserType,
+      args: {
+        id: {
+          type: GraphQLString
+        }
+      },
+      resolve: (parent, { id }, session) => {
         if (session.isAdmin) {
-          return UserModel.find({})
+          id = mongoose.Types.ObjectId(id)
+          return UserModel.findOne({_id: id})
         } else {
           return null
         }
