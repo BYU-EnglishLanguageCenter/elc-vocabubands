@@ -58,6 +58,17 @@ const Query = new GraphQLObjectType({
           return null
         }
       }
+    },
+
+    users: {
+      type: new GraphQLList(UserType),
+      resolve: (parent, args, session) => {
+        if (session.isAdmin) {
+          return UserModel.find({})
+        } else {
+          return null
+        }
+      }
     }
   }
 })

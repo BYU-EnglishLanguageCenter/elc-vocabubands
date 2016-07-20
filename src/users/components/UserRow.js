@@ -1,22 +1,19 @@
 'use strict'
 
 import React from 'react'
+import { Link } from 'react-router'
 
-const UserRow = ({ first_name, last_name, level, type, onClick }) => {
-  const showButton = (e) => {
-    
-  }
-
+const UserRow = ({ _id, first_name, last_name, level, type, onClick }) => {
   return (
-    <tr onMouseOver={showButton}>
+    <tr>
       <td>{first_name}</td>
       <td>{last_name}</td>
       <td>{level}</td>
       <td>{type}</td>
       <td className='butn-cell-no-style butn-edit-width'>
-        <button className='btn btn-default' onClick={onClick}>
+        <Link to={`/users/edit/${_id}`} className='btn btn-default' onClick={onClick}>
           Edit
-        </button>
+        </Link>
       </td>
     </tr>
   )

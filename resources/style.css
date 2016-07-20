@@ -63,7 +63,7 @@ body {
   outline: none;
 }
 
-.allLists, .home, .newUser {
+.allLists, .home, .newUser, .edit {
   width: 40%;
   margin: 125px auto 75px auto;
 }
