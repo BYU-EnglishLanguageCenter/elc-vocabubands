@@ -45,6 +45,10 @@ body {
   border: #fff;
 }
 
+.butn-edit-width {
+  width: 5%;
+}
+
 .butn-done {
   background-color: #dfece3;
   border: #fff;

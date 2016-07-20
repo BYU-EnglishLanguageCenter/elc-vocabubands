@@ -1,11 +1,11 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
-import UserRow from './UserRow'
+import UserRowContainer from '../containers/UserRowContainer'
 
 const Users = ({ users }) => {
   const userRows = users.map(user =>
-    <UserRow key={user._id} {...user} />
+    <UserRowContainer key={user._id} {...user} />
   )
 
   return (
