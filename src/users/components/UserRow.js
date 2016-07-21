@@ -1,6 +1,6 @@
 'use strict'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
 const UserRow = ({ _id, first_name, last_name, level, type, onClick }) => {
@@ -17,6 +17,15 @@ const UserRow = ({ _id, first_name, last_name, level, type, onClick }) => {
       </td>
     </tr>
   )
+}
+
+UserRow.propTypes = {
+  _id: PropTypes.string.isRequired,
+  first_name: PropTypes.string.isRequired,
+  last_name: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default UserRow

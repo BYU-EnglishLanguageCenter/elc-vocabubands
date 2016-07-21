@@ -45,8 +45,6 @@ class NewUser extends Component {
       elements[index].disabled = true
     }
 
-    console.log(this.state.level)
-
     axios.post(`/graphql?query=mutation{addNewUser(user:{first_name:"${this.state.firstName}",last_name:"${this.state.lastName}",level:"${this.state.level}"}){first_name}}`).then(response => {
       window.location.assign('https://cas.byu.edu/cas/login?service=http://localhost:8080')
     }).catch(err => {
