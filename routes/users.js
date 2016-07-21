@@ -49,8 +49,6 @@ router.get('/users/new', function * (next) {
 router.get('/users/edit/:id', function * (next) {
   let ctx = this
 
-  console.log(ctx.request.path)
-
   ctx.render('base', {
     title: 'Vocabubands',
     bundleSrc: '/js/users-bundle.js'

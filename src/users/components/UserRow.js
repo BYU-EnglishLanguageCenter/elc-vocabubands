@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const UserRow = ({ _id, first_name, last_name, level, type, onClick }) => {
+const UserRow = ({ _id, first_name, last_name, level, type }) => {
   return (
     <tr>
       <td>{first_name}</td>
@@ -11,7 +11,7 @@ const UserRow = ({ _id, first_name, last_name, level, type, onClick }) => {
       <td>{level}</td>
       <td>{type}</td>
       <td className='butn-cell-no-style butn-edit-width'>
-        <Link to={`/users/edit/${_id}`} className='btn btn-default' onClick={onClick}>
+        <Link to={`/users/edit/${_id}`} className='btn btn-default'>
           Edit
         </Link>
       </td>
@@ -24,8 +24,7 @@ UserRow.propTypes = {
   first_name: PropTypes.string.isRequired,
   last_name: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  type: PropTypes.string.isRequired
 }
 
 export default UserRow
