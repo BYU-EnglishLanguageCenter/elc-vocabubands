@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange, typeChange, handleSubmit }) => (
+const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange, typeChange, handleSubmit, cancel }) => (
   <div className='edit'>
     <div className='align-center'>
       <h1>
@@ -12,7 +12,7 @@ const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange,
         Make changes in the form below, then submit.
       </p>
     </div>
-    <form id='new-user-form' method='post' onSubmit={handleSubmit}>
+    <form id='edit-user-form' method='post' onSubmit={handleSubmit}>
       <div className='form-group'>
         <label htmlFor='firstName'>
           First Name
@@ -59,6 +59,12 @@ const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange,
         </select>
       </div>
       <input type='submit' className='btn btn-primary' value='Submit' />
+      <button className='btn btn-danger butn-delete' type='button'>
+        Delete
+      </button>
+      <button className='btn btn-default pull-right' type='button' onClick={cancel}>
+        Cancel
+      </button>
     </form>
   </div>
 )
