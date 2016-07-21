@@ -1,6 +1,6 @@
 'use strict'
 
-import { FETCH_EDIT_USER, FETCH_USERS, LOAD_EDIT_USER, LOAD_USERS, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE } from './TYPES'
+import { FETCH_EDIT_USER, FETCH_USERS, LOAD_EDIT_USER, LOAD_USERS, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE, UPDATE_USER } from './TYPES'
 
 export const fetchEditUser = (id) => ({
   type: FETCH_EDIT_USER,
@@ -44,4 +44,8 @@ export const updateNetID = (value) => ({
 export const updateType = (value) => ({
   type: UPDATE_TYPE,
   value
+})
+
+export const updateUser = () => ({
+  type: UPDATE_USER
 })

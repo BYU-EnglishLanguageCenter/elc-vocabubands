@@ -2,15 +2,10 @@
 
 import { connect } from 'react-redux'
 import Edit from '../components/Edit'
-import { updateFirstName, updateLastName, updateLevel, updateNetID, updateType } from '../actions/actionCreators'
+import { updateFirstName, updateLastName, updateLevel, updateNetID, updateType, updateUser } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.editUser,
-
-  handleSubmit: (e) => {
-    e.preventDefault()
-    console.log(state.editUser)
-  }
+  user: state.editUser
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -32,6 +27,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   typeChange: (e) => {
     dispatch(updateType(e.target.value))
+  },
+
+  handleSubmit: (e) => {
+    e.preventDefault()
+    dispatch(updateUser())
   }
 })
 
