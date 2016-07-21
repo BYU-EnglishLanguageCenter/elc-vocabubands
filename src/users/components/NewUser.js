@@ -68,7 +68,7 @@ class NewUser extends Component {
             <label htmlFor='firstName'>
               First Name
             </label>
-            <input type='text' className='form-control' id='firstName' value={this.state.firstName} onChange={this.firstNameChange} required />
+            <input type='text' className='form-control' id='firstName' value={this.state.firstName} onChange={this.firstNameChange} autoFocus required />
           </div>
           <div className='form-group'>
             <label htmlFor='lastName'>
@@ -90,7 +90,7 @@ class NewUser extends Component {
               <option value='AA'>Academic A</option>
               <option value='AB'>Academic B</option>
               <option value='UP'>University Prep</option>
-              <option value=''>None</option>
+              <option value='none'>None</option>
             </select>
           </div>
           <input type='submit' className='btn btn-primary' value='Submit' />

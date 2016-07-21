@@ -1,6 +1,7 @@
 'use strict'
 
 const graphql = require('graphql')
+const GraphQLID = graphql.GraphQLID
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
 const NewUserInputType = require('./NewUserInput')
@@ -34,6 +35,24 @@ const Mutation = new GraphQLObjectType({
         newUser.save()
 
         return user
+      }
+    },
+
+    removeUser: {
+      type: GraphQLString,
+      args: {
+        _id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve: (root, { _id }, session) => {
+        UserModel.remove({_id: _id}, function (err, success) {
+          if (err) {
+            console.log(err)
+            return err
+          }
+          return success
+        })
       }
     },
 

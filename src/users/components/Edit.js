@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange, typeChange, handleSubmit, cancel }) => (
+const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange, typeChange, handleSubmit, cancel, sendDelete }) => (
   <div className='edit'>
     <div className='align-center'>
       <h1>
@@ -59,7 +59,7 @@ const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange,
         </select>
       </div>
       <input type='submit' className='btn btn-primary' value='Submit' />
-      <button className='btn btn-danger butn-delete' type='button'>
+      <button className='btn btn-danger butn-delete' type='button' onClick={sendDelete}>
         Delete
       </button>
       <button className='btn btn-default pull-right' type='button' onClick={cancel}>

@@ -1,7 +1,6 @@
 'use strict'
 
 const router = require('koa-router')()
-const UserModel = require('../models/User')
 
 module.exports = router
 
@@ -10,14 +9,6 @@ router.get('/users', function * (next) {
   const errorRedirect = '/'
 
   if (ctx.session.isAdmin) {
-    const users = yield UserModel.find({})
-
-    const initialState = {
-      users: users
-    }
-
-    const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
-
     ctx.render('base', {
       title: 'Vocabubands',
       bundleSrc: '/js/users-bundle.js'
@@ -43,6 +34,8 @@ router.get('/users/new', function * (next) {
       title: 'Vocabubands',
       bundleSrc: '/js/users-bundle.js'
     })
+  } else {
+    ctx.redirect(errorRedirect)
   }
 })
 

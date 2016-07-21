@@ -23,8 +23,8 @@ const Main = (props) => (
 const Root = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='users' component={Main} onEnter={() => { store.dispatch(fetchUsers()) }}>
-        <IndexRoute component={Home} />
+      <Route path='users' component={Main}>
+        <IndexRoute component={Home} onEnter={() => { store.dispatch(fetchUsers()) }} />
         <Route path='new' component={NewUser} />
         <Route path='edit/:id' component={EditContainer} onEnter={({params}) => { store.dispatch(fetchEditUser(params.id)) }} />
       </Route>
