@@ -7,5 +7,5 @@ export const getEditUser = (id) => {
 }
 
 export const getUsers = () => {
-  return axios.get(`/graphql?query={users{first_name, last_name, level, type}}`)
+  return axios.get(`/graphql?query={users{_id, first_name, last_name, level, type}}`)
 }

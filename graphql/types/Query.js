@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose')
 const graphql = require('graphql')
+const GraphQLID = graphql.GraphQLID
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
 const GraphQLNonNull = graphql.GraphQLNonNull
@@ -47,12 +48,12 @@ const Query = new GraphQLObjectType({
       type: UserType,
       args: {
         id: {
-          type: GraphQLString
+          type: GraphQLID
         }
       },
       resolve: (parent, { id }, session) => {
         if (session.isAdmin) {
-          id = mongoose.Types.ObjectId(id)
+          // id = mongoose.Types.ObjectId(id)
           return UserModel.findOne({_id: id})
         } else {
           return null

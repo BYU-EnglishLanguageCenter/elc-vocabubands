@@ -20,8 +20,7 @@ router.get('/users', function * (next) {
 
     ctx.render('base', {
       title: 'Vocabubands',
-      bundleSrc: '/js/users-bundle.js',
-      html: html
+      bundleSrc: '/js/users-bundle.js'
     })
   } else {
     ctx.redirect(errorRedirect)
