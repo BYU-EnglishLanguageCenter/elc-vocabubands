@@ -29,7 +29,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
         </label>
         <select className='form-control' id='type' value={user.type} onChange={typeChange} required>
           <option value='admin'>Admin</option>
-          <option value='student' selected>Student</option>
+          <option value='student'>Student</option>
           <option value='teacher'>Teacher</option>
         </select>
       </div>

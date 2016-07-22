@@ -10,6 +10,10 @@ export const addUser = (user, isAdmin) => {
   }
 }
 
+export const deleteExistingUser = (_id) => {
+  return axios.post(`/graphql?query=mutation{removeUser(_id:"${_id}")}`)
+}
+
 export const getUser = (id) => {
   return axios.get(`/graphql?query={user(id:"${id}"){_id, first_name, last_name, net_id, level, type}}`)
 }

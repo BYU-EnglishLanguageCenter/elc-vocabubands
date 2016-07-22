@@ -1,8 +1,8 @@
 'use strict'
 
-import axios from 'axios'
 import { takeEvery } from 'redux-saga'
-import { select } from 'redux-saga/effects'
+import { call, select } from 'redux-saga/effects'
+import { deleteExistingUser } from './queries'
 import { DELETE_USER } from '../actions/TYPES'
 
 function * deleteUser (action) {
@@ -10,8 +10,7 @@ function * deleteUser (action) {
   const user = state.user
 
   try {
-    const response = yield axios.post(`/graphql?query=mutation{removeUser(_id:"${user._id}")}`)
-    console.log(response)
+    yield call(deleteExistingUser, user._id)
     window.location.assign('/users')
   } catch (err) {
     console.log(err)

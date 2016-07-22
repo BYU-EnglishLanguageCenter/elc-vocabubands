@@ -1,9 +1,9 @@
 'use strict'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange, typeChange, handleSubmit, cancel, sendDelete }) => (
+const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netIDChange, sendDelete, typeChange, user }) => (
   <div className='edit'>
     <div className='align-center'>
       <h1>
@@ -69,5 +69,16 @@ const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange,
     </form>
   </div>
 )
+
+Edit.propTypes = {
+  firstNameChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  lastNameChange: PropTypes.func.isRequired,
+  levelChange: PropTypes.func.isRequired,
+  netIDChange: PropTypes.func.isRequired,
+  sendDelete: PropTypes.func.isRequired,
+  typeChange: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
 
 export default Edit
