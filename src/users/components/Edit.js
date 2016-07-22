@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import { Link } from 'react-router'
 
 const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange, typeChange, handleSubmit, cancel, sendDelete }) => (
   <div className='edit'>
@@ -62,9 +63,9 @@ const Edit = ({ user, firstNameChange, lastNameChange, levelChange, netIDChange,
       <button className='btn btn-danger butn-delete' type='button' onClick={sendDelete}>
         Delete
       </button>
-      <button className='btn btn-default pull-right' type='button' onClick={cancel}>
+      <Link to='/users' className='btn btn-default pull-right' type='button'>
         Cancel
-      </button>
+      </Link>
     </form>
   </div>
 )

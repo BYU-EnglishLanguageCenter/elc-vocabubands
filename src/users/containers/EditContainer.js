@@ -5,11 +5,7 @@ import Edit from '../components/Edit'
 import { deleteUser, updateFirstName, updateLastName, updateLevel, updateNetID, updateType, updateUser } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.user,
-
-  cancel: () => {
-    ownProps.history.goBack()
-  }
+  user: state.user
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

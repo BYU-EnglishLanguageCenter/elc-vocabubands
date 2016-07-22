@@ -14,9 +14,15 @@ const NewUserInputType = new GraphQLInputObjectType({
     last_name: {
       type: new GraphQLNonNull(GraphQLString)
     },
+    net_id: {
+      type: GraphQLString
+    },
     level: {
       type: GraphQLString,
       defaultValue: 'none'
+    },
+    type: {
+      type: GraphQLString
     }
   }
 })

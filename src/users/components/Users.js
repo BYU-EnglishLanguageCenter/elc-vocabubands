@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 import UserRow from './UserRow'
 
 const Users = ({ users }) => {
@@ -14,9 +15,9 @@ const Users = ({ users }) => {
         Users
       </h1>
       <div className='pull-right' id='users-add-new'>
-        <button className='btn btn-success' type='button'>
+        <Link to='/users/new' className='btn btn-success' type='button'>
           Add New
-        </button>
+        </Link>
       </div>
       <div className='users-table'>
         <table className='table table-striped'>

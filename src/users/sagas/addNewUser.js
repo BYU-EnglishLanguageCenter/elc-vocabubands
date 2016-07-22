@@ -8,10 +8,16 @@ import { ADD_NEW_USER } from '../actions/TYPES'
 function * addNewUser (action) {
   const state = yield select()
   const user = state.user
+  const isAdmin = state.isAdmin
 
   try {
-    yield call(addUser, user)
-    window.location.assign('https://cas.byu.edu/cas/login?service=http://localhost:8080')
+    yield call(addUser, user, isAdmin)
+
+    if (isAdmin) {
+      window.location.assign('/users')
+    } else {
+      window.location.assign('https://cas.byu.edu/cas/login?service=http://localhost:8080')
+    }
   } catch (err) {
     console.log(err)
   }

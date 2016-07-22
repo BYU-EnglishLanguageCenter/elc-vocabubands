@@ -1,11 +1,12 @@
 'use strict'
 
 import { connect } from 'react-redux'
-import NewUser2 from '../components/NewUser2'
+import NewUser from '../components/NewUser'
 import { addNewUser, updateFirstName, updateLastName, updateLevel, updateNetID, updateType } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.user
+  user: state.user,
+  showFullForm: state.isAdmin
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -35,6 +36,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 })
 
-const NewUserContainer = connect(mapStateToProps, mapDispatchToProps)(NewUser2)
+const NewUserContainer = connect(mapStateToProps, mapDispatchToProps)(NewUser)
 
 export default NewUserContainer
