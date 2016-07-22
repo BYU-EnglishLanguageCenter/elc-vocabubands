@@ -17,7 +17,7 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     addNewUser: {
-      type: UserType,
+      type: GraphQLString,
       args: {
         user: {
           type: new GraphQLNonNull(NewUserInputType)
@@ -34,7 +34,7 @@ const Mutation = new GraphQLObjectType({
 
         newUser.save()
 
-        return user
+        return
       }
     },
 

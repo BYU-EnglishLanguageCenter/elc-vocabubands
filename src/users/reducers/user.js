@@ -1,10 +1,12 @@
 'use strict'
 
-import { LOAD_EDIT_USER, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE } from '../actions/TYPES'
+import { CLEAR_USER, LOAD_USER, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE } from '../actions/TYPES'
 
-const editUser = (state = {}, action) => {
+const user = (state = {}, action) => {
   switch (action.type) {
-    case LOAD_EDIT_USER:
+    case CLEAR_USER:
+      return {}
+    case LOAD_USER:
       return action.user
     case UPDATE_FIRST_NAME:
       return {
@@ -36,4 +38,4 @@ const editUser = (state = {}, action) => {
   }
 }
 
-export default editUser
+export default user

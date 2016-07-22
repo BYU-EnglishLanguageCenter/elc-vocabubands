@@ -1,9 +1,11 @@
 'use strict'
 
+export const ADD_NEW_USER = 'ADD_NEW_USER'
+export const CLEAR_USER = 'CLEAR_USER'
 export const DELETE_USER = 'DELETE_USER'
-export const FETCH_EDIT_USER = 'FETCH_EDIT_USER'
+export const FETCH_USER = 'FETCH_USER'
 export const FETCH_USERS = 'FETCH_USERS'
-export const LOAD_EDIT_USER = 'LOAD_EDIT_USER'
+export const LOAD_USER = 'LOAD_USER'
 export const LOAD_USERS = 'LOAD_USERS'
 export const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME'
 export const UPDATE_LAST_NAME = 'UPDATE_LAST_NAME'

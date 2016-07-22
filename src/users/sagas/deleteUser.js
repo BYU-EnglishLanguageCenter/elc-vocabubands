@@ -7,7 +7,7 @@ import { DELETE_USER } from '../actions/TYPES'
 
 function * deleteUser (action) {
   const state = yield select()
-  const user = state.editUser
+  const user = state.user
 
   try {
     const response = yield axios.post(`/graphql?query=mutation{removeUser(_id:"${user._id}")}`)

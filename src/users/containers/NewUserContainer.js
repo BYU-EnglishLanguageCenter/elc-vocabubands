@@ -1,15 +1,11 @@
 'use strict'
 
 import { connect } from 'react-redux'
-import Edit from '../components/Edit'
-import { deleteUser, updateFirstName, updateLastName, updateLevel, updateNetID, updateType, updateUser } from '../actions/actionCreators'
+import NewUser2 from '../components/NewUser2'
+import { addNewUser, updateFirstName, updateLastName, updateLevel, updateNetID, updateType } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.user,
-
-  cancel: () => {
-    ownProps.history.goBack()
-  }
+  user: state.user
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -35,14 +31,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   handleSubmit: (e) => {
     e.preventDefault()
-    dispatch(updateUser())
-  },
-
-  sendDelete: (e) => {
-    dispatch(deleteUser())
+    dispatch(addNewUser())
   }
 })
 
-const EditContainer = connect(mapStateToProps, mapDispatchToProps)(Edit)
+const NewUserContainer = connect(mapStateToProps, mapDispatchToProps)(NewUser2)
 
-export default EditContainer
+export default NewUserContainer

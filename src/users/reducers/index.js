@@ -1,10 +1,10 @@
 'use strict'
 
 import { combineReducers } from 'redux'
-import editUser from './editUser'
+import user from './user'
 import users from './users'
 
 export default combineReducers({
-  editUser,
+  user,
   users
 })
