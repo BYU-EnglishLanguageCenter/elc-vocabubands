@@ -7,9 +7,9 @@ import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
 import EditContainer from './containers/EditContainer'
-import Home from './components/Home'
 import MainLayout from '../common/components/MainLayout'
 import NewUser from './components/NewUser'
+import UsersContainer from './containers/UsersContainer'
 import rootSaga from './sagas'
 import { fetchEditUser, fetchUsers } from './actions/actionCreators'
 
@@ -24,7 +24,7 @@ const Root = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='users' component={Main}>
-        <IndexRoute component={Home} onEnter={() => { store.dispatch(fetchUsers()) }} />
+        <IndexRoute component={UsersContainer} onEnter={() => { store.dispatch(fetchUsers()) }} />
         <Route path='new' component={NewUser} />
         <Route path='edit/:id' component={EditContainer} onEnter={({params}) => { store.dispatch(fetchEditUser(params.id)) }} />
       </Route>

@@ -21,11 +21,11 @@ const UserType = new GraphQLObjectType({
     net_id: {
       type: new GraphQLNonNull(GraphQLString)
     },
-    type: {
-      type: new GraphQLNonNull(GraphQLString)
-    },
     level: {
       type: GraphQLString
+    },
+    type: {
+      type: new GraphQLNonNull(GraphQLString)
     }
   }
 })

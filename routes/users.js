@@ -41,9 +41,14 @@ router.get('/users/new', function * (next) {
 
 router.get('/users/edit/:id', function * (next) {
   let ctx = this
+  const errorRedirect = '/'
 
-  ctx.render('base', {
-    title: 'Vocabubands',
-    bundleSrc: '/js/users-bundle.js'
-  })
+  if (ctx.session.isAdmin) {
+    ctx.render('base', {
+      title: 'Vocabubands',
+      bundleSrc: '/js/users-bundle.js'
+    })
+  } else {
+    ctx.redirect(errorRedirect)
+  }
 })

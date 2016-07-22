@@ -16,7 +16,7 @@ const NewUserInputType = new GraphQLInputObjectType({
     },
     level: {
       type: GraphQLString,
-      defaultValue: ''
+      defaultValue: 'none'
     }
   }
 })

@@ -31,9 +31,18 @@ body {
   width: 75%;
 }
 
-#users-home {
+#users {
   width: 75%;
   margin: 75px auto;
+}
+
+#users-add-new {
+  display: inline;
+  padding-right: 8px;
+}
+
+#users-header {
+  display: inline;
 }
 
 .align-center {
