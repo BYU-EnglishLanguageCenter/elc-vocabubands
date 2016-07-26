@@ -1,36 +1,30 @@
-import { FETCH_ALL_LISTS, FETCH_LIST_DATA, LOAD_ALL_LISTS, LOAD_LIST_DATA, ROW_DONE } from './TYPES'
+import { FETCH_ALL_LISTS, FETCH_LIST_DATA, LOAD_ALL_LISTS, LOAD_LIST_DATA, ROW_DONE, SAVE_LIST_CHANGES } from './TYPES'
 
-export const fetchAllLists = (listType) => {
-  return {
-    type: FETCH_ALL_LISTS,
-    listType
-  }
-}
+export const fetchAllLists = (listType) => ({
+  type: FETCH_ALL_LISTS,
+  listType
+})
 
-export const fetchListData = (id) => {
-  return {
-    type: FETCH_LIST_DATA,
-    id
-  }
-}
+export const fetchListData = (id) => ({
+  type: FETCH_LIST_DATA,
+  id
+})
 
-export const loadAllLists = (data) => {
-  return {
-    type: LOAD_ALL_LISTS,
-    data
-  }
-}
+export const loadAllLists = (data) => ({
+  type: LOAD_ALL_LISTS,
+  data
+})
 
-export const loadListData = (data) => {
-  return {
-    type: LOAD_LIST_DATA,
-    data
-  }
-}
+export const loadListData = (data) => ({
+  type: LOAD_LIST_DATA,
+  data
+})
 
-export const rowDone = (id) => {
-  return {
-    type: ROW_DONE,
-    id
-  }
-}
+export const rowDone = (id) => ({
+  type: ROW_DONE,
+  id
+})
+
+export const saveListChanges = () => ({
+  type: SAVE_LIST_CHANGES
+})

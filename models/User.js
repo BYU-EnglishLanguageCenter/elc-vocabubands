@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-const UserSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   first_name: String,
   last_name: String,
   net_id: String,
@@ -12,6 +12,6 @@ const UserSchema = mongoose.Schema({
   versionKey: false
 })
 
-const UserModel = mongoose.model('User', UserSchema)
+const UserModel = mongoose.model('User', userSchema)
 
 module.exports = UserModel
