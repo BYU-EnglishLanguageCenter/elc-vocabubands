@@ -1,7 +1,6 @@
 'use strict'
 
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
 import allLists from './allLists'
 import currentList from './currentList'
 import isAuthenticated from './isAuthenticated'
@@ -15,6 +14,5 @@ export default combineReducers({
   isAuthenticated,
   listData,
   listType,
-  rowsDone,
-  routing: routerReducer
+  rowsDone
 })

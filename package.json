@@ -36,7 +36,6 @@
     "react-redux": "^4.4.5",
     "react-redux-toastr": "^3.4.0",
     "react-router": "^2.4.1",
-    "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-saga": "^0.10.5",
     "tap-spec": "^4.1.1",
