@@ -5,8 +5,8 @@ const GraphQLInputObjectType = graphql.GraphQLInputObjectType
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLString = graphql.GraphQLString
 
-const UserInputType = new GraphQLInputObjectType({
-  name: 'UserInput',
+const NewUserInputType = new GraphQLInputObjectType({
+  name: 'NewUserInput',
   fields: {
     first_name: {
       type: new GraphQLNonNull(GraphQLString)
@@ -14,11 +14,17 @@ const UserInputType = new GraphQLInputObjectType({
     last_name: {
       type: new GraphQLNonNull(GraphQLString)
     },
+    net_id: {
+      type: GraphQLString
+    },
     level: {
       type: GraphQLString,
-      defaultValue: ''
+      defaultValue: 'none'
+    },
+    type: {
+      type: GraphQLString
     }
   }
 })
 
-module.exports = UserInputType
+module.exports = NewUserInputType

@@ -26,9 +26,23 @@ body {
   color: #777;
 }
 
-#new-user-form {
+#new-user-form, #edit-user-form {
   margin: 50px auto 0 auto;
   width: 75%;
+}
+
+#users {
+  width: 75%;
+  margin: 75px auto;
+}
+
+#users-add-new {
+  display: inline;
+  padding-right: 8px;
+}
+
+#users-header {
+  display: inline;
 }
 
 .align-center {
@@ -38,6 +52,14 @@ body {
 .butn-cell-no-style {
   background-color: #fff;
   border: #fff;
+}
+
+.butn-delete {
+  margin-left: 25%;
+}
+
+.butn-edit-width {
+  width: 5%;
 }
 
 .butn-done {
@@ -54,7 +76,7 @@ body {
   outline: none;
 }
 
-.allLists, .home, .newUser {
+.allLists, .home, .newUser, .edit {
   width: 40%;
   margin: 125px auto 75px auto;
 }
@@ -70,7 +92,7 @@ body {
   margin: 15px 0;
 }
 
-.listTable {
+.listTable, .users-table {
   margin: 40px 0 80px 0;
 }
 

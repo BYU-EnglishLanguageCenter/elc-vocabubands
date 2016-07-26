@@ -8,14 +8,13 @@ module.exports = router
 
 router.get('/', function * (next) {
   let ctx = this
-
-  const query = ctx.request.querystring
+  const query = ctx.request.query
   const successRedirect = '/lists'
 
   if (ctx.session.isAuthenticated) {
     ctx.redirect(successRedirect)
-  } else if (query && query.length > 7) {
-    const ticket = query.substring(query.indexOf('=') + 1)
+  } else if (query.ticket) {
+    const ticket = query.ticket
     const service = 'http://localhost:8080'
 
     try {
@@ -27,6 +26,9 @@ router.get('/', function * (next) {
       if (user === null) {
         ctx.redirect('/users/new')
       } else {
+        if (user.type === 'admin') {
+          ctx.session.isAdmin = 'true'
+        }
         ctx.session.isAuthenticated = 'true'
         ctx.redirect(successRedirect)
       }

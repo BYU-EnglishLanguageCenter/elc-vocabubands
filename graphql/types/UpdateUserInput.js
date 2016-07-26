@@ -2,15 +2,15 @@
 
 const graphql = require('graphql')
 const GraphQLID = graphql.GraphQLID
+const GraphQLInputObjectType = graphql.GraphQLInputObjectType
 const GraphQLNonNull = graphql.GraphQLNonNull
-const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
 
-const UserType = new GraphQLObjectType({
-  name: 'User',
+const UpdateUserInputType = new GraphQLInputObjectType({
+  name: 'UpdateUserInput',
   fields: {
     _id: {
-      type: GraphQLID
+      type: new GraphQLNonNull(GraphQLID)
     },
     first_name: {
       type: new GraphQLNonNull(GraphQLString)
@@ -22,7 +22,8 @@ const UserType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString)
     },
     level: {
-      type: GraphQLString
+      type: GraphQLString,
+      defaultValue: ''
     },
     type: {
       type: new GraphQLNonNull(GraphQLString)
@@ -30,4 +31,4 @@ const UserType = new GraphQLObjectType({
   }
 })
 
-module.exports = UserType
+module.exports = UpdateUserInputType
