@@ -3,6 +3,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import ReduxToastr from 'react-redux-toastr'
 import 'regenerator-runtime/runtime'
 
 import MainLayout from '../common/components/MainLayout'
@@ -24,16 +25,19 @@ const Main = (props) => (
 
 const Root = () => (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path='lists' component={Main}>
-        <IndexRoute component={Home} />
-        <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
-          <IndexRoute component={AllListsContainer} />
-          <Route path=':id' component={ListContainer} onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} />
+    <div>
+      <Router history={browserHistory}>
+        <Route path='lists' component={Main}>
+          <IndexRoute component={Home} />
+          <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
+            <IndexRoute component={AllListsContainer} />
+            <Route path=':id' component={ListContainer} onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} />
+          </Route>
+          <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
         </Route>
-        <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
-      </Route>
-    </Router>
+      </Router>
+      <ReduxToastr position='top-center' />
+    </div>
   </Provider>
 )
 

@@ -1,6 +1,7 @@
 'use strict'
 
 import { combineReducers } from 'redux'
+import { reducer as toastrReducer } from 'react-redux-toastr'
 import allLists from './allLists'
 import currentList from './currentList'
 import isAuthenticated from './isAuthenticated'
@@ -14,5 +15,6 @@ export default combineReducers({
   isAuthenticated,
   listData,
   listType,
-  rowsDone
+  rowsDone,
+  toastr: toastrReducer
 })
