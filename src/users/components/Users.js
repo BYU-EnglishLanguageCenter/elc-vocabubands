@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import UserRow from './UserRow'
 
-const Users = ({ users }) => {
+const Users = ({ sortByFirstName, sortByLastName, sortByLevel, sortByType, users }) => {
   const userRows = users.map(user =>
     <UserRow key={user._id} {...user} />
   )
@@ -23,10 +23,18 @@ const Users = ({ users }) => {
         <table className='table table-striped'>
           <thead>
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Level</th>
-              <th>Type</th>
+              <th onClick={sortByFirstName}>
+                First Name
+              </th>
+              <th onClick={sortByLastName}>
+                Last Name
+              </th>
+              <th onClick={sortByLevel}>
+                Level
+              </th>
+              <th onClick={sortByType}>
+                Type
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +47,8 @@ const Users = ({ users }) => {
 }
 
 Users.propTypes = {
+  sortByFirstName: PropTypes.func,
+  sortByLastName: PropTypes.func,
   users: PropTypes.array
 }
 
