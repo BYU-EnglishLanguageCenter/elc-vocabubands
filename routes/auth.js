@@ -9,9 +9,11 @@ module.exports = router
 router.get('/', function * (next) {
   let ctx = this
   const query = ctx.request.query
-  const successRedirect = '/lists'
+  let successRedirect = '/lists'
 
-  if (ctx.session.isAuthenticated) {
+  if (ctx.session.isAdmin) {
+    ctx.redirect('/admin')
+  } else if (ctx.session.isAuthenticated) {
     ctx.redirect(successRedirect)
   } else if (query.ticket) {
     const ticket = query.ticket
@@ -22,13 +24,14 @@ router.get('/', function * (next) {
       ctx.session.user = response.username
       const user = yield UserModel.findOne({net_id: response.username})
 
-      // add new user if they don't exist
       if (user === null) {
         ctx.redirect('/users/new')
       } else {
         if (user.type === 'admin') {
           ctx.session.isAdmin = 'true'
+          successRedirect = '/admin'
         }
+
         ctx.session.isAuthenticated = 'true'
         ctx.redirect(successRedirect)
       }
@@ -40,6 +43,20 @@ router.get('/', function * (next) {
       pageTitle: 'Vocabubands',
       bundleSrc: '/js/auth-bundle.js'
     })
+  }
+})
+
+router.get('/admin', function * (next) {
+  let ctx = this
+  const errorRedirect = '/'
+
+  if (ctx.session.isAdmin) {
+    ctx.render('base', {
+      pageTitle: 'Vocabubands',
+      bundleSrc: '/js/auth-bundle.js'
+    })
+  } else {
+    ctx.redirect(errorRedirect)
   }
 })
 
