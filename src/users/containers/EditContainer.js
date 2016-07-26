@@ -13,6 +13,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(updateFirstName(e.target.value))
   },
 
+  handleSubmit: () => {
+    dispatch(updateUser())
+  },
+
   lastNameChange: (e) => {
     dispatch(updateLastName(e.target.value))
   },
@@ -25,17 +29,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(updateNetID(e.target.value))
   },
 
-  typeChange: (e) => {
-    dispatch(updateType(e.target.value))
-  },
-
-  handleSubmit: (e) => {
-    e.preventDefault()
-    dispatch(updateUser())
-  },
-
   sendDelete: (e) => {
     dispatch(deleteUser())
+  },
+
+  typeChange: (e) => {
+    dispatch(updateType(e.target.value))
   }
 })
 

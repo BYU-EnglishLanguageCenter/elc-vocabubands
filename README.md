@@ -2,6 +2,11 @@
 A language learning web app
 
 ## Installation
+Download [Node.js](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.com/download-center#community). Start MongoDB.
+```
+$ mongod
+```
+Clone the repository and install dependencies.
 ```
 $ git clone https://github.com/kylehoover/elc-vocabubands.git
 $ cd elc-vocabubands

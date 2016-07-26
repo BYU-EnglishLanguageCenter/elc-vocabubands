@@ -11,7 +11,6 @@ function * deleteUser (action) {
 
   try {
     yield call(deleteExistingUser, user._id)
-    window.location.assign('/users')
   } catch (err) {
     console.log(err)
   }

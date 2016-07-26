@@ -12,12 +12,6 @@ function * addNewUser (action) {
 
   try {
     yield call(addUser, user, isAdmin)
-
-    if (isAdmin) {
-      window.location.assign('/users')
-    } else {
-      window.location.assign('https://cas.byu.edu/cas/login?service=http://localhost:8080')
-    }
   } catch (err) {
     console.log(err)
   }

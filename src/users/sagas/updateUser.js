@@ -2,7 +2,7 @@
 
 import { takeEvery } from 'redux-saga'
 import { call, select } from 'redux-saga/effects'
-import { update } from './queries'
+import { updateExistingUser } from './queries'
 import { UPDATE_USER } from '../actions/TYPES'
 
 function * updateUser (action) {
@@ -10,8 +10,7 @@ function * updateUser (action) {
   const user = state.user
 
   try {
-    yield call(update, user)
-    window.location.assign('/users')
+    yield call(updateExistingUser, user)
   } catch (err) {
     console.log(err)
   }

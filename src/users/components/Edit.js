@@ -59,10 +59,12 @@ const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netI
           <option value='teacher'>Teacher</option>
         </select>
       </div>
-      <input type='submit' className='btn btn-primary' value='Submit' />
-      <button className='btn btn-danger butn-delete' type='button' onClick={sendDelete}>
+      <Link to='/users' className='btn btn-primary' onClick={handleSubmit}>
+        Submit
+      </Link>
+      <Link to='/users' className='btn btn-danger butn-delete' type='button' onClick={sendDelete}>
         Delete
-      </button>
+      </Link>
       <Link to='/users' className='btn btn-default pull-right' type='button'>
         Cancel
       </Link>

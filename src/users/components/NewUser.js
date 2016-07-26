@@ -6,6 +6,10 @@ import { Link } from 'react-router'
 const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netIDChange, showFullForm, typeChange, user }) => {
   let cancel = ''
   let netIDForm = ''
+  let submit =
+    <a href='https://cas.byu.edu/cas/login?service=http://localhost:8080' className='btn btn-primary' onClick={handleSubmit}>
+      Submit
+    </a>
   let typeForm = ''
 
   if (showFullForm) {
@@ -21,6 +25,11 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
         </label>
         <input type='text' className='form-control' id='netID' value={user.net_id} onChange={netIDChange} required />
       </div>
+
+    submit =
+      <Link to='/users' className='btn btn-primary' onClick={handleSubmit}>
+        Submit
+      </Link>
 
     typeForm =
       <div className='form-group'>
@@ -77,7 +86,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
           </select>
         </div>
         {typeForm}
-        <input type='submit' className='btn btn-primary' value='Submit' />
+        {submit}
         {cancel}
       </form>
     </div>
