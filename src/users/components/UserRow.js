@@ -11,8 +11,8 @@ const UserRow = ({ _id, first_name, last_name, level, type }) => {
       <td>{level}</td>
       <td>{type}</td>
       <td className='butn-cell-no-style butn-edit-width'>
-        <Link to={`/users/edit/${_id}`} className='btn btn-default'>
-          Edit
+        <Link to={`/users/edit/${_id}`}>
+          <span className='glyphicon glyphicon-pencil edit-pencil' aria-hidden='true' />
         </Link>
       </td>
     </tr>

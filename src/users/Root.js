@@ -3,6 +3,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import ReduxToastr from 'react-redux-toastr'
 import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
@@ -22,13 +23,16 @@ const Main = (props) => (
 
 const Root = () => (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path='users' component={Main}>
-        <IndexRoute component={UsersContainer} onEnter={() => { store.dispatch(fetchUsers()) }} />
-        <Route path='new' component={NewUserContainer} onEnter={() => { store.dispatch(clearUser()) }} />
-        <Route path='edit/:id' component={EditContainer} onEnter={({params}) => { store.dispatch(fetchUser(params.id)) }} />
-      </Route>
-    </Router>
+    <div>
+      <Router history={browserHistory}>
+        <Route path='users' component={Main}>
+          <IndexRoute component={UsersContainer} onEnter={() => { store.dispatch(fetchUsers()) }} />
+          <Route path='new' component={NewUserContainer} onEnter={() => { store.dispatch(clearUser()) }} />
+          <Route path='edit/:id' component={EditContainer} onEnter={({params}) => { store.dispatch(fetchUser(params.id)) }} />
+        </Route>
+      </Router>
+      <ReduxToastr position='top-center' />
+    </div>
   </Provider>
 )
 

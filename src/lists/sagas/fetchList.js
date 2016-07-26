@@ -2,17 +2,22 @@
 
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
+import { toastr } from 'react-redux-toastr'
 import { getListData } from './queries'
-import { fetchFailed, loadListData } from '../actions/actionCreators'
+import { loadListData } from '../actions/actionCreators'
 import { FETCH_LIST_DATA } from '../actions/TYPES'
 
 function * fetchList (action) {
   try {
     const response = yield call(getListData, action.id)
-    yield put(loadListData(response.data.data.list, action.id))
+    if (response.data.data.list === null) {
+      toastr.error('ERROR', `List ${action.id} does not exist`, { timeOut: 0 })
+    } else {
+      yield put(loadListData(response.data.data.list, action.id))
+    }
   } catch (err) {
     console.log(err)
-    yield put(fetchFailed(err))
+    toastr.error('ERROR', `Something went wrong while fetching list ${action.id}`, { timeOut: 0 })
   }
 }
 

@@ -49,6 +49,11 @@ body {
   display: inline;
 }
 
+.admin, .allLists, .edit, .home, .newUser {
+  width: 40%;
+  margin: 125px auto 75px auto;
+}
+
 .align-center {
   text-align: center;
 }
@@ -80,9 +85,8 @@ body {
   outline: none;
 }
 
-.admin, .allLists, .edit, .home, .newUser {
-  width: 40%;
-  margin: 125px auto 75px auto;
+.edit-pencil {
+  color: #000;
 }
 
 .list {

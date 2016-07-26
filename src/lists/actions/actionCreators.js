@@ -1,16 +1,9 @@
-import { FETCH_ALL_LISTS, FETCH_FAILED, FETCH_LIST_DATA, LOAD_ALL_LISTS, LOAD_LIST_DATA, ROW_DONE } from './TYPES'
+import { FETCH_ALL_LISTS, FETCH_LIST_DATA, LOAD_ALL_LISTS, LOAD_LIST_DATA, ROW_DONE } from './TYPES'
 
 export const fetchAllLists = (listType) => {
   return {
     type: FETCH_ALL_LISTS,
     listType
-  }
-}
-
-export const fetchFailed = (err) => {
-  return {
-    type: FETCH_FAILED,
-    err
   }
 }
 
