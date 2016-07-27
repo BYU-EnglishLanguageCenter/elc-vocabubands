@@ -1,13 +1,20 @@
 'use strict'
 
+// dependencies
 const graphql = require('graphql')
 const GraphQLID = graphql.GraphQLID
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
+
+// graphql types
+const ChangesInputType = require('./ChangesInput')
 const NewUserInputType = require('./NewUserInput')
-const UserModel = require('../../models/User')
-const UserType = require('./User')
 const UpdateUserInputType = require('./UpdateUserInput')
+const UserType = require('./User')
+
+// mongodb models
+const ChangesModel = require('../../models/Changes')
+const UserModel = require('../../models/User')
 
 const GraphQLBoolean = graphql.GraphQLBoolean
 const GraphQLInt = graphql.GraphQLInt
@@ -33,6 +40,27 @@ const Mutation = new GraphQLObjectType({
         })
 
         newUser.save()
+
+        return
+      }
+    },
+
+    addToChanges: {
+      type: GraphQLString,
+      args: {
+        changes: {
+          type: new GraphQLNonNull(ChangesInputType)
+        }
+      },
+      resolve: (root, { changes }, session) => {
+        const newChange = new ChangesModel({
+          list_id: changes.list_id,
+          list_type: changes.list_type,
+          net_id: session.user,
+          rows: changes.rows
+        })
+
+        newChange.save()
 
         return
       }

@@ -9,3 +9,7 @@ export const getAllLists = (type) => {
 export const getListData = (id) => {
   return axios.get(`/graphql?query={list(id:${id}){id,data{id,word,support_words,definition,building_words}}}`)
 }
+
+export const saveChange = (list_id, list_type, rows) => {
+  return axios.post(`/graphql?query=mutation{addToChanges(changes:{list_id:${list_id},list_type:"${list_type}",rows:[${rows}]})}`)
+}

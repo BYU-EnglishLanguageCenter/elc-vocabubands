@@ -1,6 +1,6 @@
 'use strict'
 
-const mongoose = require('mongoose')
+// dependencies
 const graphql = require('graphql')
 const GraphQLID = graphql.GraphQLID
 const GraphQLInt = graphql.GraphQLInt
@@ -11,11 +11,13 @@ const GraphQLString = graphql.GraphQLString
 
 // graphql types
 const AllListsType = require('./AllLists')
+const ChangesType = require('./Changes')
 const ListType = require('./List')
 const UserType = require('./User')
 
 // mongodb models
 const AllListsModel = require('../../models/AllLists')
+const ChangesModel = require('../../models/Changes')
 const ListModel = require('../../models/List')
 const UserModel = require('../../models/User')
 
@@ -29,9 +31,17 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { type }) => {
-        return AllListsModel.findOne({type: type})
-      }
+      resolve: (parent, { type }) => AllListsModel.findOne({type: type})
+    },
+
+    changes: {
+      type: ChangesType,
+      args: {
+        net_id: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve: (parent, { net_id }, session) => ChangesModel.findOne({net_id: net_id})
     },
 
     list: {

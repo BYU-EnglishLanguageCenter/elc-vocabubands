@@ -6,8 +6,9 @@ const changesSchema = mongoose.Schema({
   list_id: Number,
   list_type: String,
   net_id: String,
-  rows: Array,
-  modified: Date
+  rows: Array
+}, {
+  versionKey: false
 })
 
 const ChangesModel = mongoose.model('Changes', changesSchema)
