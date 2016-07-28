@@ -1,14 +1,14 @@
 'use strict'
 
 const graphql = require('graphql')
-const GraphQLInputObjectType = graphql.GraphQLInputObjectType
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
 const GraphQLNonNull = graphql.GraphQLNonNull
+const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
 
-const ChangesInputType = new GraphQLInputObjectType({
-  name: 'ChangesInput',
+const ListChangeType = new GraphQLObjectType({
+  name: 'ListChange',
   fields: {
     list_id: {
       type: new GraphQLNonNull(GraphQLInt)
@@ -22,4 +22,4 @@ const ChangesInputType = new GraphQLInputObjectType({
   }
 })
 
-module.exports = ChangesInputType
+module.exports = ListChangeType

@@ -12,6 +12,7 @@ function * saveListChanges (action) {
   try {
     const response = yield call(saveChange, state.currentList, state.listType, state.rowsDone)
     console.log(response)
+    toastr.success('SUCCESS', 'Changes to this list have been saved')
   } catch (err) {
     console.log(err)
     toastr.error('ERROR', 'Something went wrong while saving changes made to this list. Check the console for error messages.', { timeOut: 0 })

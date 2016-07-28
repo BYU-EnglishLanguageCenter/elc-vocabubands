@@ -11,5 +11,5 @@ export const getListData = (id) => {
 }
 
 export const saveChange = (list_id, list_type, rows) => {
-  return axios.post(`/graphql?query=mutation{addToChanges(changes:{list_id:${list_id},list_type:"${list_type}",rows:[${rows}]})}`)
+  return axios.post(`/graphql?query=mutation{addListChange(changes:{list_id:${list_id},list_type:"${list_type}",rows:[${rows}]})}`)
 }

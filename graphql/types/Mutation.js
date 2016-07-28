@@ -5,20 +5,16 @@ const graphql = require('graphql')
 const GraphQLID = graphql.GraphQLID
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
+const GraphQLString = graphql.GraphQLString
 
 // graphql types
-const ChangesInputType = require('./ChangesInput')
+const ListChangeInputType = require('./ListChangeInput')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
-const UserType = require('./User')
 
 // mongodb models
-const ChangesModel = require('../../models/Changes')
+const ListChangeModel = require('../../models/ListChange')
 const UserModel = require('../../models/User')
-
-const GraphQLBoolean = graphql.GraphQLBoolean
-const GraphQLInt = graphql.GraphQLInt
-const GraphQLString = graphql.GraphQLString
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -45,15 +41,15 @@ const Mutation = new GraphQLObjectType({
       }
     },
 
-    addToChanges: {
+    addListChange: {
       type: GraphQLString,
       args: {
         changes: {
-          type: new GraphQLNonNull(ChangesInputType)
+          type: new GraphQLNonNull(ListChangeInputType)
         }
       },
       resolve: (root, { changes }, session) => {
-        const newChange = new ChangesModel({
+        const newChange = new ListChangeModel({
           list_id: changes.list_id,
           list_type: changes.list_type,
           net_id: session.user,
