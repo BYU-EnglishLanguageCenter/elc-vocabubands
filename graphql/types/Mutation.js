@@ -9,12 +9,12 @@ const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
 
 // graphql types
-const ListChangeInputType = require('./ListChangeInput')
+const ListChangesInputType = require('./ListChangesInput')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
 
 // mongodb models
-const ListChangeModel = require('../../models/ListChange')
+const ListChangesModel = require('../../models/ListChanges')
 const UserModel = require('../../models/User')
 
 const Mutation = new GraphQLObjectType({
@@ -46,13 +46,13 @@ const Mutation = new GraphQLObjectType({
       type: GraphQLString,
       args: {
         changes: {
-          type: new GraphQLNonNull(ListChangeInputType)
+          type: new GraphQLNonNull(ListChangesInputType)
         }
       },
       resolve: (root, { changes }, session) => {
-        ListChangeModel.findOne({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}).then(res => {
+        ListChangesModel.findOne({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}).then(res => {
           if (res === null) {
-            const newChange = new ListChangeModel({
+            const newChange = new ListChangesModel({
               list_id: changes.list_id,
               list_type: changes.list_type,
               net_id: session.user,
@@ -65,7 +65,7 @@ const Mutation = new GraphQLObjectType({
               ...changes.rows
             ]
             rows = sortBy(rows)
-            ListChangeModel.update({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}, {$set: {rows: rows}}).exec()
+            ListChangesModel.update({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}, {$set: {rows: rows}}).exec()
           }
         }).catch(err => {
           console.log(err)
