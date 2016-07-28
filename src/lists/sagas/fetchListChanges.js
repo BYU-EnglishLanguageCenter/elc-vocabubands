@@ -13,7 +13,6 @@ function * fetchListChanges (action) {
   try {
     const response = yield call(getListChanges, state.currentList, state.listType)
     yield put(loadListChanges(response.data.data.listChanges))
-
     state = yield select()
     yield put(loadListDataWithChanges(state.listData, state.listChanges))
   } catch (err) {

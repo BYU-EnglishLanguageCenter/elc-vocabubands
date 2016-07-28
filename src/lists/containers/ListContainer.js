@@ -13,7 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  save: () => {
+  save: (e) => {
+    e.target.disabled = true
     dispatch(saveListChanges())
   }
 })

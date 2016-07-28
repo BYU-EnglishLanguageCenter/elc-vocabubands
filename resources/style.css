@@ -64,7 +64,7 @@ body {
 
 .animation-enter.animation-enter-active {
   opacity: 1;
-  transition: opacity 100ms ease-in;
+  transition: opacity 400ms ease-in;
 }
 
 .animation-leave {

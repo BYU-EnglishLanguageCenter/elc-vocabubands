@@ -1,6 +1,6 @@
 'use strict'
 
-import { takeEvery } from 'redux-saga'
+import { delay, takeEvery } from 'redux-saga'
 import { call, put, select } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import { saveChange } from './queries'
@@ -13,8 +13,9 @@ function * saveListChanges (action) {
   try {
     yield call(saveChange, state.currentList, state.listType, state.rowsDone)
     yield put(fetchListChanges())
-    yield put(clearRowsDone())
     toastr.success('SUCCESS', 'Changes to this list have been saved', { timeOut: 3000 })
+    yield delay(1000) // wait for reactcsstransitiongroup to finish in listTable
+    yield put(clearRowsDone())
   } catch (err) {
     console.log(err)
     toastr.error('ERROR', 'Something went wrong while saving changes made to this list. Check the console for error messages.', { timeOut: 0 })

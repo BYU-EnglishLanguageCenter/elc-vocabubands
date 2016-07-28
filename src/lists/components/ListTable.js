@@ -19,7 +19,7 @@ const ListTable = ({ data }) => {
             <th>Building Words</th>
           </tr>
         </thead>
-        <ReactCSSTransitionGroup component='tbody' transitionName='animation' transitionEnterTimeout={100} transitionLeaveTimeout={1000}>
+        <ReactCSSTransitionGroup component='tbody' transitionName='animation' transitionEnterTimeout={400} transitionLeaveTimeout={1000}>
           {listRows}
         </ReactCSSTransitionGroup>
       </table>
