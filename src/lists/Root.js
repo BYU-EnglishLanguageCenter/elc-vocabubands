@@ -13,8 +13,7 @@ import AllListsContainer from './containers/AllListsContainer'
 import ListContainer from './containers/ListContainer'
 import rootSaga from './sagas'
 
-import { fetchAllLists } from './actions/actionCreators'
-import { fetchListData } from './actions/actionCreators'
+import { clearListDataWithChanges, fetchAllLists, fetchListData } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -31,7 +30,7 @@ const Root = () => (
           <IndexRoute component={Home} />
           <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
             <IndexRoute component={AllListsContainer} />
-            <Route path=':id' component={ListContainer} onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} />
+            <Route path=':id' component={ListContainer} onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} onLeave={() => { store.dispatch(clearListDataWithChanges()) }} />
           </Route>
           <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
         </Route>

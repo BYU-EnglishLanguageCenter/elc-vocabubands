@@ -1,17 +1,13 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ListRowContainer from '../containers/ListRowContainer'
 
-const ListTable = ({ changes, data }) => {
-  const listRows = data.map(row => {
-    if (changes[0] !== row.id) {
-      return <ListRowContainer key={row.id} {...row} />
-    } else {
-      changes.shift()
-    }
-  })
-
+const ListTable = ({ data }) => {
+  const listRows = data.map(row =>
+    <ListRowContainer key={row.id} {...row} />
+  )
   return (
     <div className='listTable'>
       <table className='table table-striped'>
@@ -23,16 +19,15 @@ const ListTable = ({ changes, data }) => {
             <th>Building Words</th>
           </tr>
         </thead>
-        <tbody>
+        <ReactCSSTransitionGroup component='tbody' transitionName='animation' transitionEnterTimeout={100} transitionLeaveTimeout={1000}>
           {listRows}
-        </tbody>
+        </ReactCSSTransitionGroup>
       </table>
     </div>
   )
 }
 
 ListTable.propTypes = {
-  changes: PropTypes.array,
   data: PropTypes.array.isRequired
 }
 

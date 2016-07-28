@@ -58,6 +58,24 @@ body {
   text-align: center;
 }
 
+.animation-enter {
+  opacity: 0.01;
+}
+
+.animation-enter.animation-enter-active {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+}
+
+.animation-leave {
+  opacity: 1;
+}
+
+.animation-leave.animation-leave-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
+}
+
 .butn-cell-no-style {
   background-color: #fff;
   border: #fff;
