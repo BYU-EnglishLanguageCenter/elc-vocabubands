@@ -8,11 +8,7 @@ router.get('/lists*', function * (next) {
   let ctx = this
 
   const initialState = {
-    currentList: 0,
-    isAuthenticated: ctx.session.isAuthenticated === 'true',
-    allLists: [],
-    listData: [],
-    rowsDone: []
+    isAuthenticated: ctx.session.isAuthenticated === 'true'
   }
 
   const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`

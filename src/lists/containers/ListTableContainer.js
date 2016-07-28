@@ -5,6 +5,7 @@ import ListTable from '../components/ListTable'
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    changes: state.listChanges,
     data: state.listData
   }
 }
