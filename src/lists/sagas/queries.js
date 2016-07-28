@@ -1,6 +1,7 @@
 'use strict'
 
 import axios from 'axios'
+import { sortBy } from 'lodash'
 
 export const getAllLists = (type) => {
   return axios.get(`/graphql?query={allLists(type:"${type}"){type,list_ids}}`)
@@ -11,5 +12,6 @@ export const getListData = (id) => {
 }
 
 export const saveChange = (list_id, list_type, rows) => {
+  rows = sortBy(rows)
   return axios.post(`/graphql?query=mutation{addListChange(changes:{list_id:${list_id},list_type:"${list_type}",rows:[${rows}]})}`)
 }

@@ -2,6 +2,7 @@
 
 // dependencies
 const graphql = require('graphql')
+const sortBy = require('lodash/sortBy')
 const GraphQLID = graphql.GraphQLID
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
@@ -49,14 +50,26 @@ const Mutation = new GraphQLObjectType({
         }
       },
       resolve: (root, { changes }, session) => {
-        const newChange = new ListChangeModel({
-          list_id: changes.list_id,
-          list_type: changes.list_type,
-          net_id: session.user,
-          rows: changes.rows
+        ListChangeModel.findOne({net_id: session.user}).then(res => {
+          if (res === null) {
+            const newChange = new ListChangeModel({
+              list_id: changes.list_id,
+              list_type: changes.list_type,
+              net_id: session.user,
+              rows: changes.rows
+            })
+            newChange.save()
+          } else {
+            let rows = [
+              ...res.rows,
+              ...changes.rows
+            ]
+            rows = sortBy(rows)
+            ListChangeModel.update({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}, {$set: {rows: rows}}).exec()
+          }
+        }).catch(err => {
+          console.log(err)
         })
-
-        newChange.save()
 
         return
       }
