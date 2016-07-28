@@ -36,7 +36,15 @@ const Query = new GraphQLObjectType({
 
     listChange: {
       type: ListChangeType,
-      resolve: (parent, args, session) => ListChangeModel.findOne({net_id: session.user})
+      args: {
+        list_id: {
+          type: new GraphQLNonNull(GraphQLInt)
+        },
+        list_type: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve: (parent, { list_id, list_type }, session) => ListChangeModel.findOne({list_id: list_id, list_type, net_id: session.user})
     },
 
     list: {

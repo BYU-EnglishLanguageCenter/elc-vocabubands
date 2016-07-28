@@ -50,7 +50,7 @@ const Mutation = new GraphQLObjectType({
         }
       },
       resolve: (root, { changes }, session) => {
-        ListChangeModel.findOne({net_id: session.user}).then(res => {
+        ListChangeModel.findOne({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}).then(res => {
           if (res === null) {
             const newChange = new ListChangeModel({
               list_id: changes.list_id,
