@@ -4,7 +4,7 @@ import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import { getListData } from './queries'
-import { loadListData } from '../actions/actionCreators'
+import { fetchListChanges, loadListData } from '../actions/actionCreators'
 import { FETCH_LIST_DATA } from '../actions/TYPES'
 
 function * fetchList (action) {
@@ -14,6 +14,7 @@ function * fetchList (action) {
       toastr.error('ERROR', `List ${action.id} does not exist`, { timeOut: 0 })
     } else {
       yield put(loadListData(response.data.data.list, action.id))
+      yield put(fetchListChanges())
     }
   } catch (err) {
     console.log(err)

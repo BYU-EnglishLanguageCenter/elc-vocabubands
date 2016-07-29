@@ -1,27 +1,32 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ListRowContainer from '../containers/ListRowContainer'
 
-const ListTable = ({ data }) => (
-  <div className='listTable'>
-    <table className='table table-striped'>
-      <thead>
-        <tr>
-          <th>Word</th>
-          <th>Support Words</th>
-          <th>Definition</th>
-          <th>Building Words</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(row =>
-          <ListRowContainer key={row.id} {...row} />
-        )}
-      </tbody>
-    </table>
-  </div>
-)
+const ListTable = ({ animateLeave, data }) => {
+  const listRows = data.map(row =>
+    <ListRowContainer key={row.id} {...row} />
+  )
+
+  return (
+    <div className='listTable'>
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            <th>Word</th>
+            <th>Support Words</th>
+            <th>Definition</th>
+            <th>Building Words</th>
+          </tr>
+        </thead>
+        <ReactCSSTransitionGroup component='tbody' transitionName='animation' transitionEnterTimeout={400} transitionLeaveTimeout={400}>
+          {listRows}
+        </ReactCSSTransitionGroup>
+      </table>
+    </div>
+  )
+}
 
 ListTable.propTypes = {
   data: PropTypes.array.isRequired

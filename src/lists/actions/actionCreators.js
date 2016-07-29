@@ -1,8 +1,22 @@
-import { FETCH_ALL_LISTS, FETCH_LIST_DATA, LOAD_ALL_LISTS, LOAD_LIST_DATA, ROW_DONE, SAVE_LIST_CHANGES } from './TYPES'
+import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
+         LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, ROW_DONE, SAVE_LIST_CHANGES,
+         TOGGLE_LIST_DATA, UPDATE_LIST_DATA } from './TYPES'
+
+export const clearListDataWithChanges = () => ({
+  type: CLEAR_LIST_DATA_WITH_CHANGES
+})
+
+export const clearRowsDone = () => ({
+  type: CLEAR_ROWS_DONE
+})
 
 export const fetchAllLists = (listType) => ({
   type: FETCH_ALL_LISTS,
   listType
+})
+
+export const fetchListChanges = () => ({
+  type: FETCH_LIST_CHANGES
 })
 
 export const fetchListData = (id) => ({
@@ -15,9 +29,20 @@ export const loadAllLists = (data) => ({
   data
 })
 
+export const loadListChanges = (data) => ({
+  type: LOAD_LIST_CHANGES,
+  data
+})
+
 export const loadListData = (data) => ({
   type: LOAD_LIST_DATA,
   data
+})
+
+export const loadListDataWithChanges = (data, changes) => ({
+  type: LOAD_LIST_DATA_WITH_CHANGES,
+  data,
+  changes
 })
 
 export const rowDone = (id) => ({
@@ -27,4 +52,13 @@ export const rowDone = (id) => ({
 
 export const saveListChanges = () => ({
   type: SAVE_LIST_CHANGES
+})
+
+export const toggleListData = () => ({
+  type: TOGGLE_LIST_DATA
+})
+
+export const updateListData = (rowsDone) => ({
+  type: UPDATE_LIST_DATA,
+  rowsDone
 })

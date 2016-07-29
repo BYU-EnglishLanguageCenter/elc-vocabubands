@@ -11,13 +11,13 @@ const GraphQLString = graphql.GraphQLString
 
 // graphql types
 const AllListsType = require('./AllLists')
-const ChangesType = require('./Changes')
+const ListChangesType = require('./ListChanges')
 const ListType = require('./List')
 const UserType = require('./User')
 
 // mongodb models
 const AllListsModel = require('../../models/AllLists')
-const ChangesModel = require('../../models/Changes')
+const ListChangesModel = require('../../models/ListChanges')
 const ListModel = require('../../models/List')
 const UserModel = require('../../models/User')
 
@@ -34,14 +34,17 @@ const Query = new GraphQLObjectType({
       resolve: (parent, { type }) => AllListsModel.findOne({type: type})
     },
 
-    changes: {
-      type: ChangesType,
+    listChanges: {
+      type: ListChangesType,
       args: {
-        net_id: {
+        list_id: {
+          type: new GraphQLNonNull(GraphQLInt)
+        },
+        list_type: {
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { net_id }, session) => ChangesModel.findOne({net_id: net_id})
+      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.findOne({list_id: list_id, list_type, net_id: session.user})
     },
 
     list: {

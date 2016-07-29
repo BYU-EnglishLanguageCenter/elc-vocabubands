@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-const changesSchema = mongoose.Schema({
+const listChangesSchema = mongoose.Schema({
   list_id: Number,
   list_type: String,
   net_id: String,
@@ -11,6 +11,6 @@ const changesSchema = mongoose.Schema({
   versionKey: false
 })
 
-const ChangesModel = mongoose.model('Changes', changesSchema)
+const ListChangesModel = mongoose.model('List_Changes', listChangesSchema)
 
-module.exports = ChangesModel
+module.exports = ListChangesModel

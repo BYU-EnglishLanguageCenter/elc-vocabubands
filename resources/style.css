@@ -45,10 +45,6 @@ body {
   padding-right: 8px;
 }
 
-#users-header {
-  display: inline;
-}
-
 .admin, .allLists, .edit, .home, .newUser {
   width: 40%;
   margin: 125px auto 75px auto;
@@ -56,6 +52,24 @@ body {
 
 .align-center {
   text-align: center;
+}
+
+.animation-enter {
+  opacity: 0.01;
+}
+
+.animation-enter.animation-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in;
+}
+
+.animation-leave {
+  opacity: 1;
+}
+
+.animation-leave.animation-leave-active {
+  opacity: 0.01;
+  transition: opacity 400ms ease-in;
 }
 
 .butn-cell-no-style {
@@ -85,8 +99,16 @@ body {
   outline: none;
 }
 
+.display-none {
+  display: none;
+}
+
 .edit-pencil {
   color: #000;
+}
+
+.inline {
+  display: inline;
 }
 
 .list {
@@ -127,3 +149,9 @@ body {
 .table {
   font-weight: 100;
 }
+
+/* enables CSS3 transition for simple collapses, accordion and also navbar in responsive view */
+.collapse { transition: height .3s ease-out; /*-webkit-transition: height .3s ease-out*/ }
+
+/* styles the close button for the dismissible popovers */
+.popover .close { position: absolute; top: 7px; right: 10px; }

@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react'
 
-const ListRow = ({ id, word, support_words, definition, building_words, done, onClick }) => {
+const ListRow = ({ id, word, support_words, definition, building_words, butnCellClass, done, onClick }) => {
   const rowClass = done ? 'row-done' : 'row-normal'
   const butnClass = done ? 'butn-undo' : 'butn-done'
   const butnText = done ? 'Undo' : 'Done'
@@ -13,7 +13,7 @@ const ListRow = ({ id, word, support_words, definition, building_words, done, on
       <td>{support_words}</td>
       <td>{definition}</td>
       <td>{building_words}</td>
-      <td className='butn-cell-no-style'>
+      <td className={butnCellClass}>
         <button className={butnClass} onClick={onClick} >
           {butnText}
         </button>
@@ -28,6 +28,7 @@ ListRow.propTypes = {
   support_words: PropTypes.string,
   definition: PropTypes.string,
   building_words: PropTypes.string,
+  butnCellClass: PropTypes.string.isRequired,
   done: PropTypes.bool,
   onClick: PropTypes.func
 }

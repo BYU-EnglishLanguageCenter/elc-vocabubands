@@ -2,23 +2,20 @@
 
 // dependencies
 const graphql = require('graphql')
+const sortBy = require('lodash/sortBy')
 const GraphQLID = graphql.GraphQLID
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
+const GraphQLString = graphql.GraphQLString
 
 // graphql types
-const ChangesInputType = require('./ChangesInput')
+const ListChangesInputType = require('./ListChangesInput')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
-const UserType = require('./User')
 
 // mongodb models
-const ChangesModel = require('../../models/Changes')
+const ListChangesModel = require('../../models/ListChanges')
 const UserModel = require('../../models/User')
-
-const GraphQLBoolean = graphql.GraphQLBoolean
-const GraphQLInt = graphql.GraphQLInt
-const GraphQLString = graphql.GraphQLString
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -45,22 +42,34 @@ const Mutation = new GraphQLObjectType({
       }
     },
 
-    addToChanges: {
+    addListChange: {
       type: GraphQLString,
       args: {
         changes: {
-          type: new GraphQLNonNull(ChangesInputType)
+          type: new GraphQLNonNull(ListChangesInputType)
         }
       },
       resolve: (root, { changes }, session) => {
-        const newChange = new ChangesModel({
-          list_id: changes.list_id,
-          list_type: changes.list_type,
-          net_id: session.user,
-          rows: changes.rows
+        ListChangesModel.findOne({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}).then(res => {
+          if (res === null) {
+            const newChange = new ListChangesModel({
+              list_id: changes.list_id,
+              list_type: changes.list_type,
+              net_id: session.user,
+              rows: changes.rows
+            })
+            newChange.save()
+          } else {
+            let rows = [
+              ...res.rows,
+              ...changes.rows
+            ]
+            rows = sortBy(rows)
+            ListChangesModel.update({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}, {$set: {rows: rows}}).exec()
+          }
+        }).catch(err => {
+          console.log(err)
         })
-
-        newChange.save()
 
         return
       }

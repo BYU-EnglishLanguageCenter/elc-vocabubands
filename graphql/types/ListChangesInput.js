@@ -7,8 +7,8 @@ const GraphQLList = graphql.GraphQLList
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLString = graphql.GraphQLString
 
-const ChangesInputType = new GraphQLInputObjectType({
-  name: 'ChangesInput',
+const ListChangesInputType = new GraphQLInputObjectType({
+  name: 'ListChangesInput',
   fields: {
     list_id: {
       type: new GraphQLNonNull(GraphQLInt)
@@ -22,4 +22,4 @@ const ChangesInputType = new GraphQLInputObjectType({
   }
 })
 
-module.exports = ChangesInputType
+module.exports = ListChangesInputType
