@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 import List from '../components/List'
-import { saveListChanges, toggleListData } from '../actions/actionCreators'
+import { clearRowsDone, saveListChanges, toggleListData } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
   id: ownProps.params.id,
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   toggleData: (e) => {
     e.preventDefault()
+    dispatch(clearRowsDone())
     dispatch(toggleListData())
   }
 })

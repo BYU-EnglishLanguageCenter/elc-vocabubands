@@ -99,6 +99,10 @@ body {
   outline: none;
 }
 
+.display-none {
+  display: none;
+}
+
 .edit-pencil {
   color: #000;
 }
