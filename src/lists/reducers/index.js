@@ -10,6 +10,7 @@ import listData from './listData'
 import listDataWithChanges from './listDataWithChanges'
 import listType from './listType'
 import rowsDone from './rowsDone'
+import showDataWithChanges from './showDataWithChanges'
 
 export default combineReducers({
   allLists,
@@ -20,5 +21,6 @@ export default combineReducers({
   listDataWithChanges,
   listType,
   rowsDone,
+  showDataWithChanges,
   toastr: toastrReducer
 })

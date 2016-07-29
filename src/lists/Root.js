@@ -30,7 +30,12 @@ const Root = () => (
           <IndexRoute component={Home} />
           <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
             <IndexRoute component={AllListsContainer} />
-            <Route path=':id' component={ListContainer} onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} onLeave={() => { store.dispatch(clearListDataWithChanges()) }} />
+            <Route
+              path=':id'
+              component={ListContainer}
+              onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }}
+              onLeave={() => { store.dispatch(clearListDataWithChanges()) }}
+            />
           </Route>
           <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
         </Route>

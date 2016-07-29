@@ -11,7 +11,7 @@ const Users = ({ sortByFirstName, sortByLastName, sortByLevel, sortByType, users
 
   return (
     <div id='users'>
-      <h1 id='users-header'>
+      <h1 className='inline'>
         Users
       </h1>
       <div className='pull-right' id='users-add-new'>

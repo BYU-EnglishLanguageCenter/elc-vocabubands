@@ -14,7 +14,7 @@ function * saveListChanges (action) {
     yield call(saveChange, state.currentList, state.listType, state.rowsDone)
     yield put(fetchListChanges())
     toastr.success('SUCCESS', 'Changes to this list have been saved', { timeOut: 3000 })
-    yield delay(1000) // wait for reactcsstransitiongroup to finish in listTable
+    yield delay(400) // wait for reactcsstransitiongroup to finish in listTable
     yield put(clearRowsDone())
   } catch (err) {
     console.log(err)

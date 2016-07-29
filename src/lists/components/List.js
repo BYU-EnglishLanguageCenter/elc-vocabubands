@@ -2,9 +2,10 @@
 
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import { DropdownButton, MenuItem } from 'react-bootstrap'
 import ListTableContainer from '../containers/ListTableContainer'
 
-const List = ({ id, save, showSaveChanges, type }) => {
+const List = ({ id, save, showSaveChanges, toggleData, type, whatToShow }) => {
   let saveChanges = ''
 
   if (showSaveChanges) {
@@ -16,9 +17,16 @@ const List = ({ id, save, showSaveChanges, type }) => {
 
   return (
     <div className='list'>
-      <h1>
+      <h1 className='inline'>
         List {id}
       </h1>
+      <div className='pull-right inline'>
+        <DropdownButton title='More Options' bsStyle='default' id='options' type='button' pullRight>
+          <MenuItem onClick={toggleData}>
+            {whatToShow}
+          </MenuItem>
+        </DropdownButton>
+      </div>
       <ListTableContainer />
       <Link to={`/lists/${type}`} className='btn btn-primary'role='button'>
         See all Lists
@@ -32,7 +40,9 @@ List.propTypes = {
   id: PropTypes.string.isRequired,
   save: PropTypes.func.isRequired,
   showSaveChanges: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired
+  toggleData: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  whatToShow: PropTypes.string.isRequired
 }
 
 export default List
