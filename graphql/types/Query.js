@@ -2,6 +2,7 @@
 
 // dependencies
 const graphql = require('graphql')
+const mongoose = require('mongoose')
 const GraphQLID = graphql.GraphQLID
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
@@ -64,14 +65,26 @@ const Query = new GraphQLObjectType({
           type: GraphQLID
         }
       },
-      resolve: (parent, { id }, session) => {
-        if (session.isAdmin) {
-          // id = mongoose.Types.ObjectId(id)
-          return UserModel.findOne({_id: id})
-        } else {
+      resolve: (parent, { id }, session) =>
+        UserModel.findOne({_id: id}).then(user => {
+          if (session.isAdmin || session.user === user.net_id) {
+            return user
+          } else {
+            return null
+          }
+        }).catch(err => {
+          console.log(err)
           return null
-        }
-      }
+        })
+
+      //   console.log(session.user)
+      //   console.log(user.net_id)
+      //   if (session.isAdmin || session.user === user.net_id) {
+      //     return user
+      //   } else {
+      //     return null
+      //   }
+
     },
 
     users: {

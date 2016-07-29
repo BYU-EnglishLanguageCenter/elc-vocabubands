@@ -5,6 +5,7 @@ import Edit from '../components/Edit'
 import { deleteUser, updateFirstName, updateLastName, updateLevel, updateNetID, updateType, updateUser } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
+  showFullForm: state.isAdmin,
   user: state.user
 })
 

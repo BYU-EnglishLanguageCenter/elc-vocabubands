@@ -31,7 +31,7 @@ const Root = () => (
           <Route path='edit/:id' component={EditContainer} onEnter={({params}) => { store.dispatch(fetchUser(params.id)) }} />
         </Route>
       </Router>
-      <ReduxToastr position='top-center' />
+      <ReduxToastr position='top-center' confirmOptions={{okText: 'Yes', cancelText: 'Cancel'}} />
     </div>
   </Provider>
 )

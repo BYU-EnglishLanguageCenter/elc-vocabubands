@@ -12,7 +12,9 @@ function * updateUser (action) {
 
   try {
     yield call(updateExistingUser, user)
-    toastr.success('SUCCESS', `${user.first_name} has been updated`)
+    if (state.isAdmin) {
+      toastr.success('SUCCESS', `${user.first_name} has been updated`)
+    }
   } catch (err) {
     console.log(err)
     toastr.error('ERROR', `Something went wrong while updating ${user.first_name} ${user.last_name}. Check the console for error messages.`, { timeOut: 0 })
