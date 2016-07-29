@@ -3,12 +3,10 @@
 import { connect } from 'react-redux'
 import AllLists from '../components/AllLists'
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    data: state.allLists,
-    type: state.listType
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  data: state.allLists,
+  type: state.listType
+})
 
 const AllListsContainer = connect(mapStateToProps)(AllLists)
 
