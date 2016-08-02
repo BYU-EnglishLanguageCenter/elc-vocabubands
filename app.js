@@ -15,6 +15,7 @@ const Pug = require('koa-pug')
 const session = require('koa-session')
 const serve = require('koa-static')
 const authRouter = require('./routes/auth')
+const errorsRoute = require('./routes/errors')
 const listsRouter = require('./routes/lists')
 const usersRouter = require('./routes/users')
 const schema = require('./graphql')
@@ -68,15 +69,7 @@ app.use(mount('/graphql', graphqlHTTP((request, context) => ({
 console.log(checkMark.green)
 process.stdout.write('Registering routes ... '.cyan)
 
-app.use(function * (next) {
-  let ctx = this
-
-  yield next
-
-  if (ctx.status === 404) {
-    ctx.body = '404'
-  }
-})
+app.use(errorsRoute)
 
 app.use(authRouter.routes())
 app.use(authRouter.allowedMethods())
