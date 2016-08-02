@@ -64,9 +64,5 @@ router.get('/logout', function * (next) {
   let ctx = this
   ctx.session = null
   ctx.redirect('/')
-  // ctx.redirect('https://cas.byu.edu/cas/logout?url=localhost:8080')
-})
-
-router.get('/favicon.ico', function * (next) {
-  
+  // ctx.redirect('https://cas.byu.edu/cas/logout?url=http://localhost:8080')
 })
