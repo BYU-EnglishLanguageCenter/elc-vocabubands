@@ -45,10 +45,18 @@ const db = mongoose.connection
 db.on('error', (err) => { console.log('\nconnection error: ' + err) })
 
 console.log(checkMark.green)
+process.stdout.write('Initializing sessions ... '.cyan)
 
 app.keys = ['vcb']
 app.use(session(app))
 
+app.use(function * (next) {
+  let ctx = this
+  ctx.session.maxAge = 7200000
+  yield next
+})
+
+console.log(checkMark.green)
 process.stdout.write('Mounting graphql server ... '.cyan)
 
 app.use(mount('/graphql', graphqlHTTP((request, context) => ({
@@ -57,15 +65,18 @@ app.use(mount('/graphql', graphqlHTTP((request, context) => ({
   pretty: true
 }))))
 
-// app.use(function * (next) {
-//   let ctx = this
-//   console.log(ctx.session)
-//   yield next
-//   console.log(ctx.session)
-// })
-
 console.log(checkMark.green)
 process.stdout.write('Registering routes ... '.cyan)
+
+app.use(function * (next) {
+  let ctx = this
+
+  yield next
+
+  if (ctx.status === 404) {
+    ctx.body = '404'
+  }
+})
 
 app.use(authRouter.routes())
 app.use(authRouter.allowedMethods())
