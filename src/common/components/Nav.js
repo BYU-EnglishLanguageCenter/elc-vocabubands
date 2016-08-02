@@ -3,7 +3,7 @@
 import React from 'react'
 
 const Nav = ({ showLogout }) => {
-  let logout = <div />
+  let logout
 
   if (showLogout) {
     logout =

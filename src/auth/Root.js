@@ -10,11 +10,17 @@ const Main = (props) => (
   <MainLayout showLogout={false} {...props} />
 )
 
+const MainForAdmin = (props) => (
+  <MainLayout showLogout {...props} />
+)
+
 const Root = () => (
   <Router history={browserHistory}>
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
-      <Route path='/admin' component={Admin} />
+    </Route>
+    <Route path='/admin' component={MainForAdmin}>
+      <IndexRoute component={Admin} />
     </Route>
   </Router>
 )
