@@ -3,6 +3,10 @@
 import axios from 'axios'
 import { sortBy } from 'lodash'
 
+export const deleteChanges = (id, type) => {
+  return axios.post(`/graphql?query=mutation{removeListChanges(list_id:${id},list_type:"${type}")}`)
+}
+
 export const getAllLists = (type) => {
   return axios.get(`/graphql?query={allLists(type:"${type}"){type,list_ids}}`)
 }

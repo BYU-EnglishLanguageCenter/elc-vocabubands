@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 import ListTableContainer from '../containers/ListTableContainer'
 
-const List = ({ id, save, showSaveChanges, toggleData, type, whatToShow }) => {
+const List = ({ id, save, showSaveChanges, toggleData, type, undoChanges, whatToShow }) => {
   let saveChanges = ''
 
   if (showSaveChanges) {
@@ -25,6 +25,9 @@ const List = ({ id, save, showSaveChanges, toggleData, type, whatToShow }) => {
           <MenuItem onClick={toggleData}>
             {whatToShow}
           </MenuItem>
+          <MenuItem onClick={undoChanges}>
+            Undo All Changes
+          </MenuItem>
         </DropdownButton>
       </div>
       <ListTableContainer />
@@ -42,6 +45,7 @@ List.propTypes = {
   showSaveChanges: PropTypes.bool.isRequired,
   toggleData: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
+  undoChanges: PropTypes.func.isRequired,
   whatToShow: PropTypes.string.isRequired
 }
 
