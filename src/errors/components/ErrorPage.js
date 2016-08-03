@@ -9,7 +9,7 @@ const ErrorPage = ({ status }) => (
       {status}
     </h1>
     <p>
-      {errorInfo[status]}
+      {errorInfo[status]} Click the logo in the upper left of this page to get back to the website.
     </p>
   </div>
 )
