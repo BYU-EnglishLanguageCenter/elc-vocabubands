@@ -6,6 +6,7 @@ const listDataWithChanges = (state = [], action) => {
   switch (action.type) {
     case CLEAR_LIST_DATA_WITH_CHANGES:
       return []
+
     case LOAD_LIST_DATA_WITH_CHANGES:
       let index = 0
       let dataWithChanges = []
@@ -19,7 +20,7 @@ const listDataWithChanges = (state = [], action) => {
       })
 
       return dataWithChanges
-
+      
     default:
       return state
   }
