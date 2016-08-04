@@ -104,6 +104,7 @@ const Mutation = new GraphQLObjectType({
           }
           return success
         })
+        // also remove any entries under their net_id in list_changes
       }
     },
 

@@ -40,9 +40,7 @@ router.get('/users/new', function * (next) {
       bundleSrc: '/js/users-bundle.js',
       html: html
     })
-  } else if (ctx.session.isAuthenticated) {
-    ctx.status = 401
-  } else if (ctx.session.user) {
+  } else if (ctx.session.isNewUser) {
     ctx.render('base', {
       title: 'Vocabubands',
       bundleSrc: '/js/users-bundle.js'

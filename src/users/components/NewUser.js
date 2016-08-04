@@ -6,9 +6,11 @@ import { Link } from 'react-router'
 const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netIDChange, showFullForm, typeChange, user }) => {
   let cancel, netIDForm, typeForm
   let submit =
-    <a href='https://cas.byu.edu/cas/login?service=http://localhost:8080' className='btn btn-primary' onClick={handleSubmit}>
+    <a href='/logout?newUser=true' className='btn btn-primary' onClick={handleSubmit}>
       Submit
     </a>
+
+  // https://cas.byu.edu/cas/login?service=http://localhost:8080
 
   if (showFullForm) {
     cancel =
