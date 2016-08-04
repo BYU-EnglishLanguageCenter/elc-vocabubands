@@ -8,18 +8,18 @@ const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netI
 
   let cancel =
     <a href='/' className='btn btn-default pull-right' type='button'>
-      Cancel
+      Return
     </a>
 
   let deleteButton =
-    <button className='btn btn-danger butn-delete' type='button' onClick={sendDelete}>
+    <button className='btn btn-danger butn-delete' onClick={sendDelete} type='button'>
       Delete
     </button>
 
   let submit =
-    <a href='/' className='btn btn-primary' onClick={handleSubmit}>
+    <button className='btn btn-primary' onClick={handleSubmit} type='button'>
       Submit
-    </a>
+    </button>
 
   if (showFullForm) {
     cancel =

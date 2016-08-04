@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(updateFirstName(e.target.value))
   },
 
-  handleSubmit: () => {
+  handleSubmit: (e) => {
     dispatch(updateUser())
   },
 

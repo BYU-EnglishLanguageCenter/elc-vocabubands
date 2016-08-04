@@ -14,6 +14,8 @@ function * updateUser (action) {
     yield call(updateExistingUser, user)
     if (state.isAdmin) {
       toastr.success('SUCCESS', `${user.first_name} has been updated`)
+    } else {
+      toastr.success('SUCCESS', 'Your information has been updated')
     }
   } catch (err) {
     console.log(err)

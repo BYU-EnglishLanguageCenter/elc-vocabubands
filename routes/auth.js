@@ -9,7 +9,7 @@ module.exports = router
 router.get('/', function * (next) {
   let ctx = this
   const query = ctx.request.query
-  let redirect = '/lists'
+  let redirect = '/home'
 
   if (ctx.session.isAdmin) {
     ctx.redirect('/admin')
@@ -52,6 +52,19 @@ router.get('/admin', function * (next) {
   let ctx = this
 
   if (ctx.session.isAdmin) {
+    ctx.render('base', {
+      pageTitle: 'Vocabubands',
+      bundleSrc: '/js/auth-bundle.js'
+    })
+  } else {
+    ctx.status = 401
+  }
+})
+
+router.get('/home', function * (next) {
+  let ctx = this
+
+  if (ctx.session.isAuthenticated) {
     ctx.render('base', {
       pageTitle: 'Vocabubands',
       bundleSrc: '/js/auth-bundle.js'

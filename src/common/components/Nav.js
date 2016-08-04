@@ -1,6 +1,6 @@
 'use strict'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 const Nav = ({ showLogout }) => {
   let logout
@@ -24,6 +24,10 @@ const Nav = ({ showLogout }) => {
       </div>
     </nav>
   )
+}
+
+Nav.propTypes = {
+  showLogout: PropTypes.bool
 }
 
 export default Nav
