@@ -9,6 +9,7 @@ const config = {
   devtool: '#source-map',
   entry: {
     auth: ['./auth.js'],
+    erros: ['./errors.js'],
     lists: ['./lists.js'],
     users: ['./users.js']
   },

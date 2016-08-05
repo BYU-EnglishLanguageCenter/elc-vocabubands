@@ -4,6 +4,7 @@
 const graphql = require('graphql')
 const sortBy = require('lodash/sortBy')
 const GraphQLID = graphql.GraphQLID
+const GraphQLInt = graphql.GraphQLInt
 const GraphQLNonNull = graphql.GraphQLNonNull
 const GraphQLObjectType = graphql.GraphQLObjectType
 const GraphQLString = graphql.GraphQLString
@@ -75,6 +76,19 @@ const Mutation = new GraphQLObjectType({
       }
     },
 
+    removeListChanges: {
+      type: GraphQLString,
+      args: {
+        list_id: {
+          type: new GraphQLNonNull(GraphQLInt)
+        },
+        list_type: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.remove({list_id: list_id, list_type: list_type, net_id: session.user})
+    },
+
     removeUser: {
       type: GraphQLString,
       args: {
@@ -90,6 +104,7 @@ const Mutation = new GraphQLObjectType({
           }
           return success
         })
+        // also remove any entries under their net_id in list_changes
       }
     },
 

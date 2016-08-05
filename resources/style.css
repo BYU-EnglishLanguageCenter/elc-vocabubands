@@ -45,7 +45,7 @@ body {
   padding-right: 8px;
 }
 
-.admin, .allLists, .edit, .home, .newUser {
+.admin, .allLists, .edit, .error, .home, .login, .newUser {
   width: 40%;
   margin: 125px auto 75px auto;
 }

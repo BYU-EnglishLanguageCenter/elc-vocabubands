@@ -15,6 +15,7 @@ const Pug = require('koa-pug')
 const session = require('koa-session')
 const serve = require('koa-static')
 const authRouter = require('./routes/auth')
+const errorsRoute = require('./routes/errors')
 const listsRouter = require('./routes/lists')
 const usersRouter = require('./routes/users')
 const schema = require('./graphql')
@@ -45,10 +46,18 @@ const db = mongoose.connection
 db.on('error', (err) => { console.log('\nconnection error: ' + err) })
 
 console.log(checkMark.green)
+process.stdout.write('Initializing sessions ... '.cyan)
 
 app.keys = ['vcb']
 app.use(session(app))
 
+app.use(function * (next) {
+  let ctx = this
+  ctx.session.maxAge = 7200000
+  yield next
+})
+
+console.log(checkMark.green)
 process.stdout.write('Mounting graphql server ... '.cyan)
 
 app.use(mount('/graphql', graphqlHTTP((request, context) => ({
@@ -57,6 +66,9 @@ app.use(mount('/graphql', graphqlHTTP((request, context) => ({
   pretty: true
 }))))
 
+console.log(checkMark.green)
+process.stdout.write('Registering routes ... '.cyan)
+
 // app.use(function * (next) {
 //   let ctx = this
 //   console.log(ctx.session)
@@ -64,8 +76,7 @@ app.use(mount('/graphql', graphqlHTTP((request, context) => ({
 //   console.log(ctx.session)
 // })
 
-console.log(checkMark.green)
-process.stdout.write('Registering routes ... '.cyan)
+app.use(errorsRoute)
 
 app.use(authRouter.routes())
 app.use(authRouter.allowedMethods())

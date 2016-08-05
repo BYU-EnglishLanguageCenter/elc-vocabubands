@@ -5,8 +5,8 @@ import NewUser from '../components/NewUser'
 import { addNewUser, updateFirstName, updateLastName, updateLevel, updateNetID, updateType } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.user,
-  showFullForm: state.isAdmin
+  showFullForm: state.isAdmin,
+  user: state.user
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

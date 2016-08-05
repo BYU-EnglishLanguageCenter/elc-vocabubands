@@ -1,4 +1,4 @@
-import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
+import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, DELETE_LIST_CHANGES, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
          LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, ROW_DONE, SAVE_LIST_CHANGES,
          TOGGLE_LIST_DATA, UPDATE_LIST_DATA } from './TYPES'
 
@@ -8,6 +8,10 @@ export const clearListDataWithChanges = () => ({
 
 export const clearRowsDone = () => ({
   type: CLEAR_ROWS_DONE
+})
+
+export const deleteListChanges = () => ({
+  type: DELETE_LIST_CHANGES
 })
 
 export const fetchAllLists = (listType) => ({

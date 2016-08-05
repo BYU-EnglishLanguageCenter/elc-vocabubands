@@ -9,12 +9,12 @@ module.exports = router
 router.get('/', function * (next) {
   let ctx = this
   const query = ctx.request.query
-  let successRedirect = '/lists'
+  let redirect = '/home'
 
   if (ctx.session.isAdmin) {
     ctx.redirect('/admin')
   } else if (ctx.session.isAuthenticated) {
-    ctx.redirect(successRedirect)
+    ctx.redirect(redirect)
   } else if (query.ticket) {
     const ticket = query.ticket
     const service = 'http://localhost:8080'
@@ -25,16 +25,18 @@ router.get('/', function * (next) {
       const user = yield UserModel.findOne({net_id: response.username})
 
       if (user === null) {
-        ctx.redirect('/users/new')
+        ctx.session.isNewUser = 'true'
+        redirect = '/users/new'
       } else {
         if (user.type === 'admin') {
           ctx.session.isAdmin = 'true'
-          successRedirect = '/admin'
+          redirect = '/admin'
         }
 
         ctx.session.isAuthenticated = 'true'
-        ctx.redirect(successRedirect)
       }
+
+      ctx.redirect(redirect)
     } catch (err) {
       console.log(err)
     }
@@ -48,7 +50,6 @@ router.get('/', function * (next) {
 
 router.get('/admin', function * (next) {
   let ctx = this
-  const errorRedirect = '/'
 
   if (ctx.session.isAdmin) {
     ctx.render('base', {
@@ -56,17 +57,33 @@ router.get('/admin', function * (next) {
       bundleSrc: '/js/auth-bundle.js'
     })
   } else {
-    ctx.redirect(errorRedirect)
+    ctx.status = 401
+  }
+})
+
+router.get('/home', function * (next) {
+  let ctx = this
+
+  if (ctx.session.isAuthenticated) {
+    ctx.render('base', {
+      pageTitle: 'Vocabubands',
+      bundleSrc: '/js/auth-bundle.js'
+    })
+  } else {
+    ctx.status = 401
   }
 })
 
 router.get('/logout', function * (next) {
   let ctx = this
+  let redirect = '/'
+  const query = ctx.request.query
   ctx.session = null
-  ctx.redirect('/')
-  // ctx.redirect('https://cas.byu.edu/cas/logout?url=localhost:8080')
-})
 
-router.get('/favicon.ico', function * (next) {
-  
+  if (query.newUser) {
+    redirect = 'https://cas.byu.edu/cas/login?service=http://localhost:8080'
+  }
+
+  ctx.redirect(redirect)
+  // ctx.redirect('https://cas.byu.edu/cas/logout?url=http://localhost:8080')
 })

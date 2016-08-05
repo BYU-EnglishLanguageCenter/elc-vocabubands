@@ -12,7 +12,9 @@ function * addNewUser (action) {
 
   try {
     yield call(addUser, user)
-    toastr.success('SUCCESS', `${user.first_name} has been added`)
+    if (state.isAdmin) {
+      toastr.success('SUCCESS', `${user.first_name} has been added`)
+    }
   } catch (err) {
     console.log(err)
     toastr.error('ERROR', `Something went wrong while try to add ${user.first_name} ${user.last_name}. Check the console for error messages.`, { timeOut: 0 })
