@@ -14,7 +14,7 @@ const Users = ({ sortByFirstName, sortByLastName, sortByLevel, sortByType, users
       <h1 className='inline'>
         Users
       </h1>
-      <div className='pull-right' id='users-add-new'>
+      <div className='pull-right' id='users-add-new-butn'>
         <Link to='/users/new' className='btn btn-success' type='button'>
           Add New
         </Link>
