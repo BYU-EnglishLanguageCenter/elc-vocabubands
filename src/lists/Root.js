@@ -11,7 +11,7 @@ import AllListsContainer from './containers/AllListsContainer'
 import Home from './components/Home'
 import ListContainer from './containers/ListContainer'
 import MainLayout from '../common/components/MainLayout'
-import Words from './components/Words'
+import Test from './components/Test'
 import rootSaga from './sagas'
 
 import { clearListDataWithChanges, fetchAllLists, fetchListData } from './actions/actionCreators'
@@ -39,7 +39,7 @@ const Root = () => (
             />
           </Route>
           <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
-          <Route path='words' component={Words} />
+          <Route path='test' component={Test} />
         </Route>
       </Router>
       <ReduxToastr position='top-center' />

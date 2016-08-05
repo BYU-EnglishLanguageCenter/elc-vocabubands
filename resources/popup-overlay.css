@@ -1,20 +1,27 @@
 .popup {
   display: none;
   position: fixed;
-  /*height: 180px;
-  width: 280px;*/
-  top: 40%;
-  left: 50%;
-  margin-left: -150px;
-  margin-top: -100px;
+  top: 30%;
+  left: 25%;
+  right: 25%;
   z-index: 1;
+}
+
+.popup .popup-children {
+  padding-top: 20px;
 }
 
 .popup .popup-contents {
   height: 180px;
-  width: 280px;
+  width: 100%;
   padding: 10px;
   outline: 0;
+}
+
+.popup .popup-exit,
+.popup .popup-exit:hover,
+.popup .popup-exit:visited {
+  color: #000;
 }
 
 .popup:after {
