@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import PopupOverlay, { showPopup } from './PopupOverlay'
+import PopupOverlay, { showPopup } from '../../common/components/PopupOverlay'
 
 const Test = () => (
   <div className='list'>

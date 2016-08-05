@@ -6,7 +6,7 @@ const $ = (id) => {
   return document.getElementById(id)
 }
 
-const hide = () => {
+export const hidePopup = () => {
   $('popup').style.display = 'none'
 }
 
@@ -18,8 +18,8 @@ export const showPopup = () => {
 const PopupOverlay = ({ children }) => {
   return (
     <div className='popup' id='popup'>
-      <div className='popup-contents' id='popup-contents' tabIndex='-1' onBlur={hide}>
-        <a className='popup-exit' href='#' onClick={hide}>
+      <div className='popup-contents' id='popup-contents' tabIndex='-1' onBlur={hidePopup}>
+        <a className='popup-exit' href='#' onClick={hidePopup}>
           <span className='glyphicon glyphicon-remove pull-right' aria-hidden='true' />
         </a>
         <div className='popup-children'>
