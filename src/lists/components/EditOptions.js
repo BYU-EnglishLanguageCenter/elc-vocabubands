@@ -1,8 +1,9 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 
-const EditOptions = ({ id }) => (
+const EditOptions = ({ id, type }) => (
   <div className='edit-lists-options' key={id}>
     <h3 className='inline'>
       List {id}
@@ -11,15 +12,16 @@ const EditOptions = ({ id }) => (
       <button className='btn btn-primary btn-sm butn-edit-list'>
         Edit
       </button>
-      <button className='btn btn-default btn-sm'>
+      <Link to={`/lists/${type}/${id}/bare`} className='btn btn-default btn-sm'>
         View
-      </button>
+      </Link>
     </div>
   </div>
 )
 
 EditOptions.propTypes = {
-  id: PropTypes.number
+  id: PropTypes.number,
+  type: PropTypes.string
 }
 
 export default EditOptions

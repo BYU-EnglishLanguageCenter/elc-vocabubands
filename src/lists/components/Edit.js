@@ -3,13 +3,13 @@
 import React from 'react'
 import EditOptions from './EditOptions'
 
-const Edit = ({ avl, preAvl }) => {
+const Edit = ({ avl, preAvl, load, data }) => {
   const avlLinks = avl.map(id =>
-    <EditOptions id={id} key={id} />
+    <EditOptions id={id} type='avl' key={id} />
   )
 
   const preAvlLinks = preAvl.map(id =>
-    <EditOptions id={id} key={id} />
+    <EditOptions id={id} type='preavl' key={id} />
   )
 
   return (
@@ -17,7 +17,7 @@ const Edit = ({ avl, preAvl }) => {
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-md-6'>
-            <h1>
+            <h1 onClick={() => load(13)}>
               AVL
             </h1>
             {avlLinks}

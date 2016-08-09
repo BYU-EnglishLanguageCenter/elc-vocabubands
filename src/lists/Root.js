@@ -7,15 +7,16 @@ import ReduxToastr from 'react-redux-toastr'
 import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
-import ListLinksContainer from './containers/ListLinksContainer'
 import EditContainer from './containers/EditContainer'
 import Home from './components/Home'
+import ListBareContainer from './containers/ListBareContainer'
 import ListContainer from './containers/ListContainer'
+import ListLinksContainer from './containers/ListLinksContainer'
 import MainLayout from '../common/components/MainLayout'
 import Test from './components/Test'
 import rootSaga from './sagas'
 
-import { clearListDataWithChanges, fetchListData, setListType } from './actions/actionCreators'
+import { clearListDataWithChanges, fetchListData, setListType, toggleListData } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -32,12 +33,10 @@ const Root = () => (
           <IndexRoute component={Home} />
           <Route path='avl' onEnter={() => { store.dispatch(setListType('avl')) }}>
             <IndexRoute component={ListLinksContainer} />
-            <Route
-              path=':id'
-              component={ListContainer}
-              onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }}
-              onLeave={() => { store.dispatch(clearListDataWithChanges()) }}
-            />
+            <Route path=':id' onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} onLeave={() => { store.dispatch(clearListDataWithChanges()) }}>
+              <IndexRoute component={ListContainer} />
+              <Route path='bare' component={ListBareContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
+            </Route>
           </Route>
           <Route path='preavl' component={ListLinksContainer} onEnter={() => { store.dispatch(setListType('preavl')) }} />
           <Route path='edit' component={EditContainer} />

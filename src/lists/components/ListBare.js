@@ -2,9 +2,9 @@
 
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import ListTable from './ListTable'
+import ListTableContainer from '../containers/ListTableContainer'
 
-const List = ({ id, data, type }) => {
+const ListBare = ({ id, data, type }) => {
   let listType
 
   switch (type) {
@@ -23,10 +23,10 @@ const List = ({ id, data, type }) => {
       <h1 className='inline'>
         {listType} List {id}
       </h1>
-      <Link to={'/lists/edit'} className='btn btn-primary'role='button'>
+      <Link to={'/lists/edit'} className='btn btn-primary pull-right'role='button'>
         Back
       </Link>
-      <ListTable data={data} />
+      <ListTableContainer />
       <Link to={'/lists/edit'} className='btn btn-primary'role='button'>
         Back
       </Link>
@@ -34,10 +34,9 @@ const List = ({ id, data, type }) => {
   )
 }
 
-List.propTypes = {
-  data: PropTypes.array.isRequired,
-  id: PropTypes.string.isRequired,
+ListBare.propTypes = {
+  id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired
 }
 
-export default List
+export default ListBare
