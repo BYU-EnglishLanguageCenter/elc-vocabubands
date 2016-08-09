@@ -15,7 +15,7 @@ import MainLayout from '../common/components/MainLayout'
 import Test from './components/Test'
 import rootSaga from './sagas'
 
-import { clearListDataWithChanges, fetchAllLists, fetchListData, setListType } from './actions/actionCreators'
+import { clearListDataWithChanges, fetchListData, setListType } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)

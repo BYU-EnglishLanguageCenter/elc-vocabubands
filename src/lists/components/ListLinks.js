@@ -18,7 +18,7 @@ const ListLinks = ({ data, type }) => {
   }
 
   const links = data.map(id =>
-    <Link to={`/lists/${type}/${id}`} className='btn btn-primary btn-lg listLink' role='button' key={id}>
+    <Link to={`/lists/${type}/${id}`} className='btn btn-primary btn-lg list-link' role='button' key={id}>
       List {id}
     </Link>
   )

@@ -81,8 +81,8 @@ body {
   padding: 0;
 }
 
-.butn-edit-width {
-  width: 5%;
+.butn-edit-list {
+  margin: 0 20px 0 40px;
 }
 
 .butn-done {
@@ -103,8 +103,16 @@ body {
   display: none;
 }
 
+.edit-lists-options {
+  padding: 15px 0;
+}
+
 .edit-pencil {
   color: #000;
+}
+
+.edit-user-cell-width {
+  width: 5%;
 }
 
 .inline {
@@ -116,7 +124,7 @@ body {
   margin: 75px auto;
 }
 
-.listLink {
+.list-link {
   width: 100%;
   text-align: left;
   margin: 15px 0;
@@ -149,9 +157,3 @@ body {
 .table {
   font-weight: 100;
 }
-
-/* enables CSS3 transition for simple collapses, accordion and also navbar in responsive view */
-.collapse { transition: height .3s ease-out; /*-webkit-transition: height .3s ease-out*/ }
-
-/* styles the close button for the dismissible popovers */
-.popover .close { position: absolute; top: 7px; right: 10px; }

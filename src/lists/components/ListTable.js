@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ListRowContainer from '../containers/ListRowContainer'
 
-const ListTable = ({ animateLeave, data }) => {
+const ListTable = ({ data }) => {
   const listRows = data.map(row =>
     <ListRowContainer key={row.id} {...row} />
   )
