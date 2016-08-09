@@ -1,5 +1,5 @@
 import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, DELETE_LIST_CHANGES, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
-         LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, ROW_DONE, SAVE_LIST_CHANGES,
+         LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, ROW_DONE, SAVE_LIST_CHANGES, SET_LIST_TYPE,
          TOGGLE_LIST_DATA, UPDATE_LIST_DATA } from './TYPES'
 
 export const clearListDataWithChanges = () => ({
@@ -56,6 +56,11 @@ export const rowDone = (id) => ({
 
 export const saveListChanges = () => ({
   type: SAVE_LIST_CHANGES
+})
+
+export const setListType = (listType) => ({
+  type: SET_LIST_TYPE,
+  listType
 })
 
 export const toggleListData = () => ({

@@ -7,7 +7,7 @@ import ReduxToastr from 'react-redux-toastr'
 import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
-import AllListsContainer from './containers/AllListsContainer'
+import ListLinksContainer from './containers/ListLinksContainer'
 import EditContainer from './containers/EditContainer'
 import Home from './components/Home'
 import ListContainer from './containers/ListContainer'
@@ -15,7 +15,7 @@ import MainLayout from '../common/components/MainLayout'
 import Test from './components/Test'
 import rootSaga from './sagas'
 
-import { clearListDataWithChanges, fetchAllLists, fetchListData } from './actions/actionCreators'
+import { clearListDataWithChanges, fetchAllLists, fetchListData, setListType } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -30,8 +30,8 @@ const Root = () => (
       <Router history={browserHistory}>
         <Route path='lists' component={Main}>
           <IndexRoute component={Home} />
-          <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
-            <IndexRoute component={AllListsContainer} />
+          <Route path='avl' onEnter={() => { store.dispatch(setListType('avl')) }}>
+            <IndexRoute component={ListLinksContainer} />
             <Route
               path=':id'
               component={ListContainer}
@@ -39,7 +39,7 @@ const Root = () => (
               onLeave={() => { store.dispatch(clearListDataWithChanges()) }}
             />
           </Route>
-          <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
+          <Route path='preavl' component={ListLinksContainer} onEnter={() => { store.dispatch(setListType('preavl')) }} />
           <Route path='edit' component={EditContainer} />
           <Route path='test' component={Test} />
         </Route>

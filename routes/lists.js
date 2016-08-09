@@ -1,6 +1,7 @@
 'use strict'
 
 const router = require('koa-router')()
+const AllListsModel = require('../models/AllLists')
 
 module.exports = router
 
@@ -9,9 +10,16 @@ router.get('/lists*', function * (next) {
   const path = ctx.request.path
 
   if (path === '/lists/edit' && ctx.session.isAdmin || (path !== '/lists/edit' && ctx.session.isAuthenticated)) {
+    const initialState = {
+      allLists: yield AllListsModel.find({})
+    }
+
+    const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
+
     ctx.render('base', {
       pageTitle: 'Vocabubands',
-      bundleSrc: '/js/lists-bundle.js'
+      bundleSrc: '/js/lists-bundle.js',
+      html: html
     })
   } else {
     ctx.status = 401

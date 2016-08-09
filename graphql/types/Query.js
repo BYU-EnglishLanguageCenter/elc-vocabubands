@@ -2,7 +2,6 @@
 
 // dependencies
 const graphql = require('graphql')
-const mongoose = require('mongoose')
 const GraphQLID = graphql.GraphQLID
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLList = graphql.GraphQLList
@@ -26,13 +25,8 @@ const Query = new GraphQLObjectType({
   name: 'Query',
   fields: {
     allLists: {
-      type: AllListsType,
-      args: {
-        type: {
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (parent, { type }) => AllListsModel.findOne({type: type})
+      type: new GraphQLList(AllListsType),
+      resolve: (parent, args, session) => AllListsModel.find({})
     },
 
     listChanges: {

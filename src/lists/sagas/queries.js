@@ -8,7 +8,7 @@ export const deleteChanges = (id, type) => {
 }
 
 export const getAllLists = (type) => {
-  return axios.get(`/graphql?query={allLists(type:"${type}"){type,list_ids}}`)
+  return axios.get(`/graphql?query={allLists{type,list_ids}}`)
 }
 
 export const getListChanges = (id, type) => {
