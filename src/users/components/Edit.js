@@ -28,7 +28,7 @@ const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netI
       </Link>
 
     deleteButton =
-      <Link to='/users' className='btn btn-danger' type='button' onClick={sendDelete}>
+      <Link to='/users' className='btn btn-danger' onClick={sendDelete} type='button'>
         Delete
       </Link>
 
