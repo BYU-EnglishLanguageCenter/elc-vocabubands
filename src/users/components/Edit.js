@@ -12,7 +12,7 @@ const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netI
     </a>
 
   let deleteButton =
-    <button className='btn btn-danger butn-delete' onClick={sendDelete} type='button'>
+    <button className='btn btn-danger' onClick={sendDelete} type='button'>
       Delete
     </button>
 
@@ -28,7 +28,7 @@ const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netI
       </Link>
 
     deleteButton =
-      <Link to='/users' className='btn btn-danger butn-delete' type='button' onClick={sendDelete}>
+      <Link to='/users' className='btn btn-danger' type='button' onClick={sendDelete}>
         Delete
       </Link>
 
@@ -100,9 +100,19 @@ const Edit = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, netI
           </select>
         </div>
         {typeForm}
-        {submit}
-        {deleteButton}
-        {cancel}
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-xs-4 butn-edit-group'>
+              {submit}
+            </div>
+            <div className='col-xs-4 butn-edit-group align-center'>
+              {deleteButton}
+            </div>
+            <div className='col-xs-4 butn-edit-group'>
+              {cancel}
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   )
