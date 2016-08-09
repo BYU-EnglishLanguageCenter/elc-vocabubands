@@ -1,0 +1,48 @@
+.popup {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 25%;
+  right: 25%;
+  z-index: 1;
+}
+
+.popup .popup-children {
+  padding-top: 20px;
+}
+
+.popup .popup-contents {
+  height: 180px;
+  width: 100%;
+  padding: 10px;
+  outline: 0;
+}
+
+.popup .popup-exit,
+.popup .popup-exit:hover,
+.popup .popup-exit:visited {
+  color: #000;
+}
+
+.popup:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  background: rgba(0, 0, 0, .5);
+}
+
+.popup:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: #fff;
+  border-radius: 4px;
+}
