@@ -8,6 +8,7 @@ import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
 import AllListsContainer from './containers/AllListsContainer'
+import EditContainer from './containers/EditContainer'
 import Home from './components/Home'
 import ListContainer from './containers/ListContainer'
 import MainLayout from '../common/components/MainLayout'
@@ -39,6 +40,7 @@ const Root = () => (
             />
           </Route>
           <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
+          <Route path='edit' component={EditContainer} />
           <Route path='test' component={Test} />
         </Route>
       </Router>
