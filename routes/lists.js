@@ -9,7 +9,7 @@ router.get('/lists*', function * (next) {
   let ctx = this
   const path = ctx.request.path
 
-  if (ctx.session.isAdmin || (!path.includes('edit') && ctx.session.isAuthenticated)) {
+  if (ctx.session.isAdmin || (!path.includes('edit') && !path.includes('bare') && ctx.session.isAuthenticated)) {
     const initialState = {
       allLists: yield AllListsModel.find({})
     }

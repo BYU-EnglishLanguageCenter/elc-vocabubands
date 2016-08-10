@@ -3,6 +3,10 @@ body {
   font-weight: 100;
 }
 
+tbody textarea {
+  resize: none;
+}
+
 #all-lists-header {
   margin-bottom: 40px;
 }

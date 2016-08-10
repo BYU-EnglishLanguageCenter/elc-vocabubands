@@ -5,6 +5,7 @@ import watchFetchAllLists from './fetchAllLists'
 import watchFetchList from './fetchList'
 import watchFetchListChanges from './fetchListChanges'
 import watchSaveListChanges from './saveListChanges'
+import watchUpdateList from './updateList'
 
 export default function * rootSaga () {
   yield [
@@ -12,6 +13,7 @@ export default function * rootSaga () {
     watchFetchAllLists(),
     watchFetchList(),
     watchFetchListChanges(),
-    watchSaveListChanges()
+    watchSaveListChanges(),
+    watchUpdateList()
   ]
 }

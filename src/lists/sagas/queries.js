@@ -23,3 +23,7 @@ export const saveChange = (list_id, list_type, rows) => {
   rows = sortBy(rows)
   return axios.post(`/graphql?query=mutation{addListChange(changes:{list_id:${list_id},list_type:"${list_type}",rows:[${rows}]})}`)
 }
+
+export const updateExistingList = (id, data) => {
+  return axios.post(`/graphql?query=mutation{updateList(list:{id:${id},data:[${data}]})}`)
+}

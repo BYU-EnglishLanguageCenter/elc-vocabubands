@@ -9,9 +9,9 @@ const EditOptions = ({ id, type }) => (
       List {id}
     </h3>
     <div className='inline'>
-      <button className='btn btn-primary btn-sm butn-edit-list'>
+      <Link to={`/lists/${type}/${id}/edit`} className='btn btn-primary btn-sm butn-edit-list'>
         Edit
-      </button>
+      </Link>
       <Link to={`/lists/${type}/${id}/bare`} className='btn btn-default btn-sm'>
         View
       </Link>

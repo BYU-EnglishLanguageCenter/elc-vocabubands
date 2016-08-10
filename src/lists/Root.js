@@ -11,6 +11,7 @@ import EditContainer from './containers/EditContainer'
 import Home from './components/Home'
 import ListBareContainer from './containers/ListBareContainer'
 import ListContainer from './containers/ListContainer'
+import ListEditContainer from './containers/ListEditContainer'
 import ListLinksContainer from './containers/ListLinksContainer'
 import MainLayout from '../common/components/MainLayout'
 import Test from './components/Test'
@@ -36,6 +37,7 @@ const Root = () => (
             <Route path=':id' onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} onLeave={() => { store.dispatch(clearListDataWithChanges()) }}>
               <IndexRoute component={ListContainer} />
               <Route path='bare' component={ListBareContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
+              <Route path='edit' component={ListEditContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
             </Route>
           </Route>
           <Route path='preavl' component={ListLinksContainer} onEnter={() => { store.dispatch(setListType('preavl')) }} />

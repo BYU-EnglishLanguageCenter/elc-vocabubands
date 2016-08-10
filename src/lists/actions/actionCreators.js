@@ -1,6 +1,6 @@
 import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, DELETE_LIST_CHANGES, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
          LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, ROW_DONE, SAVE_LIST_CHANGES, SET_LIST_TYPE,
-         TOGGLE_LIST_DATA, UPDATE_LIST_DATA } from './TYPES'
+         TOGGLE_LIST_DATA, UPDATE_BUILDING_WORDS, UPDATE_DEFINITION, UPDATE_LIST, UPDATE_SUPPORT_WORDS, UPDATE_WORD } from './TYPES'
 
 export const clearListDataWithChanges = () => ({
   type: CLEAR_LIST_DATA_WITH_CHANGES
@@ -67,7 +67,30 @@ export const toggleListData = () => ({
   type: TOGGLE_LIST_DATA
 })
 
-export const updateListData = (rowsDone) => ({
-  type: UPDATE_LIST_DATA,
-  rowsDone
+export const updateBuildingWords = (index, value) => ({
+  type: UPDATE_BUILDING_WORDS,
+  index,
+  value
+})
+
+export const updateDefinition = (index, value) => ({
+  type: UPDATE_DEFINITION,
+  index,
+  value
+})
+
+export const updateList = () => ({
+  type: UPDATE_LIST
+})
+
+export const updateSupportWords = (index, value) => ({
+  type: UPDATE_SUPPORT_WORDS,
+  index,
+  value
+})
+
+export const updateWord = (index, value) => ({
+  type: UPDATE_WORD,
+  index,
+  value
 })

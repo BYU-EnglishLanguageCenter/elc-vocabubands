@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import ListTableContainer from '../containers/ListTableContainer'
 
-const ListBare = ({ id, data, type }) => {
+const ListBare = ({ id, type }) => {
   let listType
 
   switch (type) {
