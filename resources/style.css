@@ -25,6 +25,15 @@ tbody textarea {
   margin-bottom: 10px;
 }
 
+#file-upload {
+  margin-top: 50px;
+  width: 75%;
+}
+
+#file-upload-container {
+  margin-top: 125px;
+}
+
 #login-btn {
   margin-top: 30%;
 }
@@ -85,8 +94,8 @@ tbody textarea {
   padding: 0;
 }
 
-.butn-edit-list {
-  margin: 0 20px 0 40px;
+.butn-edit-options {
+  width: 50%;
 }
 
 .butn-done {

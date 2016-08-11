@@ -2,7 +2,6 @@
 
 import { connect } from 'react-redux'
 import Edit from '../components/Edit'
-import { fetchListData } from '../actions/actionCreators'
 
 const mapStateToProps = (state, ownProps) => {
   let avl = []
@@ -18,17 +17,10 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     avl: avl,
-    preAvl: preAvl,
-    data: state.listData
+    preAvl: preAvl
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  load: (id) => {
-    dispatch(fetchListData(id))
-  }
-})
-
-const EditContainer = connect(mapStateToProps, mapDispatchToProps)(Edit)
+const EditContainer = connect(mapStateToProps)(Edit)
 
 export default EditContainer
