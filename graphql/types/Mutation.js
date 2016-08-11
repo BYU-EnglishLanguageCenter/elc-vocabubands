@@ -11,8 +11,8 @@ const GraphQLString = graphql.GraphQLString
 
 // graphql types
 const ListChangesInputType = require('./ListChangesInput')
+const ListInputType = require('./ListInput')
 const NewUserInputType = require('./NewUserInput')
-const UpdateListInputType = require('./UpdateListInput')
 const UpdateUserInputType = require('./UpdateUserInput')
 
 // mongodb models
@@ -114,10 +114,11 @@ const Mutation = new GraphQLObjectType({
       type: GraphQLString,
       args: {
         list: {
-          type: new GraphQLNonNull(UpdateListInputType)
+          type: new GraphQLNonNull(ListInputType)
         }
       },
       resolve: (root, { list }, session) => {
+        // console.log(list)
         if (session.isAdmin) {
           return ListModel.update({id: list.id}, { $set: { data: list.data } })
         }

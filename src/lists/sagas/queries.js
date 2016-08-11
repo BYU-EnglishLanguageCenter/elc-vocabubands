@@ -25,5 +25,10 @@ export const saveChange = (list_id, list_type, rows) => {
 }
 
 export const updateExistingList = (id, data) => {
-  return axios.post(`/graphql?query=mutation{updateList(list:{id:${id},data:[${data}]})}`)
+  // convert data from array of objects to stringified json
+  // then get rid of quotes around keys otherwise graphql will complain, e.g. {"key": "value"} => {key: "value"}
+  data = JSON.stringify(data)
+  data = data.replace(/\"([^(\")"]+)\":/g, '$1:')
+
+  return axios.post(`/graphql?query=mutation{updateList(list:{id:${id},data:${data}})}`)
 }

@@ -11,10 +11,10 @@ const RowInputType = new GraphQLInputObjectType({
   name: 'RowInput',
   fields: {
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
+      type: GraphQLInt
     },
     word: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: GraphQLString
     },
     support_words: {
       type: GraphQLString
@@ -28,8 +28,8 @@ const RowInputType = new GraphQLInputObjectType({
   }
 })
 
-const UpdateListInputType = new GraphQLInputObjectType({
-  name: 'UpdateListInput',
+const ListInputType = new GraphQLInputObjectType({
+  name: 'ListInput',
   fields: {
     id: {
       type: new GraphQLNonNull(GraphQLInt)
@@ -40,4 +40,4 @@ const UpdateListInputType = new GraphQLInputObjectType({
   }
 })
 
-module.exports = UpdateListInputType
+module.exports = ListInputType

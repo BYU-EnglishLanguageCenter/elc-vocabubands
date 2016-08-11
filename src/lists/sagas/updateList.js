@@ -11,7 +11,7 @@ function * updateList (action) {
 
   try {
     const response = yield call(updateExistingList, state.currentList, state.listData)
-    console.log(response)
+    toastr.success('SUCCESS', `List ${state.currentList} has been updated`, { timeOut: 2000 })
   } catch (err) {
     console.log(err)
     toastr.error('ERROR', 'Something went wrong while updating this list. Check the console for error messages.', { timeOut: 0 })
