@@ -3,7 +3,7 @@
 import React from 'react'
 import EditOptions from './EditOptions'
 
-const Edit = ({ avl, getFilename, preAvl }) => {
+const Edit = ({ avl, getFilename, preAvl, upload }) => {
   const avlLinks = avl.map(id =>
     <EditOptions id={id} type='avl' key={id} />
   )
@@ -35,15 +35,23 @@ const Edit = ({ avl, getFilename, preAvl }) => {
         <h1>
           Upload a New List
         </h1>
-        <div className='input-group' id='file-upload'>
-          <span className='input-group-btn'>
-            <label className='btn btn-default btn-file'>
-              Browse
-              <input type='file' className='display-none' onChange={getFilename} />
-            </label>
-          </span>
-          <input type='text' className='form-control' id='filename' />
-        </div>
+
+        <form id='form' encType='multipart/form-data'>
+          <div className='input-group' id='file-upload'>
+            <span className='input-group-btn'>
+              <label className='btn btn-default btn-file'>
+                Browse
+                <input type='file' className='display-none' id='file' onChange={getFilename} accept='.csv,.json' name='file' />
+              </label>
+            </span>
+            <input type='text' className='form-control' id='filename' readOnly name='filename' />
+          </div>
+          <button className='btn btn-primary' onClick={upload} type='button'>
+            Upload
+          </button>
+
+        </form>
+
       </div>
 
     </div>

@@ -1,6 +1,8 @@
 'use strict'
 
 const router = require('koa-router')()
+const path = require('path')
+const parser = require('koa-body')({ multipart: true })
 const AllListsModel = require('../models/AllLists')
 
 module.exports = router
@@ -24,4 +26,12 @@ router.get('/lists*', function * (next) {
   } else {
     ctx.status = 401
   }
+})
+
+router.post('/upload', parser, function * (next) {
+  let ctx = this
+
+  console.log(ctx.request.body)
+
+  ctx.body = 'ok hi there friend'
 })
