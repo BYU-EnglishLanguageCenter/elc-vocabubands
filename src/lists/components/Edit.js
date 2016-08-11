@@ -3,7 +3,7 @@
 import React from 'react'
 import EditOptions from './EditOptions'
 
-const Edit = ({ avl, preAvl }) => {
+const Edit = ({ avl, getFilename, preAvl }) => {
   const avlLinks = avl.map(id =>
     <EditOptions id={id} type='avl' key={id} />
   )
@@ -37,11 +37,12 @@ const Edit = ({ avl, preAvl }) => {
         </h1>
         <div className='input-group' id='file-upload'>
           <span className='input-group-btn'>
-            <button className='btn btn-default' type='button'>
-              Go!
-            </button>
+            <label className='btn btn-default btn-file'>
+              Browse
+              <input type='file' className='display-none' onChange={getFilename} />
+            </label>
           </span>
-          <input type='text' className='form-control' placeholder='Search for...' />
+          <input type='text' className='form-control' id='filename' />
         </div>
       </div>
 
