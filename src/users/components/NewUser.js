@@ -70,7 +70,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
           <label htmlFor='level'>
             Enrollment Level
           </label>
-          <select className='form-control' id='level' value={user.level} onChange={levelChange}>
+          <select className='form-control' id='level' value={user.level} onChange={levelChange} required >
             <option value=''>--------</option>
             <option value='FP'>Foundations Prep</option>
             <option value='FA'>Foundations A</option>

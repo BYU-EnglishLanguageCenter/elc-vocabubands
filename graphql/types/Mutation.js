@@ -25,7 +25,7 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     addNewUser: {
-      type: GraphQLString,
+      type: UserType,
       args: {
         user: {
           type: new GraphQLNonNull(NewUserInputType)
@@ -36,13 +36,13 @@ const Mutation = new GraphQLObjectType({
           first_name: user.first_name,
           last_name: user.last_name,
           net_id: user.net_id !== 'undefined' ? user.net_id : session.user,
-          level: user.level,
+          level: user.level !== 'undefined' ? user.level : 'none',
           type: user.type !== 'undefined' ? user.type : 'student'
         })
 
-        newUser.save()
-
-        return
+        return newUser.save()
+          .then(user => user)
+          .catch(err => console.log(err))
       }
     },
 
@@ -99,16 +99,14 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLID)
         }
       },
-      resolve: (root, { _id }, session) => {
-        UserModel.remove({_id: _id}, function (err, success) {
-          if (err) {
+      resolve: (root, { _id }, session) =>
+        UserModel.remove({_id: _id})
+          .then(info => 'success')
+          .catch(err => {
             console.log(err)
-            return err
-          }
-          return success
-        })
+            return 'error'
+          })
         // also remove any entries under their net_id in list_changes
-      }
     },
 
     updateList: {

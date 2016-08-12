@@ -32,7 +32,8 @@ router.get('/users/new', function * (next) {
 
   if (ctx.session.isAdmin || ctx.session.isNewUser) {
     const initialState = {
-      isAdmin: ctx.session.isAdmin === 'true'
+      isAdmin: ctx.session.isAdmin === 'true',
+      users: ctx.session.isAdmin === 'true' ? yield UserModel.find({}) : []
     }
 
     const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
@@ -50,18 +51,30 @@ router.get('/users/new', function * (next) {
 router.get('/users/edit', loginRequired, function * (next) {
   let ctx = this
 
-  const user = yield UserModel.findOne({net_id: ctx.session.user})
-  ctx.redirect(`/users/edit/${user._id}`)
+  const initialState = {
+    isAdmin: ctx.session.isAdmin === 'true',
+    user: yield UserModel.findOne({net_id: ctx.session.user})
+  }
+
+  const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
+
+  ctx.render('base', {
+    title: 'Vocabubands',
+    bundleSrc: '/js/users-bundle.js',
+    html: html
+  })
 })
 
 router.get('/users/edit/:id', loginRequired, function * (next) {
   let ctx = this
-  const id = ctx.request.path.substring(12)
-  const user = yield UserModel.findOne({net_id: ctx.session.user})
 
-  if (ctx.session.isAdmin || id === user._id.toString()) {
+  if (ctx.session.isAdmin) {
+    const id = ctx.request.path.substring(12)
+
     const initialState = {
-      isAdmin: ctx.session.isAdmin === 'true'
+      isAdmin: ctx.session.isAdmin === 'true',
+      user: yield UserModel.findOne({_id: id}),
+      users: yield UserModel.find({})
     }
 
     const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`

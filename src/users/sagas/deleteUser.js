@@ -1,9 +1,10 @@
 'use strict'
 
 import { takeEvery } from 'redux-saga'
-import { call, select } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import { deleteExistingUser } from './queries'
+import { removeFromUsersList } from '../actions/actionCreators'
 import { DELETE_USER } from '../actions/TYPES'
 
 function confirm () {
@@ -29,11 +30,17 @@ function * deleteUser (action) {
   }
 
   try {
-    yield call(deleteExistingUser, user._id)
-    if (state.isAdmin) {
-      toastr.success('SUCCESS', `${user.first_name} ${user.last_name} has been deleted`)
+    const response = yield call(deleteExistingUser, user._id)
+    if (response.data.data.removeUser === 'success') {
+      yield put(removeFromUsersList(user._id))
+
+      if (state.isAdmin) {
+        toastr.success('SUCCESS', `${user.first_name} ${user.last_name} has been deleted`)
+      } else {
+        window.location.assign('/logout')
+      }
     } else {
-      window.location.assign('/logout')
+      toastr.error('ERROR', `Something went wrong while trying to delete ${user.first_name} ${user.last_name}. Check the console for error messages.`, { timeOut: 0 })
     }
   } catch (err) {
     console.log(err)

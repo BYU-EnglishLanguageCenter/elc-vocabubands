@@ -28,7 +28,9 @@ const Root = () => (
         <Route path='users' component={Main}>
           <IndexRoute component={UsersContainer} />
           <Route path='new' component={NewUserContainer} onEnter={() => { store.dispatch(clearUser()) }} />
-          <Route path='edit/:id' component={EditContainer} />
+          <Route path='edit' component={EditContainer}>
+            <Route path=':id' />
+          </Route>
         </Route>
       </Router>
       <ReduxToastr position='top-center' confirmOptions={{okText: 'Yes', cancelText: 'Cancel'}} />
