@@ -4,7 +4,7 @@ import { takeEvery } from 'redux-saga'
 import { call, put, select } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import { updateExistingUser } from './queries'
-import { updateUsersList } from '../actions/actionCreators'
+import { updateUsersList, sort } from '../actions/actionCreators'
 import { UPDATE_USER } from '../actions/TYPES'
 
 function * updateUser (action) {
@@ -14,6 +14,7 @@ function * updateUser (action) {
   try {
     const response = yield call(updateExistingUser, user)
     yield put(updateUsersList(response.data.data.updateUser))
+    yield put(sort())
 
     if (state.isAdmin) {
       toastr.success('SUCCESS', `${user.first_name} has been updated`)

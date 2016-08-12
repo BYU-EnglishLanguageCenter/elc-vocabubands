@@ -4,7 +4,7 @@ import { takeEvery } from 'redux-saga'
 import { call, put, select } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import { addUser } from './queries'
-import { addToUsersList } from '../actions/actionCreators'
+import { addToUsersList, sort } from '../actions/actionCreators'
 import { ADD_NEW_USER } from '../actions/TYPES'
 
 function * addNewUser (action) {
@@ -13,6 +13,8 @@ function * addNewUser (action) {
   try {
     const response = yield call(addUser, state.user)
     yield put(addToUsersList(response.data.data.addNewUser))
+    yield put(sort())
+    
     if (state.isAdmin) {
       toastr.success('SUCCESS', `${state.user.first_name} has been added`)
     }

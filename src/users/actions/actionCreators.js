@@ -1,7 +1,7 @@
 'use strict'
 
 import { ADD_NEW_USER, ADD_TO_USERS_LIST, CLEAR_USER, DELETE_USER, FETCH_USER, FETCH_USERS, LOAD_USER, LOAD_USER_BY_ID, LOAD_USERS,
-         REMOVE_FROM_USERS_LIST, SORT_FIRST_NAME, SORT_LAST_NAME, SORT_LEVEL, SORT_TYPE, UPDATE_FIRST_NAME, UPDATE_LAST_NAME,
+         REMOVE_FROM_USERS_LIST, SORT, SORT_FIRST_NAME, SORT_LAST_NAME, SORT_LEVEL, SORT_TYPE, UPDATE_FIRST_NAME, UPDATE_LAST_NAME,
          UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE, UPDATE_USER, UPDATE_USERS_LIST } from './TYPES'
 
 export const addNewUser = () => ({
@@ -48,6 +48,10 @@ export const loadUsers = (users) => ({
 export const removeFromUsersList = (id) => ({
   type: REMOVE_FROM_USERS_LIST,
   id
+})
+
+export const sort = () => ({
+  type: SORT
 })
 
 export const sortFirstName = () => ({

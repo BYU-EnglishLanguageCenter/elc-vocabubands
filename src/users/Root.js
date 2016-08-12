@@ -12,7 +12,7 @@ import MainLayout from '../common/components/MainLayout'
 import NewUserContainer from './containers/NewUserContainer'
 import UsersContainer from './containers/UsersContainer'
 import rootSaga from './sagas'
-import { clearUser } from './actions/actionCreators'
+import { clearUser, sort } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -25,7 +25,7 @@ const Root = () => (
   <Provider store={store}>
     <div>
       <Router history={browserHistory}>
-        <Route path='users' component={Main}>
+        <Route path='users' component={Main} onEnter={() => { store.dispatch(sort()) }}>
           <IndexRoute component={UsersContainer} />
           <Route path='new' component={NewUserContainer} onEnter={() => { store.dispatch(clearUser()) }} />
           <Route path='edit' component={EditContainer}>
