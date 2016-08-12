@@ -29,9 +29,9 @@ router.get('/users', loginRequired, function * (next) {
 router.get('/users/new', function * (next) {
   let ctx = this
 
-  if (ctx.session.isAdmin) {
+  if (ctx.session.isAdmin || ctx.session.isNewUser) {
     const initialState = {
-      isAdmin: true
+      isAdmin: ctx.session.isAdmin === 'true'
     }
 
     const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
@@ -41,11 +41,6 @@ router.get('/users/new', function * (next) {
       bundleSrc: '/js/users-bundle.js',
       html: html
     })
-  } else if (ctx.session.isNewUser) {
-    ctx.render('base', {
-      title: 'Vocabubands',
-      bundleSrc: '/js/users-bundle.js'
-    })
   } else {
     ctx.status = 401
   }
@@ -54,41 +49,27 @@ router.get('/users/new', function * (next) {
 router.get('/users/edit', loginRequired, function * (next) {
   let ctx = this
 
-  if (ctx.session.isAuthenticated) {
-    const user = yield UserModel.findOne({net_id: ctx.session.user})
-    ctx.redirect(`/users/edit/${user._id}`)
-  } else {
-    ctx.status = 401
-  }
+  const user = yield UserModel.findOne({net_id: ctx.session.user})
+  ctx.redirect(`/users/edit/${user._id}`)
 })
 
 router.get('/users/edit/:id', loginRequired, function * (next) {
   let ctx = this
+  const id = ctx.request.path.substring(12)
+  const user = yield UserModel.findOne({net_id: ctx.session.user})
 
-  if (ctx.session.isAuthenticated) {
-    const id = ctx.request.path.substring(12)
-    const user = yield UserModel.findOne({net_id: ctx.session.user})
-
-    if (ctx.session.isAdmin) {
-      const initialState = {
-        isAdmin: true
-      }
-
-      const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
-
-      ctx.render('base', {
-        title: 'Vocabubands',
-        bundleSrc: '/js/users-bundle.js',
-        html: html
-      })
-    } else if (id === user._id.toString()) {
-      ctx.render('base', {
-        title: 'Vocabubands',
-        bundleSrc: '/js/users-bundle.js'
-      })
-    } else {
-      ctx.status = 401
+  if (ctx.session.isAdmin || id === user._id.toString()) {
+    const initialState = {
+      isAdmin: ctx.session.isAdmin === 'true'
     }
+
+    const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`
+
+    ctx.render('base', {
+      title: 'Vocabubands',
+      bundleSrc: '/js/users-bundle.js',
+      html: html
+    })
   } else {
     ctx.status = 401
   }

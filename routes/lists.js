@@ -1,10 +1,10 @@
 'use strict'
 
 const router = require('koa-router')()
-const path = require('path')
-const parser = require('koa-body')({ multipart: true })
 const loginRequired = require('./loginRequired')
 const AllListsModel = require('../models/AllLists')
+// const path = require('path')
+// const parser = require('koa-body')({ multipart: true })
 
 module.exports = router
 
@@ -12,7 +12,7 @@ router.get('/lists*', loginRequired, function * (next) {
   let ctx = this
   const path = ctx.request.path
 
-  if (ctx.session.isAdmin || (!path.includes('edit') && !path.includes('bare') && ctx.session.isAuthenticated)) {
+  if (ctx.session.isAdmin || (!path.includes('edit') && !path.includes('bare'))) {
     const initialState = {
       allLists: yield AllListsModel.find({})
     }

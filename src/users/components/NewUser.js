@@ -10,8 +10,6 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
       Submit
     </a>
 
-  // https://cas.byu.edu/cas/login?service=http://localhost:8080
-
   if (showFullForm) {
     cancel =
       <Link to='/users' className='btn btn-default pull-right' type='button'>
