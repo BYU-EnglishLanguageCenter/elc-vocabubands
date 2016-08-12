@@ -21,7 +21,7 @@ const ListChangesModel = require('../../models/ListChanges')
 const ListModel = require('../../models/List')
 const UserModel = require('../../models/User')
 
-const Query = new GraphQLObjectType({
+const QueryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
     allLists: {
@@ -39,7 +39,7 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.findOne({list_id: list_id, list_type, net_id: session.user})
+      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.findOne({list_id, list_type, net_id: session.user})
     },
 
     list: {
@@ -47,9 +47,12 @@ const Query = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLInt)
+        },
+        type: {
+          type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { id }) => ListModel.findOne({id: id})
+      resolve: (parent, { id, type }) => ListModel.findOne({id, type})
     },
 
     user: {
@@ -94,4 +97,4 @@ const Query = new GraphQLObjectType({
   }
 })
 
-module.exports = Query
+module.exports = QueryType

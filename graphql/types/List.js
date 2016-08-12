@@ -34,6 +34,9 @@ const ListType = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLInt)
     },
+    type: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
     data: {
       type: new GraphQLList(RowType)
     }

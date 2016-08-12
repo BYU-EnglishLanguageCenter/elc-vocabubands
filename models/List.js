@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const listSchema = mongoose.Schema({
   id: Number,
+  type: String,
   data: Array
 })
 

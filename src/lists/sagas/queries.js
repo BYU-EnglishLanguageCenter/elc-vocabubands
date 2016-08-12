@@ -15,8 +15,8 @@ export const getListChanges = (id, type) => {
   return axios.get(`/graphql?query={listChanges(list_id:${id},list_type:"${type}"){rows}}`)
 }
 
-export const getListData = (id) => {
-  return axios.get(`/graphql?query={list(id:${id}){id,data{id,word,support_words,definition,building_words}}}`)
+export const getListData = (id, type) => {
+  return axios.get(`/graphql?query={list(id:${id},type:"${type}"){id,data{id,word,support_words,definition,building_words}}}`)
 }
 
 export const saveChange = (list_id, list_type, rows) => {
