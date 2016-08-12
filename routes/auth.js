@@ -9,38 +9,14 @@ module.exports = router
 
 router.get('/', function * (next) {
   let ctx = this
-  const query = ctx.request.query
   let redirect = '/home'
 
-  if (ctx.session.isAdmin) {
-    ctx.redirect('/admin')
-  } else if (ctx.session.isAuthenticated) {
-    ctx.redirect(redirect)
-  } else if (query.ticket) {
-    const ticket = query.ticket
-    const service = 'http://localhost:8080'
-
-    try {
-      const response = yield cas.validate(ticket, service)
-      ctx.session.user = response.username
-      const user = yield UserModel.findOne({net_id: response.username})
-
-      if (user === null) {
-        ctx.session.isNewUser = 'true'
-        redirect = '/users/new'
-      } else {
-        if (user.type === 'admin') {
-          ctx.session.isAdmin = 'true'
-          redirect = '/admin'
-        }
-
-        ctx.session.isAuthenticated = 'true'
-      }
-
-      ctx.redirect(redirect)
-    } catch (err) {
-      console.log(err)
+  if (ctx.session.isAuthenticated) {
+    if (ctx.session.isAdmin) {
+      redirect = '/admin'
     }
+
+    ctx.redirect(redirect)
   } else {
     ctx.render('base', {
       pageTitle: 'Vocabubands',
@@ -75,6 +51,42 @@ router.get('/home', loginRequired, function * (next) {
   }
 })
 
+router.get('/login', function * (next) {
+  let ctx = this
+  const query = ctx.request.query
+  let redirect = '/home'
+
+  if (query.ticket) {
+    const ticket = query.ticket
+    const service = 'http://localhost:8080/login'
+    let user
+
+    try {
+      const response = yield cas.validate(ticket, service)
+      ctx.session.user = response.username
+      user = yield UserModel.findOne({net_id: response.username})
+    } catch (err) {
+      console.log(err)
+    }
+
+    if (user === null) {
+      ctx.session.isNewUser = 'true'
+      redirect = '/users/new'
+    } else {
+      if (user.type === 'admin') {
+        ctx.session.isAdmin = 'true'
+        redirect = '/admin'
+      }
+
+      ctx.session.isAuthenticated = 'true'
+    }
+  } else {
+    redirect = 'https://cas.byu.edu/cas/login?service=http://localhost:8080/login'
+  }
+
+  ctx.redirect(redirect)
+})
+
 router.get('/logout', function * (next) {
   let ctx = this
   let redirect = '/'
@@ -82,7 +94,7 @@ router.get('/logout', function * (next) {
   ctx.session = null
 
   if (query.newUser) {
-    redirect = 'https://cas.byu.edu/cas/login?service=http://localhost:8080'
+    redirect = '/login'
   }
 
   ctx.redirect(redirect)
