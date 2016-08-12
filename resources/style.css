@@ -1,6 +1,30 @@
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
 body {
   font-family: sans-serif;
   font-weight: 100;
+}
+
+tbody textarea {
+  resize: none;
 }
 
 #all-lists-header {
@@ -21,6 +45,15 @@ body {
   margin-bottom: 10px;
 }
 
+#file-upload {
+  margin-top: 50px;
+  width: 75%;
+}
+
+#file-upload-container {
+  margin-top: 125px;
+}
+
 #login-btn {
   margin-top: 30%;
 }
@@ -35,7 +68,7 @@ body {
   width: 75%;
 }
 
-#users {
+#users, #edit-lists {
   width: 75%;
   margin: 75px auto;
 }
@@ -81,8 +114,8 @@ body {
   padding: 0;
 }
 
-.butn-edit-width {
-  width: 5%;
+.butn-edit-options {
+  width: 50%;
 }
 
 .butn-done {
@@ -103,8 +136,16 @@ body {
   display: none;
 }
 
+.edit-lists-options {
+  padding: 15px 0;
+}
+
 .edit-pencil {
   color: #000;
+}
+
+.edit-user-cell-width {
+  width: 5%;
 }
 
 .inline {
@@ -116,7 +157,7 @@ body {
   margin: 75px auto;
 }
 
-.listLink {
+.list-link {
   width: 100%;
   text-align: left;
   margin: 15px 0;
@@ -149,9 +190,3 @@ body {
 .table {
   font-weight: 100;
 }
-
-/* enables CSS3 transition for simple collapses, accordion and also navbar in responsive view */
-.collapse { transition: height .3s ease-out; /*-webkit-transition: height .3s ease-out*/ }
-
-/* styles the close button for the dismissible popovers */
-.popover .close { position: absolute; top: 7px; right: 10px; }

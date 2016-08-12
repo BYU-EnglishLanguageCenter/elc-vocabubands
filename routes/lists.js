@@ -1,15 +1,19 @@
 'use strict'
 
 const router = require('koa-router')()
+const path = require('path')
+const parser = require('koa-body')({ multipart: true })
+const AllListsModel = require('../models/AllLists')
 
 module.exports = router
 
 router.get('/lists*', function * (next) {
   let ctx = this
+  const path = ctx.request.path
 
-  if (ctx.session.isAuthenticated) {
+  if (ctx.session.isAdmin || (!path.includes('edit') && !path.includes('bare') && ctx.session.isAuthenticated)) {
     const initialState = {
-      isAuthenticated: ctx.session.isAuthenticated === 'true'
+      allLists: yield AllListsModel.find({})
     }
 
     const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`

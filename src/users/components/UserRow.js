@@ -10,7 +10,7 @@ const UserRow = ({ _id, first_name, last_name, level, type }) => {
       <td>{last_name}</td>
       <td>{level}</td>
       <td>{type}</td>
-      <td className='butn-cell-no-style butn-edit-width'>
+      <td className='butn-cell-no-style edit-user-cell-width'>
         <Link to={`/users/edit/${_id}`}>
           <span className='glyphicon glyphicon-pencil edit-pencil' aria-hidden='true' />
         </Link>

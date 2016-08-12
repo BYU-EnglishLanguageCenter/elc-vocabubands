@@ -11,11 +11,13 @@ const GraphQLString = graphql.GraphQLString
 
 // graphql types
 const ListChangesInputType = require('./ListChangesInput')
+const ListInputType = require('./ListInput')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
 
 // mongodb models
 const ListChangesModel = require('../../models/ListChanges')
+const ListModel = require('../../models/List')
 const UserModel = require('../../models/User')
 
 const Mutation = new GraphQLObjectType({
@@ -105,6 +107,21 @@ const Mutation = new GraphQLObjectType({
           return success
         })
         // also remove any entries under their net_id in list_changes
+      }
+    },
+
+    updateList: {
+      type: GraphQLString,
+      args: {
+        list: {
+          type: new GraphQLNonNull(ListInputType)
+        }
+      },
+      resolve: (root, { list }, session) => {
+        // console.log(list)
+        if (session.isAdmin) {
+          return ListModel.update({id: list.id}, { $set: { data: list.data } })
+        }
       }
     },
 

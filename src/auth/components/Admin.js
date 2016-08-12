@@ -10,7 +10,12 @@ const Admin = () => (
     <ul id='admin-options'>
       <li>
         <a href='/lists'>
-          Lists
+          Lists - View
+        </a>
+      </li>
+      <li>
+        <a href='/lists/edit'>
+          Lists - Edit
         </a>
       </li>
       <li>

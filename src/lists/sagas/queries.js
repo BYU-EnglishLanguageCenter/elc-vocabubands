@@ -8,7 +8,7 @@ export const deleteChanges = (id, type) => {
 }
 
 export const getAllLists = (type) => {
-  return axios.get(`/graphql?query={allLists(type:"${type}"){type,list_ids}}`)
+  return axios.get(`/graphql?query={allLists{type,list_ids}}`)
 }
 
 export const getListChanges = (id, type) => {
@@ -22,4 +22,13 @@ export const getListData = (id) => {
 export const saveChange = (list_id, list_type, rows) => {
   rows = sortBy(rows)
   return axios.post(`/graphql?query=mutation{addListChange(changes:{list_id:${list_id},list_type:"${list_type}",rows:[${rows}]})}`)
+}
+
+export const updateExistingList = (id, data) => {
+  // convert data from array of objects to stringified json
+  // then get rid of quotes around keys otherwise graphql will complain, e.g. {"key": "value"} => {key: "value"}
+  data = JSON.stringify(data)
+  data = data.replace(/\"([^(\")"]+)\":/g, '$1:')
+
+  return axios.post(`/graphql?query=mutation{updateList(list:{id:${id},data:${data}})}`)
 }

@@ -1,10 +1,7 @@
 'use strict'
 
 import React from 'react'
-
-const $ = (id) => {
-  return document.getElementById(id)
-}
+import { $ } from '../../../resources/js/util.js'
 
 export const hidePopup = () => {
   $('popup').style.display = 'none'

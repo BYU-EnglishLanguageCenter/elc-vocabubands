@@ -7,14 +7,17 @@ import ReduxToastr from 'react-redux-toastr'
 import 'regenerator-runtime/runtime'
 
 import configureStore from './configureStore'
-import AllListsContainer from './containers/AllListsContainer'
+import EditContainer from './containers/EditContainer'
 import Home from './components/Home'
+import ListBareContainer from './containers/ListBareContainer'
 import ListContainer from './containers/ListContainer'
+import ListEditContainer from './containers/ListEditContainer'
+import ListLinksContainer from './containers/ListLinksContainer'
 import MainLayout from '../common/components/MainLayout'
 import Test from './components/Test'
 import rootSaga from './sagas'
 
-import { clearListDataWithChanges, fetchAllLists, fetchListData } from './actions/actionCreators'
+import { clearListDataWithChanges, fetchListData, setListType, toggleListData } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -29,16 +32,16 @@ const Root = () => (
       <Router history={browserHistory}>
         <Route path='lists' component={Main}>
           <IndexRoute component={Home} />
-          <Route path='avl' onEnter={() => { store.dispatch(fetchAllLists('avl')) }}>
-            <IndexRoute component={AllListsContainer} />
-            <Route
-              path=':id'
-              component={ListContainer}
-              onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }}
-              onLeave={() => { store.dispatch(clearListDataWithChanges()) }}
-            />
+          <Route path='avl' onEnter={() => { store.dispatch(setListType('avl')) }}>
+            <IndexRoute component={ListLinksContainer} />
+            <Route path=':id' onEnter={({params}) => { store.dispatch(fetchListData(params.id)) }} onLeave={() => { store.dispatch(clearListDataWithChanges()) }}>
+              <IndexRoute component={ListContainer} />
+              <Route path='bare' component={ListBareContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
+              <Route path='edit' component={ListEditContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
+            </Route>
           </Route>
-          <Route path='preavl' component={AllListsContainer} onEnter={() => { store.dispatch(fetchAllLists('preavl')) }} />
+          <Route path='preavl' component={ListLinksContainer} onEnter={() => { store.dispatch(setListType('preavl')) }} />
+          <Route path='edit' component={EditContainer} />
           <Route path='test' component={Test} />
         </Route>
       </Router>
