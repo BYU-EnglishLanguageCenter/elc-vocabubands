@@ -1,11 +1,12 @@
 'use strict'
 
 const router = require('koa-router')()
+const loginRequired = require('./loginRequired')
 const UserModel = require('../models/User')
 
 module.exports = router
 
-router.get('/users', function * (next) {
+router.get('/users', loginRequired, function * (next) {
   let ctx = this
 
   if (ctx.session.isAdmin) {
@@ -50,7 +51,7 @@ router.get('/users/new', function * (next) {
   }
 })
 
-router.get('/users/edit', function * (next) {
+router.get('/users/edit', loginRequired, function * (next) {
   let ctx = this
 
   if (ctx.session.isAuthenticated) {
@@ -61,7 +62,7 @@ router.get('/users/edit', function * (next) {
   }
 })
 
-router.get('/users/edit/:id', function * (next) {
+router.get('/users/edit/:id', loginRequired, function * (next) {
   let ctx = this
 
   if (ctx.session.isAuthenticated) {

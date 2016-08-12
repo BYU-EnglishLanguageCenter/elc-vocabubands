@@ -2,6 +2,7 @@
 
 const cas = require('byu-cas')
 const router = require('koa-router')()
+const loginRequired = require('./loginRequired')
 const UserModel = require('../models/User')
 
 module.exports = router
@@ -48,7 +49,7 @@ router.get('/', function * (next) {
   }
 })
 
-router.get('/admin', function * (next) {
+router.get('/admin', loginRequired, function * (next) {
   let ctx = this
 
   if (ctx.session.isAdmin) {
@@ -61,7 +62,7 @@ router.get('/admin', function * (next) {
   }
 })
 
-router.get('/home', function * (next) {
+router.get('/home', loginRequired, function * (next) {
   let ctx = this
 
   if (ctx.session.isAuthenticated) {

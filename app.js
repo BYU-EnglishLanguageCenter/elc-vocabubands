@@ -69,13 +69,6 @@ app.use(mount('/graphql', graphqlHTTP((request, context) => ({
 console.log(checkMark.green)
 process.stdout.write('Registering routes ... '.cyan)
 
-// app.use(function * (next) {
-//   let ctx = this
-//   console.log(ctx.session)
-//   yield next
-//   console.log(ctx.session)
-// })
-
 app.use(errorsRoute)
 
 app.use(authRouter.routes())

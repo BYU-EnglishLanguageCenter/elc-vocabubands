@@ -3,11 +3,12 @@
 const router = require('koa-router')()
 const path = require('path')
 const parser = require('koa-body')({ multipart: true })
+const loginRequired = require('./loginRequired')
 const AllListsModel = require('../models/AllLists')
 
 module.exports = router
 
-router.get('/lists*', function * (next) {
+router.get('/lists*', loginRequired, function * (next) {
   let ctx = this
   const path = ctx.request.path
 
