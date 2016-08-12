@@ -11,7 +11,8 @@ router.get('/users', loginRequired, function * (next) {
 
   if (ctx.session.isAdmin) {
     const initialState = {
-      isAdmin: true
+      isAdmin: true,
+      users: yield UserModel.find({})
     }
 
     const html = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>`

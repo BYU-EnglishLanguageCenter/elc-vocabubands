@@ -14,6 +14,7 @@ const ListChangesInputType = require('./ListChangesInput')
 const ListInputType = require('./ListInput')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
+const UserType = require('./User')
 
 // mongodb models
 const ListChangesModel = require('../../models/ListChanges')
@@ -126,21 +127,18 @@ const Mutation = new GraphQLObjectType({
     },
 
     updateUser: {
-      type: GraphQLString,
+      type: UserType,
       args: {
         user: {
           type: new GraphQLNonNull(UpdateUserInputType)
         }
       },
-      resolve: (root, { user }, session) => {
-        UserModel.update({_id: user._id}, {$set: { first_name: user.first_name, last_name: user.last_name, net_id: user.net_id, level: user.level, type: user.type }}, function (err, success) {
-          if (err) {
-            console.log(err)
-            return
-          }
-          return
-        })
-      }
+      resolve: (root, { user }, session) =>
+        UserModel.findOneAndUpdate({_id: user._id},
+          {$set: { first_name: user.first_name, last_name: user.last_name, net_id: user.net_id, level: user.level, type: user.type }},
+          { new: true })
+          .then(user => user)
+          .catch(err => console.log(err))
     }
   }
 })

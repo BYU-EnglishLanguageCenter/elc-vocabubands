@@ -1,8 +1,8 @@
 'use strict'
 
-import { ADD_NEW_USER, CLEAR_USER, DELETE_USER, FETCH_USER, FETCH_USERS, LOAD_USER, LOAD_USERS, SORT_FIRST_NAME,
+import { ADD_NEW_USER, CLEAR_USER, DELETE_USER, FETCH_USER, FETCH_USERS, LOAD_USER, LOAD_USER_BY_ID, LOAD_USERS, SORT_FIRST_NAME,
          SORT_LAST_NAME, SORT_LEVEL, SORT_TYPE, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID,
-         UPDATE_TYPE, UPDATE_USER } from './TYPES'
+         UPDATE_TYPE, UPDATE_USER, UPDATE_USERS_LIST } from './TYPES'
 
 export const addNewUser = () => ({
   type: ADD_NEW_USER
@@ -28,6 +28,11 @@ export const fetchUsers = () => ({
 export const loadUser = (user) => ({
   type: LOAD_USER,
   user
+})
+
+export const loadUserById = (id) => ({
+  type: LOAD_USER_BY_ID,
+  id
 })
 
 export const loadUsers = (users) => ({
@@ -78,4 +83,9 @@ export const updateType = (value) => ({
 
 export const updateUser = () => ({
   type: UPDATE_USER
+})
+
+export const updateUsersList = (user) => ({
+  type: UPDATE_USERS_LIST,
+  user
 })

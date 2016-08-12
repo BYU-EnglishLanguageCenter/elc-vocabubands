@@ -52,7 +52,7 @@ const QueryType = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { id, type }) => ListModel.findOne({id, type})
+      resolve: (parent, { id, type }, session) => ListModel.findOne({id, type})
     },
 
     user: {
@@ -66,35 +66,59 @@ const QueryType = new GraphQLObjectType({
         UserModel.findOne({_id: id}).then(user => {
           if (session.isAdmin || session.user === user.net_id) {
             return user
-          } else {
-            return null
           }
+
+          return null
         }).catch(err => {
           console.log(err)
           return null
         })
-
-      //   console.log(session.user)
-      //   console.log(user.net_id)
-      //   if (session.isAdmin || session.user === user.net_id) {
-      //     return user
-      //   } else {
-      //     return null
-      //   }
-
     },
 
     users: {
       type: new GraphQLList(UserType),
-      resolve: (parent, args, session) => {
-        if (session.isAdmin) {
-          return UserModel.find({})
-        } else {
+      resolve: (parent, args, session) =>
+        UserModel.find({}).then(users => {
+          if (session.isAdmin) {
+            return users
+          }
+
           return null
+        }).catch(err => {
+          console.log(err)
+          return null
+        })
+    },
+
+    test: {
+      type: ListType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLInt)
+        },
+        type: {
+          type: new GraphQLNonNull(GraphQLString)
         }
-      }
+      },
+      resolve: (root, { id, type }, session) =>
+        ListModel.findOneAndUpdate({id, type}, {$set: { type: 'avl' }}, { new: true })
     }
   }
 })
 
 module.exports = QueryType
+
+// new GraphQLObjectType({
+//   name: 'r',
+//   fields: {
+//     ok: {
+//       type: GraphQLInt
+//     },
+//     nModified: {
+//       type: GraphQLInt
+//     },
+//     n: {
+//       type: GraphQLInt
+//     }
+//   }
+// })

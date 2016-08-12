@@ -1,9 +1,10 @@
 'use strict'
 
 import { takeEvery } from 'redux-saga'
-import { call, select } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import { updateExistingUser } from './queries'
+import { updateUsersList } from '../actions/actionCreators'
 import { UPDATE_USER } from '../actions/TYPES'
 
 function * updateUser (action) {
@@ -11,7 +12,9 @@ function * updateUser (action) {
   const user = state.user
 
   try {
-    yield call(updateExistingUser, user)
+    const response = yield call(updateExistingUser, user)
+    yield put(updateUsersList(response.data.data.updateUser))
+
     if (state.isAdmin) {
       toastr.success('SUCCESS', `${user.first_name} has been updated`)
     } else {
