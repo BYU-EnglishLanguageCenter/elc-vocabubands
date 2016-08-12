@@ -26,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
       $('filename').value = filename
     },
 
+    // NOT WORKING
     upload: (e) => {
       e.preventDefault()
       const formData = new FormData($('form'))

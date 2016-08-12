@@ -27,11 +27,3 @@ router.get('/lists*', function * (next) {
     ctx.status = 401
   }
 })
-
-router.post('/upload', parser, function * (next) {
-  let ctx = this
-
-  console.log(ctx.request.body)
-
-  ctx.body = 'ok hi there friend'
-})
