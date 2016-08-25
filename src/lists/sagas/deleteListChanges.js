@@ -11,8 +11,13 @@ function * deleteListChanges (action) {
   const state = yield select()
 
   try {
-    yield call(deleteChanges, state.currentList, state.listType)
-    yield put(fetchListChanges())
+    const response = yield call(deleteChanges, state.currentList, state.listType)
+
+    if (response.data.data.removeListChanges === 'success') {
+      yield put(fetchListChanges())
+    } else {
+      toastr.error('ERROR', 'Something went wrong while undoing changes made to this list. Check the console for error messages.', { timeOut: 0 })
+    }
   } catch (err) {
     console.log(err)
     toastr.error('ERROR', 'Something went wrong while undoing changes made to this list. Check the console for error messages.', { timeOut: 0 })

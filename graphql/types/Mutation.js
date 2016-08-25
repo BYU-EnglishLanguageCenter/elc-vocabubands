@@ -71,7 +71,13 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.remove({list_id: list_id, list_type: list_type, net_id: session.user})
+      resolve: (parent, { list_id, list_type }, session) =>
+        ListChangesModel.remove({list_id, list_type, net_id: session.user})
+          .then(info => 'success')
+          .catch(err => {
+            console.log(err)
+            return 'error'
+          })
     },
 
     removeUser: {
