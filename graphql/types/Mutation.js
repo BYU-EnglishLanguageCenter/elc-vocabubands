@@ -2,7 +2,6 @@
 
 // dependencies
 const graphql = require('graphql')
-const sortBy = require('lodash/sortBy')
 const GraphQLID = graphql.GraphQLID
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLNonNull = graphql.GraphQLNonNull
@@ -11,6 +10,7 @@ const GraphQLString = graphql.GraphQLString
 
 // graphql types
 const ListChangesInputType = require('./ListChangesInput')
+const ListChangesType = require('./ListChanges')
 const ListInputType = require('./ListInput')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
@@ -47,36 +47,18 @@ const Mutation = new GraphQLObjectType({
     },
 
     addListChange: {
-      type: GraphQLString,
+      type: ListChangesType,
       args: {
         changes: {
           type: new GraphQLNonNull(ListChangesInputType)
         }
       },
-      resolve: (root, { changes }, session) => {
-        ListChangesModel.findOne({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}).then(res => {
-          if (res === null) {
-            const newChange = new ListChangesModel({
-              list_id: changes.list_id,
-              list_type: changes.list_type,
-              net_id: session.user,
-              rows: changes.rows
-            })
-            newChange.save()
-          } else {
-            let rows = [
-              ...res.rows,
-              ...changes.rows
-            ]
-            rows = sortBy(rows)
-            ListChangesModel.update({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}, {$set: {rows: rows}}).exec()
-          }
-        }).catch(err => {
-          console.log(err)
-        })
-
-        return
-      }
+      resolve: (root, { changes }, session) =>
+        ListChangesModel.findOneAndUpdate({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user},
+          {$set: { rows: changes.rows }},
+          {new: true, upsert: true})
+          .then(listChanges => listChanges)
+          .catch(err => console.log(err))
     },
 
     removeListChanges: {

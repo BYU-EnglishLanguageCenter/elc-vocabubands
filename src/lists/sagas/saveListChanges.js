@@ -10,16 +10,20 @@ import { SAVE_LIST_CHANGES } from '../actions/TYPES'
 
 function * saveListChanges (action) {
   const state = yield select()
+  let rows = [
+    ...state.listChanges,
+    ...state.rowsDone
+  ]
+
+  rows = sortBy(rows)
 
   try {
-    yield call(saveChange, state.currentList, state.listType, state.rowsDone)
-    toastr.success('SUCCESS', 'Changes to this list have been saved', { timeOut: 3000 })
+    const response = yield call(saveChange, state.currentList, state.listType, rows)
 
-    // optimistic reloading of listChanges -- there were issues with fetching listChanges from the database before they were saved
-    let listChanges = [...state.listChanges, ...state.rowsDone]
-    listChanges = sortBy(listChanges)
-    yield put(loadListChanges({rows: listChanges}))
-    yield put(loadListDataWithChanges(state.listData, listChanges))
+    yield put(loadListChanges({rows: response.data.data.addListChange.rows}))
+    yield put(loadListDataWithChanges(state.listData, response.data.data.addListChange.rows))
+
+    toastr.success('SUCCESS', 'Changes to this list have been saved', { timeOut: 3000 })
 
     yield delay(400) // wait for reactcsstransitiongroup to finish in listTable
     yield put(clearRowsDone())

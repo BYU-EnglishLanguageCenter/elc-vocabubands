@@ -31,6 +31,7 @@ function * deleteUser (action) {
 
   try {
     const response = yield call(deleteExistingUser, user._id)
+
     if (response.data.data.removeUser === 'success') {
       yield put(removeFromUsersList(user._id))
 
