@@ -14,7 +14,7 @@ function * addNewUser (action) {
     const response = yield call(addUser, state.user)
     yield put(addToUsersList(response.data.data.addNewUser))
     yield put(sort())
-    
+
     if (state.isAdmin) {
       toastr.success('SUCCESS', `${state.user.first_name} has been added`)
     }
