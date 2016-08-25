@@ -12,6 +12,7 @@ const GraphQLString = graphql.GraphQLString
 const ListChangesInputType = require('./ListChangesInput')
 const ListChangesType = require('./ListChanges')
 const ListInputType = require('./ListInput')
+const ListType = require('./List')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
 const UserType = require('./User')
@@ -98,16 +99,19 @@ const Mutation = new GraphQLObjectType({
     },
 
     updateList: {
-      type: GraphQLString,
+      type: ListType,
       args: {
         list: {
           type: new GraphQLNonNull(ListInputType)
         }
       },
       resolve: (root, { list }, session) => {
-        // console.log(list)
         if (session.isAdmin) {
-          return ListModel.update({id: list.id}, { $set: { data: list.data } })
+          return ListModel.findOneAndUpdate({id: list.id},
+            {$set: { data: list.data }},
+            {new: true})
+            .then(list => list)
+            .catch(err => console.log(err))
         }
       }
     },

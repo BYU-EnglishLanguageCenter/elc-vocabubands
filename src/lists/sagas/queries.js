@@ -30,5 +30,5 @@ export const updateExistingList = (id, data) => {
   data = JSON.stringify(data)
   data = data.replace(/\"([^(\")"]+)\":/g, '$1:')
 
-  return axios.post(`/graphql?query=mutation{updateList(list:{id:${id},data:${data}})}`)
+  return axios.post(`/graphql?query=mutation{updateList(list:{id:${id},data:${data}}){id,data{id,word,support_words,definition,building_words}}}`)
 }
