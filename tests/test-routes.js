@@ -9,6 +9,7 @@ const koa = require('koa')
 const session = require('koa-session')
 const Pug = require('koa-pug')
 const authRouter = require('../routes/auth')
+const listsRouter = require('../routes/lists')
 
 const unauthenticated = () => {
   const app = koa()
@@ -22,6 +23,9 @@ const unauthenticated = () => {
 
   app.use(authRouter.routes())
   app.use(authRouter.allowedMethods())
+
+  app.use(listsRouter.routes())
+  app.use(listsRouter.allowedMethods())
 
   return request(app.callback())
 }
@@ -45,6 +49,9 @@ const authenticated = () => {
   app.use(authRouter.routes())
   app.use(authRouter.allowedMethods())
 
+  app.use(listsRouter.routes())
+  app.use(listsRouter.allowedMethods())
+
   return request(app.callback())
 }
 
@@ -67,6 +74,9 @@ const admin = () => {
 
   app.use(authRouter.routes())
   app.use(authRouter.allowedMethods())
+
+  app.use(listsRouter.routes())
+  app.use(listsRouter.allowedMethods())
 
   return request(app.callback())
 }
@@ -210,4 +220,29 @@ test('Auth Route - /logout', assert => {
     .catch(err => {
       assert.fail(err)
     })
+})
+
+test('Lists Route - /lists', assert => {
+  assert.plan(2)
+
+  unauthenticated()
+    .get('/lists')
+    .expect(302)
+    .then(res => {
+      assert.equal(res.header.location, '/', 'redirects to main login page for unauthenticated users')
+    })
+    .catch(err => {
+      assert.fail(err)
+    })
+
+  // database needs tobe hooked up
+  // authenticated()
+  //   .get('/lists')
+  //   .expect(200)
+  //   .then(res => {
+  //     assert.pass('renders /lists page for authenticated users')
+  //   })
+  //   .catch(err => {
+  //     assert.fail(err)
+  //   })
 })
