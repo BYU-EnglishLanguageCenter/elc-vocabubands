@@ -6,7 +6,9 @@ const test = require('tape')
 
 // app dependencies
 const koa = require('koa')
+const mongoose = require('mongoose')
 const session = require('koa-session')
+const Promise = require('bluebird')
 const Pug = require('koa-pug')
 const authRouter = require('../routes/auth')
 const listsRouter = require('../routes/lists')
@@ -55,6 +57,36 @@ const authenticated = () => {
   return request(app.callback())
 }
 
+const authenticatedWithDB = () => {
+  let app = koa()
+  const pug = new Pug({
+    viewPath: './views',
+    noCache: true
+  })
+  pug.use(app)
+
+  mongoose.connect('mongodb://localhost/vocabubands')
+  mongoose.Promise = Promise
+  app.context.db = mongoose.connection
+
+  app.keys = ['vcb']
+  app.use(session(app))
+
+  app.use(function * (next) {
+    let ctx = this
+    ctx.session.isAuthenticated = 'true'
+    yield next
+  })
+
+  app.use(authRouter.routes())
+  app.use(authRouter.allowedMethods())
+
+  app.use(listsRouter.routes())
+  app.use(listsRouter.allowedMethods())
+
+  return app
+}
+
 const admin = () => {
   const app = koa()
   const pug = new Pug({
@@ -79,6 +111,37 @@ const admin = () => {
   app.use(listsRouter.allowedMethods())
 
   return request(app.callback())
+}
+
+const adminWithDB = () => {
+  let app = koa()
+  const pug = new Pug({
+    viewPath: './views',
+    noCache: true
+  })
+  pug.use(app)
+
+  mongoose.connect('mongodb://localhost/vocabubands')
+  mongoose.Promise = Promise
+  app.context.db = mongoose.connection
+
+  app.keys = ['vcb']
+  app.use(session(app))
+
+  app.use(function * (next) {
+    let ctx = this
+    ctx.session.isAdmin = 'true'
+    ctx.session.isAuthenticated = 'true'
+    yield next
+  })
+
+  app.use(authRouter.routes())
+  app.use(authRouter.allowedMethods())
+
+  app.use(listsRouter.routes())
+  app.use(listsRouter.allowedMethods())
+
+  return app
 }
 
 test('Auth Route - /', assert => {
@@ -142,7 +205,7 @@ test('Auth Route - /admin', assert => {
     .get('/admin')
     .expect(200)
     .then(res => {
-      assert.pass('renders admin page for admin users')
+      assert.pass('renders /admin page for admin users')
     })
     .catch(err => {
       assert.fail(err)
@@ -235,14 +298,104 @@ test('Lists Route - /lists', assert => {
       assert.fail(err)
     })
 
-  // database needs tobe hooked up
-  // authenticated()
-  //   .get('/lists')
-  //   .expect(200)
-  //   .then(res => {
-  //     assert.pass('renders /lists page for authenticated users')
-  //   })
-  //   .catch(err => {
-  //     assert.fail(err)
-  //   })
+  const app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/lists')
+    .expect(200)
+    .then(res => {
+      assert.pass('renders /lists page for authenticated users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Lists Route - /lists/edit', assert => {
+  assert.plan(2)
+
+  let app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/lists/edit')
+    .expect(401)
+    .then(res => {
+      assert.pass('renders 401 unauthorized page for authenticated users')
+
+      return app.context.db.close().then(() => {
+        app = adminWithDB()
+
+        return request(app.callback())
+          .get('/lists/edit')
+          .expect(200)
+      })
+    })
+    .then(res => {
+      assert.pass('renders /lists/edit page for admin users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Lists Route - /lists/[type]/[id]/bare', assert => {
+  assert.plan(2)
+
+  let app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/lists/avl/13/bare')
+    .expect(401)
+    .then(res => {
+      assert.pass('renders 401 unauthorized page for authenticated users')
+
+      return app.context.db.close().then(() => {
+        app = adminWithDB()
+
+        return request(app.callback())
+          .get('/lists/avl/13/bare')
+          .expect(200)
+      })
+    })
+    .then(res => {
+      assert.pass('renders /lists/[type]/[id]/bare page for admin users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Lists Route - /lists/[type]/[id]/edit', assert => {
+  assert.plan(2)
+
+  let app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/lists/avl/13/edit')
+    .expect(401)
+    .then(res => {
+      assert.pass('renders 401 unauthorized page for authenticated users')
+
+      return app.context.db.close().then(() => {
+        app = adminWithDB()
+
+        return request(app.callback())
+          .get('/lists/avl/13/edit')
+          .expect(200)
+      })
+    })
+    .then(res => {
+      assert.pass('renders /lists/[type]/[id]/edit page for admin users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
 })
