@@ -36,9 +36,9 @@ const Mutation = new GraphQLObjectType({
         const newUser = new UserModel({
           first_name: user.first_name,
           last_name: user.last_name,
-          net_id: user.net_id !== 'undefined' ? user.net_id : session.user,
-          level: user.level !== 'undefined' ? user.level : 'none',
-          type: user.type !== 'undefined' ? user.type : 'student'
+          net_id: user.net_id !== '' ? user.net_id : session.user,
+          level: user.level !== '' ? user.level : 'none',
+          type: user.type !== '' ? user.type : 'student'
         })
 
         return newUser.save()

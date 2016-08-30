@@ -60,6 +60,7 @@ router.get('/login', function * (next) {
     try {
       const response = yield cas.validate(ticket, service)
       ctx.session.user = response.username
+      ctx.session.isAuthenticated = 'true'
       user = yield UserModel.findOne({net_id: response.username})
     } catch (err) {
       if (process.env.NODE_ENV !== 'test') {
@@ -72,13 +73,9 @@ router.get('/login', function * (next) {
     if (user === null) {
       ctx.session.isNewUser = 'true'
       redirect = '/users/new'
-    } else {
-      if (user.type === 'admin') {
-        ctx.session.isAdmin = 'true'
-        redirect = '/admin'
-      }
-
-      ctx.session.isAuthenticated = 'true'
+    } else if (user.type === 'admin') {
+      ctx.session.isAdmin = 'true'
+      redirect = '/admin'
     }
   } else {
     redirect = 'https://cas.byu.edu/cas/login?service=http://localhost:8080/login'

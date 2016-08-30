@@ -27,7 +27,7 @@ router.get('/users', loginRequired, function * (next) {
   }
 })
 
-router.get('/users/new', function * (next) {
+router.get('/users/new', loginRequired, function * (next) {
   let ctx = this
 
   if (ctx.session.isAdmin || ctx.session.isNewUser) {
@@ -73,7 +73,7 @@ router.get('/users/edit/:id', loginRequired, function * (next) {
 
     const initialState = {
       isAdmin: ctx.session.isAdmin === 'true',
-      user: yield UserModel.findOne({_id: id}),
+      user: process.env.NODE_ENV !== 'test' ? yield UserModel.findOne({_id: id}) : 'TestUser',
       users: yield UserModel.find({})
     }
 

@@ -12,6 +12,7 @@ const Promise = require('bluebird')
 const Pug = require('koa-pug')
 const authRouter = require('../routes/auth')
 const listsRouter = require('../routes/lists')
+const usersRouter = require('../routes/users')
 
 const unauthenticated = () => {
   const app = koa()
@@ -28,6 +29,9 @@ const unauthenticated = () => {
 
   app.use(listsRouter.routes())
   app.use(listsRouter.allowedMethods())
+
+  app.use(usersRouter.routes())
+  app.use(usersRouter.allowedMethods())
 
   return request(app.callback())
 }
@@ -53,6 +57,9 @@ const authenticated = () => {
 
   app.use(listsRouter.routes())
   app.use(listsRouter.allowedMethods())
+
+  app.use(usersRouter.routes())
+  app.use(usersRouter.allowedMethods())
 
   return request(app.callback())
 }
@@ -84,6 +91,9 @@ const authenticatedWithDB = () => {
   app.use(listsRouter.routes())
   app.use(listsRouter.allowedMethods())
 
+  app.use(usersRouter.routes())
+  app.use(usersRouter.allowedMethods())
+
   return app
 }
 
@@ -109,6 +119,9 @@ const admin = () => {
 
   app.use(listsRouter.routes())
   app.use(listsRouter.allowedMethods())
+
+  app.use(usersRouter.routes())
+  app.use(usersRouter.allowedMethods())
 
   return request(app.callback())
 }
@@ -140,6 +153,43 @@ const adminWithDB = () => {
 
   app.use(listsRouter.routes())
   app.use(listsRouter.allowedMethods())
+
+  app.use(usersRouter.routes())
+  app.use(usersRouter.allowedMethods())
+
+  return app
+}
+
+const newUserWithDB = () => {
+  let app = koa()
+  const pug = new Pug({
+    viewPath: './views',
+    noCache: true
+  })
+  pug.use(app)
+
+  mongoose.connect('mongodb://localhost/vocabubands')
+  mongoose.Promise = Promise
+  app.context.db = mongoose.connection
+
+  app.keys = ['vcb']
+  app.use(session(app))
+
+  app.use(function * (next) {
+    let ctx = this
+    ctx.session.isNewUser = 'true'
+    ctx.session.isAuthenticated = 'true'
+    yield next
+  })
+
+  app.use(authRouter.routes())
+  app.use(authRouter.allowedMethods())
+
+  app.use(listsRouter.routes())
+  app.use(listsRouter.allowedMethods())
+
+  app.use(usersRouter.routes())
+  app.use(usersRouter.allowedMethods())
 
   return app
 }
@@ -392,6 +442,131 @@ test('Lists Route - /lists/[type]/[id]/edit', assert => {
     })
     .then(res => {
       assert.pass('renders /lists/[type]/[id]/edit page for admin users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Users Route - /users', assert => {
+  assert.plan(3)
+
+  unauthenticated()
+    .get('/users')
+    .expect(302)
+    .then(res => {
+      assert.equal(res.header.location, '/', 'redirects to main login page for unauthenticated users')
+    })
+    .catch(err => {
+      assert.fail(err)
+    })
+
+  let app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/users')
+    .expect(401)
+    .then(res => {
+      assert.pass('renders 401 unauthorized page for authenticated users')
+
+      return app.context.db.close().then(() => {
+        app = adminWithDB()
+
+        return request(app.callback())
+          .get('/users')
+          .expect(200)
+      })
+    })
+    .then(res => {
+      assert.pass('renders /users page for admin users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Users Route - /users/edit', assert => {
+  assert.plan(1)
+
+  let app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/users/edit')
+    .expect(200)
+    .then(res => {
+      assert.pass('renders /users/edit page for authenticated users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Users Route - /users/edit/[id]', assert => {
+  assert.plan(2)
+
+  let app = authenticatedWithDB()
+
+  request(app.callback())
+    .get('/users/edit/123456789')
+    .expect(401)
+    .then(res => {
+      assert.pass('renders 401 unauthorized page for authenticated users')
+
+      return app.context.db.close().then(() => {
+        app = adminWithDB()
+
+        return request(app.callback())
+          .get('/users/edit/123456789')
+          .expect(200)
+      })
+    })
+    .then(res => {
+      assert.pass('renders /users/edit/[id] page for admin users')
+      app.context.db.close()
+    })
+    .catch(err => {
+      assert.fail(err)
+      app.context.db.close()
+    })
+})
+
+test('Users Route - /users/new', assert => {
+  assert.plan(3)
+
+  authenticated()
+    .get('/users/new')
+    .expect(401)
+    .then(res => {
+      assert.pass('renders 401 unauthorized page for authenticated users')
+    })
+    .catch(err => {
+      assert.fail(err)
+    })
+
+  let app = newUserWithDB()
+
+  request(app.callback())
+    .get('/users/new')
+    .expect(200)
+    .then(res => {
+      assert.pass('renders /users/new page for new users')
+
+      return app.context.db.close().then(() => {
+        app = adminWithDB()
+
+        return request(app.callback())
+          .get('/users/new')
+          .expect(200)
+      })
+    })
+    .then(res => {
+      assert.pass('renders /users/new page for admin users')
       app.context.db.close()
     })
     .catch(err => {
