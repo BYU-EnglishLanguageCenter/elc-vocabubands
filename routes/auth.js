@@ -41,14 +41,10 @@ router.get('/admin', loginRequired, function * (next) {
 router.get('/home', loginRequired, function * (next) {
   let ctx = this
 
-  if (ctx.session.isAuthenticated) {
-    ctx.render('base', {
-      pageTitle: 'Vocabubands',
-      bundleSrc: '/js/auth-bundle.js'
-    })
-  } else {
-    ctx.status = 401
-  }
+  ctx.render('base', {
+    pageTitle: 'Vocabubands',
+    bundleSrc: '/js/auth-bundle.js'
+  })
 })
 
 router.get('/login', function * (next) {
@@ -66,7 +62,11 @@ router.get('/login', function * (next) {
       ctx.session.user = response.username
       user = yield UserModel.findOne({net_id: response.username})
     } catch (err) {
-      console.log(err)
+      if (process.env.NODE_ENV !== 'test') {
+        console.log(err)
+      } else {
+        err
+      }
     }
 
     if (user === null) {
@@ -94,6 +94,7 @@ router.get('/logout', function * (next) {
   ctx.session = null
 
   if (query.newUser) {
+    // redirect to /login for new users to reset session cookies
     redirect = '/login'
   }
 
