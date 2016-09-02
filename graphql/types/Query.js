@@ -68,7 +68,7 @@ const QueryType = new GraphQLObjectType({
       resolve: (parent, { id }, session) =>
         UserModel.findOne({_id: id})
           .then(user => {
-            if (session.isAdmin || session.user === user.net_id) {
+            if (user !== null && (session.isAdmin || session.user === user.net_id)) {
               return user
             }
 

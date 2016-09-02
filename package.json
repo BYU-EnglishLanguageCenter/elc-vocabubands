@@ -49,8 +49,9 @@
   },
   "scripts": {
     "build": "webpack -d",
+    "spectest": "NODE_ENV=test tape tests/test-${FILE}*.js | tap-spec",
     "start": "node app.js",
-    "test": "NODE_ENV='test' node tests/*.js | tap-spec",
+    "test": "NODE_ENV=test tape tests/*.js | tap-spec",
     "watch": "webpack -d --watch"
   }
 }

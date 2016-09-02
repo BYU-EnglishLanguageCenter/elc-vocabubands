@@ -6,11 +6,13 @@ const checkMark = '\u2714'
 const env = process.env.NODE_ENV || 'development'
 let outstream = {}
 
-if (env !== 'test') {
-  outstream.log = x => process.stdout.write(x)
-} else {
-  outstream.log = x => {}
-}
+// if (env !== 'test') {
+//   outstream.log = x => process.stdout.write(x)
+// } else {
+//   outstream.log = x => {}
+// }
+
+outstream.log = x => process.stdout.write(x)
 
 outstream.log('Importing dependencies ... '.cyan)
 
@@ -33,10 +35,13 @@ outstream.log(checkMark.green + '\n')
 
 let app = koa()
 
-if (env !== 'test') {
-  outstream.log('Initializing logger ... '.cyan)
-  app.use(logger())
-}
+// if (env !== 'test') {
+//   outstream.log('Initializing logger ... '.cyan)
+//   app.use(logger())
+// }
+
+outstream.log('Initializing logger ... '.cyan)
+app.use(logger())
 
 outstream.log(checkMark.green + '\n')
 outstream.log('Initializing template engine ... '.cyan)
@@ -50,7 +55,9 @@ pug.use(app)
 outstream.log(checkMark.green + '\n')
 outstream.log('Initializing database connection ... '.cyan)
 
-mongoose.connect('mongodb://localhost/vocabubands')
+const dbName = process.env.NODE_ENV !== 'test' ? 'vocabubands' : 'testv'
+
+mongoose.connect(`mongodb://localhost/${dbName}`)
 mongoose.Promise = Promise
 const db = mongoose.connection
 db.on('error', (err) => { console.log('\nconnection error: ' + err) })
