@@ -11,19 +11,33 @@ function * updateUser (action) {
   const state = yield select()
   const user = state.user
 
-  try {
-    const response = yield call(updateExistingUser, user)
-    yield put(updateUsersList(response.data.data.updateUser))
-    yield put(sort())
+  if (user.first_name === '') {
+    action.e.preventDefault()
+    toastr.warning('WARNING', 'The First Name field is required')
+  } else if (user.last_name === '') {
+    action.e.preventDefault()
+    toastr.warning('WARNING', 'The Last Name field is required')
+  } else if (state.isAdmin && user.net_id === '') {
+    action.e.preventDefault()
+    toastr.warning('WARNING', 'The Net ID field is required')
+  } else if (user.level === '') {
+    action.e.preventDefault()
+    toastr.warning('WARNING', 'The Enrollment Level field is required')
+  } else {
+    try {
+      const response = yield call(updateExistingUser, user)
+      yield put(updateUsersList(response.data.data.updateUser))
+      yield put(sort())
 
-    if (state.isAdmin) {
-      toastr.success('SUCCESS', `${user.first_name} has been updated`)
-    } else {
-      toastr.success('SUCCESS', 'Your information has been updated')
+      if (state.isAdmin) {
+        toastr.success('SUCCESS', `${user.first_name} has been updated`)
+      } else {
+        toastr.success('SUCCESS', 'Your information has been updated')
+      }
+    } catch (err) {
+      console.log(err)
+      toastr.error('ERROR', `Something went wrong while updating ${user.first_name} ${user.last_name}. Check the console for error messages.`, { timeOut: 0 })
     }
-  } catch (err) {
-    console.log(err)
-    toastr.error('ERROR', `Something went wrong while updating ${user.first_name} ${user.last_name}. Check the console for error messages.`, { timeOut: 0 })
   }
 }
 

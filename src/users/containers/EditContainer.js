@@ -15,7 +15,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 
   handleSubmit: (e) => {
-    dispatch(updateUser())
+    e.persist()
+    dispatch(updateUser(e))
   },
 
   lastNameChange: (e) => {

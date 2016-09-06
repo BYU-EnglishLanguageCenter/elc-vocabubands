@@ -10,6 +10,8 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
       Submit
     </a>
 
+  let title = 'Welcome to Vocabubands!'
+
   if (showFullForm) {
     cancel =
       <Link to='/users' className='btn btn-default pull-right' type='button'>
@@ -29,6 +31,8 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
         Submit
       </Link>
 
+    title = 'Add New User'
+
     typeForm =
       <div className='form-group'>
         <label htmlFor='type'>
@@ -46,7 +50,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
     <div className='newUser'>
       <div className='align-center'>
         <h1>
-          Welcome to Vocabubands!
+          {title}
         </h1>
         <p className='margin-top-30'>
           Fill out the form below to get started.

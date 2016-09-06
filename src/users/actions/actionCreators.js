@@ -4,8 +4,9 @@ import { ADD_NEW_USER, ADD_TO_USERS_LIST, CLEAR_USER, DELETE_USER, FETCH_USER, F
          REMOVE_FROM_USERS_LIST, SORT, SORT_FIRST_NAME, SORT_LAST_NAME, SORT_LEVEL, SORT_TYPE, UPDATE_FIRST_NAME, UPDATE_LAST_NAME,
          UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE, UPDATE_USER, UPDATE_USERS_LIST } from './TYPES'
 
-export const addNewUser = () => ({
-  type: ADD_NEW_USER
+export const addNewUser = (e) => ({
+  type: ADD_NEW_USER,
+  e
 })
 
 export const addToUsersList = (user) => ({
@@ -95,8 +96,9 @@ export const updateType = (value) => ({
   value
 })
 
-export const updateUser = () => ({
-  type: UPDATE_USER
+export const updateUser = (e) => ({
+  type: UPDATE_USER,
+  e
 })
 
 export const updateUsersList = (user) => ({
