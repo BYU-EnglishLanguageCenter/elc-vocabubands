@@ -21,12 +21,13 @@ const ListChangesModel = require('../../models/ListChanges')
 const ListModel = require('../../models/List')
 const UserModel = require('../../models/User')
 
-const Query = new GraphQLObjectType({
+const QueryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
     allLists: {
       type: new GraphQLList(AllListsType),
-      resolve: (parent, args, session) => AllListsModel.find({})
+      resolve: (parent, args, session) =>
+        AllListsModel.find({})
     },
 
     listChanges: {
@@ -39,7 +40,8 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.findOne({list_id: list_id, list_type, net_id: session.user})
+      resolve: (parent, { list_id, list_type }, session) =>
+        ListChangesModel.findOne({list_id, list_type, net_id: session.user})
     },
 
     list: {
@@ -47,9 +49,13 @@ const Query = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLInt)
+        },
+        type: {
+          type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { id }) => ListModel.findOne({id: id})
+      resolve: (parent, { id, type }, session) =>
+        ListModel.findOne({id, type})
     },
 
     user: {
@@ -60,38 +66,37 @@ const Query = new GraphQLObjectType({
         }
       },
       resolve: (parent, { id }, session) =>
-        UserModel.findOne({_id: id}).then(user => {
-          if (session.isAdmin || session.user === user.net_id) {
-            return user
-          } else {
+        UserModel.findOne({_id: id})
+          .then(user => {
+            if (user !== null && (session.isAdmin || session.user === user.net_id)) {
+              return user
+            }
+
             return null
-          }
-        }).catch(err => {
-          console.log(err)
-          return null
-        })
-
-      //   console.log(session.user)
-      //   console.log(user.net_id)
-      //   if (session.isAdmin || session.user === user.net_id) {
-      //     return user
-      //   } else {
-      //     return null
-      //   }
-
+          })
+          .catch(err => {
+            console.log(err)
+            return null
+          })
     },
 
     users: {
       type: new GraphQLList(UserType),
-      resolve: (parent, args, session) => {
-        if (session.isAdmin) {
-          return UserModel.find({})
-        } else {
-          return null
-        }
-      }
+      resolve: (parent, args, session) =>
+        UserModel.find({})
+          .then(users => {
+            if (session.isAdmin) {
+              return users
+            }
+
+            return null
+          })
+          .catch(err => {
+            console.log(err)
+            return null
+          })
     }
   }
 })
 
-module.exports = Query
+module.exports = QueryType

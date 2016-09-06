@@ -2,12 +2,18 @@
 
 import { CLEAR_USER, LOAD_USER, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE } from '../actions/TYPES'
 
-const user = (state = {}, action) => {
+const initialState = {
+  first_name: '',
+  last_name: '',
+  net_id: '',
+  level: '',
+  type: 'student'
+}
+
+const user = (state = initialState, action) => {
   switch (action.type) {
     case CLEAR_USER:
-      return {
-        type: 'student'
-      }
+      return initialState
     case LOAD_USER:
       return action.user
     case UPDATE_FIRST_NAME:

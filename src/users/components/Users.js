@@ -2,11 +2,11 @@
 
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import UserRow from './UserRow'
+import UserRowContainer from '../containers/UserRowContainer'
 
 const Users = ({ sortByFirstName, sortByLastName, sortByLevel, sortByType, users }) => {
   const userRows = users.map(user =>
-    <UserRow key={user._id} {...user} />
+    <UserRowContainer key={user._id} {...user} />
   )
 
   return (

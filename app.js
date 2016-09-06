@@ -1,9 +1,20 @@
 'use strict'
 
 require('colors')
-const checkMark = '\u2714'
 
-process.stdout.write('Importing dependencies ... '.cyan)
+const checkMark = '\u2714'
+const env = process.env.NODE_ENV || 'development'
+let outstream = {}
+
+// if (env !== 'test') {
+//   outstream.log = x => process.stdout.write(x)
+// } else {
+//   outstream.log = x => {}
+// }
+
+outstream.log = x => process.stdout.write(x)
+
+outstream.log('Importing dependencies ... '.cyan)
 
 const koa = require('koa')
 const graphqlHTTP = require('koa-graphql')
@@ -20,16 +31,20 @@ const listsRouter = require('./routes/lists')
 const usersRouter = require('./routes/users')
 const schema = require('./graphql')
 
-console.log(checkMark.green)
+outstream.log(checkMark.green + '\n')
 
-const app = koa()
+let app = koa()
 
-process.stdout.write('Initializing logger ... '.cyan)
+// if (env !== 'test') {
+//   outstream.log('Initializing logger ... '.cyan)
+//   app.use(logger())
+// }
 
+outstream.log('Initializing logger ... '.cyan)
 app.use(logger())
 
-console.log(checkMark.green)
-process.stdout.write('Initializing template engine ... '.cyan)
+outstream.log(checkMark.green + '\n')
+outstream.log('Initializing template engine ... '.cyan)
 
 const pug = new Pug({
   viewPath: './views',
@@ -37,16 +52,20 @@ const pug = new Pug({
 })
 pug.use(app)
 
-console.log(checkMark.green)
-process.stdout.write('Initializing database connection ... '.cyan)
+outstream.log(checkMark.green + '\n')
+outstream.log('Initializing database connection ... '.cyan)
 
-mongoose.connect('mongodb://localhost/vocabubands')
+const dbName = process.env.NODE_ENV !== 'test' ? 'vocabubands' : 'testv'
+
+mongoose.connect(`mongodb://localhost/${dbName}`)
 mongoose.Promise = Promise
 const db = mongoose.connection
 db.on('error', (err) => { console.log('\nconnection error: ' + err) })
 
-console.log(checkMark.green)
-process.stdout.write('Initializing sessions ... '.cyan)
+app.context.db = db
+
+outstream.log(checkMark.green + '\n')
+outstream.log('Initializing sessions ... '.cyan)
 
 app.keys = ['vcb']
 app.use(session(app))
@@ -57,8 +76,8 @@ app.use(function * (next) {
   yield next
 })
 
-console.log(checkMark.green)
-process.stdout.write('Mounting graphql server ... '.cyan)
+outstream.log(checkMark.green + '\n')
+outstream.log('Mounting graphql server ... '.cyan)
 
 app.use(mount('/graphql', graphqlHTTP((request, context) => ({
   schema: schema,
@@ -66,15 +85,8 @@ app.use(mount('/graphql', graphqlHTTP((request, context) => ({
   pretty: true
 }))))
 
-console.log(checkMark.green)
-process.stdout.write('Registering routes ... '.cyan)
-
-// app.use(function * (next) {
-//   let ctx = this
-//   console.log(ctx.session)
-//   yield next
-//   console.log(ctx.session)
-// })
+outstream.log(checkMark.green + '\n')
+outstream.log('Registering routes ... '.cyan)
 
 app.use(errorsRoute)
 
@@ -89,7 +101,11 @@ app.use(usersRouter.allowedMethods())
 
 app.use(serve(__dirname + '/public'))
 
-console.log(checkMark.green)
+outstream.log(checkMark.green + '\n')
 
-app.listen(8080)
-console.log('Listening on http://localhost:8080'.grey)
+if (!module.parent) {
+  app.listen(8080)
+  outstream.log('Listening on http://localhost:8080'.grey + '\n')
+}
+
+module.exports = app

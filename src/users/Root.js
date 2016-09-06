@@ -12,7 +12,7 @@ import MainLayout from '../common/components/MainLayout'
 import NewUserContainer from './containers/NewUserContainer'
 import UsersContainer from './containers/UsersContainer'
 import rootSaga from './sagas'
-import { clearUser, fetchUser, fetchUsers } from './actions/actionCreators'
+import { clearUser, sort } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -25,10 +25,12 @@ const Root = () => (
   <Provider store={store}>
     <div>
       <Router history={browserHistory}>
-        <Route path='users' component={Main}>
-          <IndexRoute component={UsersContainer} onEnter={() => { store.dispatch(fetchUsers()) }} />
+        <Route path='users' component={Main} onEnter={() => { store.dispatch(sort()) }}>
+          <IndexRoute component={UsersContainer} />
           <Route path='new' component={NewUserContainer} onEnter={() => { store.dispatch(clearUser()) }} />
-          <Route path='edit/:id' component={EditContainer} onEnter={({params}) => { store.dispatch(fetchUser(params.id)) }} />
+          <Route path='edit' component={EditContainer}>
+            <Route path=':id' />
+          </Route>
         </Route>
       </Router>
       <ReduxToastr position='top-center' confirmOptions={{okText: 'Yes', cancelText: 'Cancel'}} />

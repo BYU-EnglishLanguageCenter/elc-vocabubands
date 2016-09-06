@@ -17,7 +17,8 @@ const ListChangesType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString)
     },
     rows: {
-      type: new GraphQLList(GraphQLInt)
+      type: new GraphQLList(GraphQLInt),
+      description: 'Rows that have been marked done for this list'
     }
   }
 })

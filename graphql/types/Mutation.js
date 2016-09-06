@@ -2,7 +2,6 @@
 
 // dependencies
 const graphql = require('graphql')
-const sortBy = require('lodash/sortBy')
 const GraphQLID = graphql.GraphQLID
 const GraphQLInt = graphql.GraphQLInt
 const GraphQLNonNull = graphql.GraphQLNonNull
@@ -11,9 +10,12 @@ const GraphQLString = graphql.GraphQLString
 
 // graphql types
 const ListChangesInputType = require('./ListChangesInput')
+const ListChangesType = require('./ListChanges')
 const ListInputType = require('./ListInput')
+const ListType = require('./List')
 const NewUserInputType = require('./NewUserInput')
 const UpdateUserInputType = require('./UpdateUserInput')
+const UserType = require('./User')
 
 // mongodb models
 const ListChangesModel = require('../../models/ListChanges')
@@ -24,7 +26,7 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     addNewUser: {
-      type: GraphQLString,
+      type: UserType,
       args: {
         user: {
           type: new GraphQLNonNull(NewUserInputType)
@@ -34,48 +36,30 @@ const Mutation = new GraphQLObjectType({
         const newUser = new UserModel({
           first_name: user.first_name,
           last_name: user.last_name,
-          net_id: user.net_id !== 'undefined' ? user.net_id : session.user,
-          level: user.level,
-          type: user.type !== 'undefined' ? user.type : 'student'
+          net_id: user.net_id !== '' ? user.net_id : session.user,
+          level: user.level !== '' ? user.level : 'none',
+          type: user.type !== '' ? user.type : 'student'
         })
 
-        newUser.save()
-
-        return
+        return newUser.save()
+          .then(user => user)
+          .catch(err => console.log(err))
       }
     },
 
     addListChange: {
-      type: GraphQLString,
+      type: ListChangesType,
       args: {
         changes: {
           type: new GraphQLNonNull(ListChangesInputType)
         }
       },
-      resolve: (root, { changes }, session) => {
-        ListChangesModel.findOne({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}).then(res => {
-          if (res === null) {
-            const newChange = new ListChangesModel({
-              list_id: changes.list_id,
-              list_type: changes.list_type,
-              net_id: session.user,
-              rows: changes.rows
-            })
-            newChange.save()
-          } else {
-            let rows = [
-              ...res.rows,
-              ...changes.rows
-            ]
-            rows = sortBy(rows)
-            ListChangesModel.update({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user}, {$set: {rows: rows}}).exec()
-          }
-        }).catch(err => {
-          console.log(err)
-        })
-
-        return
-      }
+      resolve: (root, { changes }, session) =>
+        ListChangesModel.findOneAndUpdate({list_id: changes.list_id, list_type: changes.list_type, net_id: session.user},
+          {$set: { rows: changes.rows }},
+          {new: true, upsert: true})
+          .then(listChanges => listChanges)
+          .catch(err => console.log(err))
     },
 
     removeListChanges: {
@@ -88,7 +72,13 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (parent, { list_id, list_type }, session) => ListChangesModel.remove({list_id: list_id, list_type: list_type, net_id: session.user})
+      resolve: (parent, { list_id, list_type }, session) =>
+        ListChangesModel.remove({list_id, list_type, net_id: session.user})
+          .then(info => 'success')
+          .catch(err => {
+            console.log(err)
+            return 'error'
+          })
     },
 
     removeUser: {
@@ -98,49 +88,47 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLID)
         }
       },
-      resolve: (root, { _id }, session) => {
-        UserModel.remove({_id: _id}, function (err, success) {
-          if (err) {
+      resolve: (root, { _id }, session) =>
+        UserModel.remove({_id: _id})
+          .then(info => 'success')
+          .catch(err => {
             console.log(err)
-            return err
-          }
-          return success
-        })
+            return 'error'
+          })
         // also remove any entries under their net_id in list_changes
-      }
     },
 
     updateList: {
-      type: GraphQLString,
+      type: ListType,
       args: {
         list: {
           type: new GraphQLNonNull(ListInputType)
         }
       },
       resolve: (root, { list }, session) => {
-        // console.log(list)
         if (session.isAdmin) {
-          return ListModel.update({id: list.id}, { $set: { data: list.data } })
+          return ListModel.findOneAndUpdate({id: list.id},
+            {$set: { data: list.data }},
+            {new: true})
+            .then(list => list)
+            .catch(err => console.log(err))
         }
       }
     },
 
     updateUser: {
-      type: GraphQLString,
+      type: UserType,
       args: {
         user: {
           type: new GraphQLNonNull(UpdateUserInputType)
         }
       },
-      resolve: (root, { user }, session) => {
-        UserModel.update({_id: user._id}, {$set: { first_name: user.first_name, last_name: user.last_name, net_id: user.net_id, level: user.level, type: user.type }}, function (err, success) {
-          if (err) {
-            console.log(err)
-            return
-          }
-          return
-        })
-      }
+      resolve: (root, { user }, session) =>
+        UserModel.findOneAndUpdate({_id: user._id},
+          {$set: { first_name: user.first_name, last_name: user.last_name, net_id: user.net_id, level: user.level, type: user.type }},
+          { new: true })
+          .then(user => user)
+          .catch(err => console.log(err))
     }
   }
 })

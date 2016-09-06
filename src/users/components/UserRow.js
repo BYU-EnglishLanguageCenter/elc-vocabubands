@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const UserRow = ({ _id, first_name, last_name, level, type }) => {
+const UserRow = ({ _id, first_name, last_name, level, type, loadUser }) => {
   return (
     <tr>
       <td>{first_name}</td>
@@ -11,7 +11,7 @@ const UserRow = ({ _id, first_name, last_name, level, type }) => {
       <td>{level}</td>
       <td>{type}</td>
       <td className='butn-cell-no-style edit-user-cell-width'>
-        <Link to={`/users/edit/${_id}`}>
+        <Link to={`/users/edit/${_id}`} onClick={loadUser}>
           <span className='glyphicon glyphicon-pencil edit-pencil' aria-hidden='true' />
         </Link>
       </td>

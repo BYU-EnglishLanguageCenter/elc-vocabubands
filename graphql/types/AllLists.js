@@ -10,10 +10,12 @@ const AllListsType = new GraphQLObjectType({
   name: 'AllLists',
   fields: {
     type: {
-      type: GraphQLString
+      type: GraphQLString,
+      description: 'List type, e.g. avl, pre-avl'
     },
     list_ids: {
-      type: new GraphQLList(GraphQLInt)
+      type: new GraphQLList(GraphQLInt),
+      description: 'All of the list ids that have the given list type'
     }
   }
 })

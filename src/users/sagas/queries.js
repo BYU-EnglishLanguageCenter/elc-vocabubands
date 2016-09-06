@@ -3,7 +3,7 @@
 import axios from 'axios'
 
 export const addUser = (user) => {
-  return axios.post(`/graphql?query=mutation{addNewUser(user:{first_name:"${user.first_name}",last_name:"${user.last_name}",net_id:"${user.net_id}",level:"${user.level}",type:"${user.type}"})}`)
+  return axios.post(`/graphql?query=mutation{addNewUser(user:{first_name:"${user.first_name}",last_name:"${user.last_name}",net_id:"${user.net_id}",level:"${user.level}",type:"${user.type}"}){_id,first_name,last_name,net_id,level,type}}`)
 }
 
 export const deleteExistingUser = (_id) => {
@@ -19,5 +19,5 @@ export const getUsers = () => {
 }
 
 export const updateExistingUser = (user) => {
-  return axios.post(`/graphql?query=mutation{updateUser(user:{_id:"${user._id}",first_name:"${user.first_name}",last_name:"${user.last_name}",net_id:"${user.net_id}",level:"${user.level}",type:"${user.type}"})}`)
+  return axios.post(`/graphql?query=mutation{updateUser(user:{_id:"${user._id}",first_name:"${user.first_name}",last_name:"${user.last_name}",net_id:"${user.net_id}",level:"${user.level}",type:"${user.type}"}){_id,first_name,last_name,net_id,level,type}}`)
 }

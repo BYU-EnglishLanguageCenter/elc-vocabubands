@@ -1,11 +1,17 @@
 'use strict'
 
-import { ADD_NEW_USER, CLEAR_USER, DELETE_USER, FETCH_USER, FETCH_USERS, LOAD_USER, LOAD_USERS, SORT_FIRST_NAME,
-         SORT_LAST_NAME, SORT_LEVEL, SORT_TYPE, UPDATE_FIRST_NAME, UPDATE_LAST_NAME, UPDATE_LEVEL, UPDATE_NET_ID,
-         UPDATE_TYPE, UPDATE_USER } from './TYPES'
+import { ADD_NEW_USER, ADD_TO_USERS_LIST, CLEAR_USER, DELETE_USER, FETCH_USER, FETCH_USERS, LOAD_USER, LOAD_USER_BY_ID, LOAD_USERS,
+         REMOVE_FROM_USERS_LIST, SORT, SORT_FIRST_NAME, SORT_LAST_NAME, SORT_LEVEL, SORT_TYPE, UPDATE_FIRST_NAME, UPDATE_LAST_NAME,
+         UPDATE_LEVEL, UPDATE_NET_ID, UPDATE_TYPE, UPDATE_USER, UPDATE_USERS_LIST } from './TYPES'
 
-export const addNewUser = () => ({
-  type: ADD_NEW_USER
+export const addNewUser = (e) => ({
+  type: ADD_NEW_USER,
+  e
+})
+
+export const addToUsersList = (user) => ({
+  type: ADD_TO_USERS_LIST,
+  user
 })
 
 export const clearUser = () => ({
@@ -30,9 +36,23 @@ export const loadUser = (user) => ({
   user
 })
 
+export const loadUserById = (id) => ({
+  type: LOAD_USER_BY_ID,
+  id
+})
+
 export const loadUsers = (users) => ({
   type: LOAD_USERS,
   users
+})
+
+export const removeFromUsersList = (id) => ({
+  type: REMOVE_FROM_USERS_LIST,
+  id
+})
+
+export const sort = () => ({
+  type: SORT
 })
 
 export const sortFirstName = () => ({
@@ -76,6 +96,12 @@ export const updateType = (value) => ({
   value
 })
 
-export const updateUser = () => ({
-  type: UPDATE_USER
+export const updateUser = (e) => ({
+  type: UPDATE_USER,
+  e
+})
+
+export const updateUsersList = (user) => ({
+  type: UPDATE_USERS_LIST,
+  user
 })

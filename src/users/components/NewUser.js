@@ -10,7 +10,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
       Submit
     </a>
 
-  // https://cas.byu.edu/cas/login?service=http://localhost:8080
+  let title = 'Welcome to Vocabubands!'
 
   if (showFullForm) {
     cancel =
@@ -31,6 +31,8 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
         Submit
       </Link>
 
+    title = 'Add New User'
+
     typeForm =
       <div className='form-group'>
         <label htmlFor='type'>
@@ -48,7 +50,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
     <div className='newUser'>
       <div className='align-center'>
         <h1>
-          Welcome to Vocabubands!
+          {title}
         </h1>
         <p className='margin-top-30'>
           Fill out the form below to get started.
@@ -72,7 +74,7 @@ const NewUser = ({ firstNameChange, handleSubmit, lastNameChange, levelChange, n
           <label htmlFor='level'>
             Enrollment Level
           </label>
-          <select className='form-control' id='level' value={user.level} onChange={levelChange}>
+          <select className='form-control' id='level' value={user.level} onChange={levelChange} required >
             <option value=''>--------</option>
             <option value='FP'>Foundations Prep</option>
             <option value='FA'>Foundations A</option>
