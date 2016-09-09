@@ -3,6 +3,7 @@
 import React from 'react'
 import vex from 'vex-js'
 import dialogPolyfill from 'dialog-polyfill'
+import { $ } from '../../../resources/js/util'
 import PopupOverlay, { showPopup } from '../../common/components/PopupOverlay'
 
 vex.registerPlugin(require('vex-dialog'))
@@ -13,27 +14,39 @@ const start = () => {
 }
 
 const a = () => {
-  const dialog = document.getElementById('d')
+  const dialog = $('d')
   dialogPolyfill.registerDialog(dialog)
   dialog.showModal()
 }
 
+const close = () => {
+  $('d').close()
+}
+
 const Test = () => (
   <div className='list'>
-    <button className='btn btn-default' type='button' onClick={showPopup}>
+    <button className='btn btn-default show-popup' type='button' onClick={showPopup}>
       Overlay Popup
     </button>
     <PopupOverlay>
       <p>
-        <button className='btn btn-success' onClick={start}>
-          Start
-        </button>
+        hello
       </p>
     </PopupOverlay>
-    <dialog className='modal' id='d'>hi</dialog>
+    <dialog className='modal' id='d'>
+      hi
+      <br /><br />
+      <button className='btn btn-default' onClick={close}>
+        Close
+      </button>
+    </dialog>
     <br /><br />
     <button className='btn btn-primary' onClick={a}>
       Show Dialog
+    </button>
+    <br /><br />
+    <button className='btn btn-success' onClick={start}>
+      Vex overlay
     </button>
   </div>
 )
