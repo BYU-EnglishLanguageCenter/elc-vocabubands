@@ -4,13 +4,21 @@ import React from 'react'
 import { $ } from '../../../resources/js/util.js'
 
 export const hidePopup = () => {
-  $('popup').style.display = 'none'
+  $('popup').classList.remove('popup')
+  $('popup').classList.add('popup-hidden')
+  // $('popup').style.display = 'none'
+  // $('popup').style.visibility = 'hidden'
+  // $('popup').style.opacity = 0
 }
 
 export const showPopup = () => {
-  $('popup').style.display = 'block'
+  $('popup').classList.remove('popup-hidden')
+  $('popup').classList.add('popup')
+  // $('popup').style.display = 'block'
+  // $('popup').style.visibility = 'visible'
   // $('popup').style.opacity = 1
-  fadeIn(1)
+  // $('popup').style.opacity = 1
+  // fadeIn(1)
   // $('popup-contents').focus()
 }
 
@@ -37,7 +45,7 @@ const PopupOverlay = ({ children }) => {
   }
 
   return (
-    <div className='popup' id='popup'>
+    <div className='popup-hidden' id='popup'>
       <div className='popup-contents' id='popup-contents'>
         <button className='btn btn-default pull-right' style={{'border': 'none', 'outline': 'none'}} onClick={hidePopup}>
           <span className='glyphicon glyphicon-remove' aria-hidden='true' />
