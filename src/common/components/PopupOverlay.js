@@ -6,33 +6,11 @@ import { $ } from '../../../resources/js/util.js'
 export const hidePopup = () => {
   $('popup').classList.remove('popup')
   $('popup').classList.add('popup-hidden')
-  // $('popup').style.display = 'none'
-  // $('popup').style.visibility = 'hidden'
-  // $('popup').style.opacity = 0
 }
 
 export const showPopup = () => {
   $('popup').classList.remove('popup-hidden')
   $('popup').classList.add('popup')
-  // $('popup').style.display = 'block'
-  // $('popup').style.visibility = 'visible'
-  // $('popup').style.opacity = 1
-  // $('popup').style.opacity = 1
-  // fadeIn(1)
-  // $('popup-contents').focus()
-}
-
-const fadeIn = (val) => {
-  // console.log(val)
-  // val += 0.1
-  // val = Number(val.toFixed(1))
-
-  $('popup').style.opacity = '0.' + val
-  val++
-
-  if (val <= 9) {
-    setTimeout(() => { fadeIn(val) }, 0)
-  }
 }
 
 const PopupOverlay = ({ children }) => {
