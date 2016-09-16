@@ -75,3 +75,136 @@
 #card2.flipped {
   transform: translateX(-100%) rotateY(-180deg);
 }
+
+#card3 {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: opacity 1s ease, transform 1s;
+}
+
+#card3 figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+#card3 .front {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+}
+
+#card3 .back {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+  transform: rotateY(180deg);
+}
+
+#card3.slide-left, #card4.slide-left {
+  opacity: 1;
+  transform: translateX(-100%) rotateY(60deg);
+}
+
+#card3.slide-right, #card4.slide-right {
+  opacity: 1;
+  transform: translateX(100%) rotateY(-60deg);
+}
+
+#card3.slide-origin, #card4.slide-origin, #left.slide-origin {
+  opacity: 1;
+  transform: translateX(0%) rotateY(0deg);
+}
+
+#card3.left {
+
+  transition: transfrom 0s;
+  transform: translateX(-100%) rotateY(60deg);
+}
+
+#card3.right {
+  opacity: 1;
+  transition: transfrom 0s;
+  transform: translateX(100%) rotateY(-60deg);
+}
+
+#card3.origin, #card4.origin {
+  opacity: 1;
+  transition: transfrom 0s;
+  transform: translateX(0%) rotateY(0deg);
+}
+
+#card4 {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: absolute;
+  transform: translateX(100%) rotateY(-60deg);
+  transform-style: preserve-3d;
+  transition: opacity 1s ease, transform 1s;
+}
+
+#card4 figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+#card4 .front {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+}
+
+#card4 .back {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+  transform: rotateY(180deg);
+}
+
+#card4.slide {
+  opacity: 1;
+  transform: translateX(0%) rotateY(0deg);
+}
+
+#left {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: absolute;
+  transform: translateX(-100%) rotateY(60deg);
+  transform-style: preserve-3d;
+  transition: opacity 1s ease, transform 1s;
+}
+
+#left figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+#left .front {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+}
+
+#left .back {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+  transform: rotateY(180deg);
+}
