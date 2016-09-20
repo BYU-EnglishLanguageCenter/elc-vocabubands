@@ -3,32 +3,6 @@
 import React from 'react'
 import { $ } from '../../../resources/js/util'
 
-const slide1 = () => {
-  $('card3').classList.toggle('slide-left')
-  $('card4').classList.toggle('slide-origin')
-  setTimeout(() => { $('card3').classList.toggle('slide-left'); $('card3').classList.toggle('right'); console.log('here') }, 1000)
-}
-
-const slide2 = () => {
-  // $('card3').classList.remove('slide-left')
-  // // $('card3').classList.add('right')
-  // $('card3').style.transition = 'transfrom 0s'
-  // $('card3').style.transform = 'translateX(100%) rotateY(-60deg)'
-  // $('card3').style.opacity = 1
-
-  $('card4').classList.remove('slide-origin')
-  $('card4').classList.add('slide-left')
-
-  $('card3').classList.toggle('right')
-  // $('card3').classList.add('slide-origin')
-}
-
-const slide3 = () => {
-  $('left').style.transition = 'transform 1s'
-  $('left').classList.add('slide-origin')
-  setTimeout(() => { $('left').style.transition = 'transform 0s'; $('left').classList.remove('slide-origin') }, 1000)
-}
-
 const leftToRight = () => {
   $('left').style.transition = 'opacity 1s, transform 1s'
   $('left').classList.add('slide-origin')
@@ -59,6 +33,11 @@ const rightToLeft = () => {
   }, 1000)
 }
 
+const flip = () => {
+  $('middle').style.transition = 'transform 1s'
+  $('middle').classList.toggle('flipped')
+}
+
 const Flashcards = () => (
   <div className='flashcards'>
     <div className='flashcard'>
@@ -79,21 +58,6 @@ const Flashcards = () => (
     </div>
 
     <section className='fcontainer'>
-      <div id='card'>
-        <figure className='front align-center'>
-          <h1>1</h1>
-        </figure>
-        <figure className='back align-center'>
-          <h1>2</h1>
-        </figure>
-      </div>
-    </section>
-
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={() => { $('card').classList.toggle('flipped') }}>
-      Flip
-    </button>
-
-    <section className='fcontainer'>
       <div id='card2'>
         <figure className='front align-center'>
           <h1>1</h1>
@@ -104,77 +68,58 @@ const Flashcards = () => (
       </div>
     </section>
 
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={() => { $('card2').classList.toggle('flipped') }}>
+    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={() => { $('card2').classList.toggle('flipped') }}>
       Flip
     </button>
 
-    <section className='fcontainer'>
-      <div id='card3'>
-        <figure className='front align-center'>
-          <h1>1</h1>
-        </figure>
-        <figure className='back align-center'>
-          <h1>2</h1>
-        </figure>
-      </div>
-      <div id='card4'>
-        <figure className='front align-center'>
-          <h1>2</h1>
-        </figure>
-        <figure className='back align-center'>
-          <h1>2</h1>
-        </figure>
-      </div>
-    </section>
+    <section className='flashcard-container'>
 
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={slide1}>
-      Slide1
-    </button>
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={slide2}>
-      Slide2
-    </button>
-
-    <section className='fcontainer'>
-      <div id='left'>
-        <figure className='front align-center'>
+      <div className='flashcard' id='left'>
+        <div className='front align-center'>
           <h1>left</h1>
           <p id='left-text'>
             this is coming in from the left card
           </p>
-        </figure>
-        <figure className='back align-center'>
+        </div>
+        <div className='back align-center'>
           <h1>2</h1>
-        </figure>
+        </div>
       </div>
-      <div id='middle'>
-        <figure className='front align-center'>
+
+      <div className='flashcard' id='middle'>
+        <div className='front align-center'>
           <h1>middle</h1>
           <p id='middle-text'>
             this is on the middle card
           </p>
-        </figure>
-        <figure className='back align-center'>
+        </div>
+        <div className='back align-center'>
           <h1>2</h1>
-        </figure>
+        </div>
       </div>
-      <div id='right'>
-        <figure className='front align-center'>
+
+      <div className='flashcard' id='right'>
+        <div className='front align-center'>
           <h1>right</h1>
           <p id='right-text'>
             this is coming in from the right card
           </p>
-        </figure>
-        <figure className='back align-center'>
+        </div>
+        <div className='back align-center'>
           <h1>2</h1>
-        </figure>
+        </div>
       </div>
+
     </section>
 
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={leftToRight}>
-      Left to Right
+    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={leftToRight}>
+      Prev
     </button>
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={rightToLeft}>
-      Right to Left
+    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={flip}>
+      Flip
+    </button>
+    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={rightToLeft}>
+      Next
     </button>
   </div>
 )

@@ -12,13 +12,13 @@
   padding-right: 40px;
 }
 
-/*.flashcard {
+.flashcard {
   height: 200px;
   width: 100%;
   background-color: rgba(0, 166, 216, 1);
   border-radius: 2px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
-}*/
+}
 
 
 .fcontainer {
@@ -177,92 +177,108 @@
   transform: translateX(0%) rotateY(0deg);
 }
 
-
-
-
-
-
-
-
-
-
-
-.flashcard-container {
-  height: 200px;
-  width: 100%;
-  margin-top: 200px;
-  perspective: 800px;
-  position: relative;
-}
-
-.flashcard {
+#left {
   height: 100%;
   width: 100%;
+  opacity: 1;
   position: absolute;
+  transform: translateX(-100%) rotateY(60deg);
   transform-style: preserve-3d;
   transition: opacity 1s ease, transform 1s;
 }
 
-.flashcard div {
-  backface-visibility: hidden;
+#left figure {
+  margin: 0;
   display: block;
+  position: absolute;
   height: 100%;
   width: 100%;
-  margin: 0;
-  position: absolute;
+  backface-visibility: hidden;
 }
 
-.flashcard .front {
+#left .front {
   background-color: rgba(0, 166, 216, 1);
   border-radius: 2px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
 }
 
-.flashcard .back {
+#left .back {
   background-color: rgba(0, 166, 216, 1);
   border-radius: 2px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
   transform: rotateY(180deg);
 }
 
-#left {
-  opacity: 0;
-  transform: translateX(-100%) rotateY(60deg);
+#middle {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: opacity 1s ease, transform 1s;
 }
 
-#middle {
-  opacity: 1;
-  transform-origin: right center;
+#middle figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+#middle .front {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+}
+
+#middle .back {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+  transform: rotateY(180deg);
 }
 
 #right {
-  opacity: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: absolute;
   transform: translateX(100%) rotateY(-60deg);
+  transform-style: preserve-3d;
+  transition: opacity 1s ease, transform 1s;
 }
 
-#middle.flipped {
-  transform: translateX(-100%) rotateY(-180deg);
+#right figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
 }
 
-#middle.flipped.slide-left {
-  transform-origin: right center;
-  transform: translateX(-200%) rotateY(-120deg);
+#right .front {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
 }
 
-#middle.flipped.slide-right {
-  transform-origin: right center;
-  transform: translateX(10%) rotateY(-240deg);
+#right .back {
+  background-color: rgba(0, 166, 216, 1);
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+  transform: rotateY(180deg);
 }
 
-#middle.slide-left {
-  opacity: 0;
-  transform-origin: center center;
+#left.slide-left, #middle.slide-left, #right.slide-left {
+  opacity: 1;
   transform: translateX(-100%) rotateY(60deg);
 }
 
-#middle.slide-right {
-  opacity: 0;
-  transform-origin: center center;
+#left.slide-right, #middle.slide-right, #right.slide-right {
+  opacity: 1;
   transform: translateX(100%) rotateY(-60deg);
 }
 

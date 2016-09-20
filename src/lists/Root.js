@@ -9,6 +9,7 @@ import 'regenerator-runtime/runtime'
 import configureStore from './configureStore'
 import EditContainer from './containers/EditContainer'
 import FlashcardsContainer from './containers/FlashcardsContainer'
+import FlashcardsPlayground from './components/FlashcardsPlayground'
 import Home from './components/Home'
 import ListBareContainer from './containers/ListBareContainer'
 import ListContainer from './containers/ListContainer'
@@ -40,6 +41,7 @@ const Root = () => (
               <Route path='bare' component={ListBareContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
               <Route path='edit' component={ListEditContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
               <Route path='flashcards' component={FlashcardsContainer} />
+              <Route path='flashcards-playground' component={FlashcardsPlayground} />
             </Route>
           </Route>
           <Route path='preavl' component={ListLinksContainer} onEnter={() => { store.dispatch(setListType('preavl')) }} />

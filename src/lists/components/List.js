@@ -1,7 +1,7 @@
 'use strict'
 
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 import ListTableContainer from '../containers/ListTableContainer'
 
@@ -15,6 +15,10 @@ const List = ({ id, save, showSaveChanges, toggleData, type, undoChanges, whatTo
       </button>
   }
 
+  const goToFlashcards = () => {
+    browserHistory.push(`/lists/${type}/${id}/flashcards`)
+  }
+
   return (
     <div className='list'>
       <h1 className='inline'>
@@ -22,6 +26,9 @@ const List = ({ id, save, showSaveChanges, toggleData, type, undoChanges, whatTo
       </h1>
       <div className='pull-right inline'>
         <DropdownButton title='More Options' bsStyle='default' id='options' type='button' pullRight>
+          <MenuItem onClick={goToFlashcards}>
+            Flashcards
+          </MenuItem>
           <MenuItem onClick={toggleData}>
             {whatToShow}
           </MenuItem>
