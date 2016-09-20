@@ -50,11 +50,11 @@ router.get('/home', loginRequired, function * (next) {
 router.get('/login', function * (next) {
   let ctx = this
   const query = ctx.request.query
-  let redirect = '/home'
+  let redirect = query.path || '/home'
 
   if (query.ticket) {
     const ticket = query.ticket
-    const service = 'http://localhost:8080/login'
+    const service = `http://localhost:8080/login?path=${redirect}`
     let user
 
     try {
@@ -75,10 +75,10 @@ router.get('/login', function * (next) {
       redirect = '/users/new'
     } else if (user.type === 'admin') {
       ctx.session.isAdmin = 'true'
-      redirect = '/admin'
+      redirect = redirect === '/home' ? '/admin' : redirect
     }
   } else {
-    redirect = 'https://cas.byu.edu/cas/login?service=http://localhost:8080/login'
+    redirect = `https://cas.byu.edu/cas/login?service=http://localhost:8080/login?path=${redirect}`
   }
 
   ctx.redirect(redirect)
