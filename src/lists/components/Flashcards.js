@@ -29,6 +29,36 @@ const slide3 = () => {
   setTimeout(() => { $('left').style.transition = 'transform 0s'; $('left').classList.remove('slide-origin') }, 1000)
 }
 
+const leftToRight = () => {
+  $('left').style.transition = 'opacity 1s, transform 1s'
+  $('left').classList.add('slide-origin')
+  $('middle').style.transition = 'opacity 1s, transform 1s'
+  $('middle').classList.add('slide-right')
+
+  setTimeout(() => {
+    $('middle-text').innerHTML = $('left-text').innerHTML
+    $('left').style.transition = 'transform 0s'
+    $('left').classList.remove('slide-origin')
+    $('middle').style.transition = 'transform 0s'
+    $('middle').classList.remove('slide-right')
+  }, 1000)
+}
+
+const rightToLeft = () => {
+  $('right').style.transition = 'opacity 1s, transform 1s'
+  $('right').classList.add('slide-origin')
+  $('middle').style.transition = 'opacity 1s, transform 1s'
+  $('middle').classList.add('slide-left')
+
+  setTimeout(() => {
+    $('middle-text').innerHTML = $('right-text').innerHTML
+    $('right').style.transition = 'transform 0s'
+    $('right').classList.remove('slide-origin')
+    $('middle').style.transition = 'transform 0s'
+    $('middle').classList.remove('slide-left')
+  }, 1000)
+}
+
 const Flashcards = () => (
   <div className='flashcards'>
     <div className='flashcard'>
@@ -77,6 +107,7 @@ const Flashcards = () => (
     <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={() => { $('card2').classList.toggle('flipped') }}>
       Flip
     </button>
+
     <section className='fcontainer'>
       <div id='card3'>
         <figure className='front align-center'>
@@ -94,14 +125,6 @@ const Flashcards = () => (
           <h1>2</h1>
         </figure>
       </div>
-      <div id='left'>
-        <figure className='front align-center'>
-          <h1>left</h1>
-        </figure>
-        <figure className='back align-center'>
-          <h1>2</h1>
-        </figure>
-      </div>
     </section>
 
     <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={slide1}>
@@ -110,8 +133,48 @@ const Flashcards = () => (
     <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={slide2}>
       Slide2
     </button>
-    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={slide3}>
-      Slide3
+
+    <section className='fcontainer'>
+      <div id='left'>
+        <figure className='front align-center'>
+          <h1>left</h1>
+          <p id='left-text'>
+            this is coming in from the left card
+          </p>
+        </figure>
+        <figure className='back align-center'>
+          <h1>2</h1>
+        </figure>
+      </div>
+      <div id='middle'>
+        <figure className='front align-center'>
+          <h1>middle</h1>
+          <p id='middle-text'>
+            this is on the middle card
+          </p>
+        </figure>
+        <figure className='back align-center'>
+          <h1>2</h1>
+        </figure>
+      </div>
+      <div id='right'>
+        <figure className='front align-center'>
+          <h1>right</h1>
+          <p id='right-text'>
+            this is coming in from the right card
+          </p>
+        </figure>
+        <figure className='back align-center'>
+          <h1>2</h1>
+        </figure>
+      </div>
+    </section>
+
+    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={leftToRight}>
+      Left to Right
+    </button>
+    <button className='btn btn-default' style={{'margin-top': '50px'}} onClick={rightToLeft}>
+      Right to Left
     </button>
   </div>
 )
