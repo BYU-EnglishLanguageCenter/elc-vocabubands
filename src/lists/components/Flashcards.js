@@ -3,10 +3,17 @@
 import React from 'react'
 import { $ } from '../../../resources/js/util'
 
-const leftToRight = () => {
-  $('left').style.transition = 'opacity 1s, transform 1s'
+let animationStatus = 'SET'
+
+const prev = () => {
+  if (animationStatus === 'ACTIVE') {
+    return
+  }
+
+  animationStatus = 'ACTIVE'
+  $('left').style.transition = 'opacity .75s, transform .75s'
   $('left').classList.add('slide-origin')
-  $('middle').style.transition = 'opacity 1s, transform 1s'
+  $('middle').style.transition = 'opacity .75s, transform .75s'
   $('middle').classList.add('slide-right')
 
   setTimeout(() => {
@@ -14,14 +21,21 @@ const leftToRight = () => {
     $('left').style.transition = 'transform 0s'
     $('left').classList.remove('slide-origin')
     $('middle').style.transition = 'transform 0s'
+    $('middle').classList.remove('flipped')
     $('middle').classList.remove('slide-right')
-  }, 1000)
+    animationStatus = 'SET'
+  }, 750)
 }
 
-const rightToLeft = () => {
-  $('right').style.transition = 'opacity 1s, transform 1s'
+const next = () => {
+  if (animationStatus === 'ACTIVE') {
+    return
+  }
+
+  animationStatus = 'ACTIVE'
+  $('right').style.transition = 'opacity .75s, transform .75s'
   $('right').classList.add('slide-origin')
-  $('middle').style.transition = 'opacity 1s, transform 1s'
+  $('middle').style.transition = 'opacity .75s, transform .75s'
   $('middle').classList.add('slide-left')
 
   setTimeout(() => {
@@ -29,51 +43,24 @@ const rightToLeft = () => {
     $('right').style.transition = 'transform 0s'
     $('right').classList.remove('slide-origin')
     $('middle').style.transition = 'transform 0s'
+    $('middle').classList.remove('flipped')
     $('middle').classList.remove('slide-left')
-  }, 1000)
+    animationStatus = 'SET'
+  }, 750)
 }
 
 const flip = () => {
+  if (animationStatus === 'ACTIVE') {
+    return
+  }
+
   $('middle').style.transition = 'transform 1s'
   $('middle').classList.toggle('flipped')
 }
 
-const Flashcards = () => (
+const Flashcards = ({ data }) => (
   <div className='flashcards'>
-    <div className='flashcard'>
-    </div>
-
-    <div className='buttons align-center'>
-      <div className='btn-group' role='group' aria-label='...'>
-        <button className='btn btn-default' type='button'>
-          Prev
-        </button>
-        <button className='btn btn-default' type='button'>
-          Flip
-        </button>
-        <button className='btn btn-default' type='button'>
-          Next
-        </button>
-      </div>
-    </div>
-
-    <section className='fcontainer'>
-      <div id='card2'>
-        <figure className='front align-center'>
-          <h1>1</h1>
-        </figure>
-        <figure className='back align-center'>
-          <h1>2</h1>
-        </figure>
-      </div>
-    </section>
-
-    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={() => { $('card2').classList.toggle('flipped') }}>
-      Flip
-    </button>
-
     <section className='flashcard-container'>
-
       <div className='flashcard' id='left'>
         <div className='front align-center'>
           <h1>left</h1>
@@ -90,7 +77,7 @@ const Flashcards = () => (
         <div className='front align-center'>
           <h1>middle</h1>
           <p id='middle-text'>
-            this is on the middle card
+            {data.length > 0 ? data[0].word : ''}
           </p>
         </div>
         <div className='back align-center'>
@@ -109,18 +96,21 @@ const Flashcards = () => (
           <h1>2</h1>
         </div>
       </div>
-
     </section>
 
-    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={leftToRight}>
-      Prev
-    </button>
-    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={flip}>
-      Flip
-    </button>
-    <button className='btn btn-default' style={{'marginTop': '50px'}} onClick={rightToLeft}>
-      Next
-    </button>
+    <div className='buttons align-center'>
+      <div className='btn-group' role='group' aria-label='...'>
+        <button className='btn btn-default' id='btn-prev' type='button' onClick={prev}>
+          Prev
+        </button>
+        <button className='btn btn-default' id='btn-flip' type='button' onClick={flip}>
+          Flip
+        </button>
+        <button className='btn btn-default' id='btn-next' type='button' onClick={next}>
+          Next
+        </button>
+      </div>
+    </div>
   </div>
 )
 

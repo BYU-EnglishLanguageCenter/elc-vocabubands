@@ -5,6 +5,7 @@ import watchFetchAllLists from './fetchAllLists'
 import watchFetchList from './fetchList'
 import watchFetchListChanges from './fetchListChanges'
 import watchSaveListChanges from './saveListChanges'
+import watchShuffleData from './shuffleData'
 import watchUpdateList from './updateList'
 
 export default function * rootSaga () {
@@ -14,6 +15,7 @@ export default function * rootSaga () {
     watchFetchList(),
     watchFetchListChanges(),
     watchSaveListChanges(),
+    watchShuffleData(),
     watchUpdateList()
   ]
 }

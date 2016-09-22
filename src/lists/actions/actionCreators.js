@@ -1,6 +1,6 @@
 import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, DELETE_LIST_CHANGES, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
-         LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, ROW_DONE, SAVE_LIST_CHANGES, SET_LIST_TYPE,
-         TOGGLE_LIST_DATA, UPDATE_BUILDING_WORDS, UPDATE_DEFINITION, UPDATE_LIST, UPDATE_SUPPORT_WORDS, UPDATE_WORD } from './TYPES'
+         LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, LOAD_SHUFFLED_DATA, ROW_DONE, SAVE_LIST_CHANGES, SET_LIST_TYPE,
+         SHUFFLE_DATA, TOGGLE_LIST_DATA, UPDATE_BUILDING_WORDS, UPDATE_DEFINITION, UPDATE_LIST, UPDATE_SUPPORT_WORDS, UPDATE_WORD } from './TYPES'
 
 export const clearListDataWithChanges = () => ({
   type: CLEAR_LIST_DATA_WITH_CHANGES
@@ -49,6 +49,11 @@ export const loadListDataWithChanges = (data, changes) => ({
   changes
 })
 
+export const loadShuffledData = (data) => ({
+  type: LOAD_SHUFFLED_DATA,
+  data
+})
+
 export const rowDone = (id) => ({
   type: ROW_DONE,
   id
@@ -61,6 +66,10 @@ export const saveListChanges = () => ({
 export const setListType = (listType) => ({
   type: SET_LIST_TYPE,
   listType
+})
+
+export const shuffleData = () => ({
+  type: SHUFFLE_DATA
 })
 
 export const toggleListData = () => ({

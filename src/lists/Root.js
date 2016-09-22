@@ -19,7 +19,7 @@ import MainLayout from '../common/components/MainLayout'
 import Test from './components/Test'
 import rootSaga from './sagas'
 
-import { clearListDataWithChanges, fetchListData, setListType, toggleListData } from './actions/actionCreators'
+import { clearListDataWithChanges, fetchListData, setListType, shuffleData, toggleListData } from './actions/actionCreators'
 
 const store = configureStore(window.__INITIAL_STATE__)
 store.runSaga(rootSaga)
@@ -40,7 +40,7 @@ const Root = () => (
               <IndexRoute component={ListContainer} />
               <Route path='bare' component={ListBareContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
               <Route path='edit' component={ListEditContainer} onEnter={() => { store.dispatch(toggleListData()) }} />
-              <Route path='flashcards' component={FlashcardsContainer} />
+              <Route path='flashcards' component={FlashcardsContainer} onEnter={() => { store.dispatch(shuffleData()) }} />
               <Route path='flashcards-playground' component={FlashcardsPlayground} />
             </Route>
           </Route>
