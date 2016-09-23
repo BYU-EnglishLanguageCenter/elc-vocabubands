@@ -21,6 +21,10 @@
   position: relative;
 }
 
+.flashcard-count {
+  margin: 50px auto;
+}
+
 .flashcard {
   height: 100%;
   width: 100%;
@@ -51,6 +55,29 @@
   transform: rotateY(180deg);
 }
 
+#test {
+  opacity: 1;
+  transform-origin: right center;
+}
+
+#middle.fake-right {
+  transform: translateX(25%) rotateY(-20deg);
+}
+
+#middle.fake-left {
+  transform: translate(-25%) rotateY(20deg);
+}
+
+#middle.flipped.fake-right {
+  transform-origin: right center;
+  transform: translateX(-75%) rotateY(-200deg);
+}
+
+#middle.flipped.fake-left {
+  transform-origin: right center;
+  transform: translateX(-125%) rotateY(-160deg);
+}
+
 #left {
   opacity: 0;
   transform: translateX(-100%) rotateY(60deg);
@@ -66,6 +93,18 @@
   transform: translateX(100%) rotateY(-60deg);
 }
 
+#middle.slide-left {
+  opacity: 0;
+  transform-origin: center center;
+  transform: translateX(-100%) rotateY(60deg);
+}
+
+#middle.slide-right {
+  opacity: 0;
+  transform-origin: center center;
+  transform: translateX(100%) rotateY(-60deg);
+}
+
 #middle.flipped {
   transform: translateX(-100%) rotateY(-180deg);
 }
@@ -78,18 +117,6 @@
 #middle.flipped.slide-right {
   transform-origin: right center;
   transform: translateX(10%) rotateY(-240deg);
-}
-
-#middle.slide-left {
-  opacity: 0;
-  transform-origin: center center;
-  transform: translateX(-100%) rotateY(60deg);
-}
-
-#middle.slide-right {
-  opacity: 0;
-  transform-origin: center center;
-  transform: translateX(100%) rotateY(-60deg);
 }
 
 #left.slide-origin, #right.slide-origin {

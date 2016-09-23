@@ -14,12 +14,8 @@ function * shuffleData (action) {
     state = yield select()
   }
 
-  // console.log(state.listData)
-
   let shuffledData = yield shuffle(state.listData)
   yield put(loadShuffledData(shuffledData))
-
-  // console.log(shuffledData)
 }
 
 export default function * watchShuffleData () {

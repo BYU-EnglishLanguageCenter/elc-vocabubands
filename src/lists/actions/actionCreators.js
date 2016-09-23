@@ -1,4 +1,4 @@
-import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, DELETE_LIST_CHANGES, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA,
+import { CLEAR_LIST_DATA_WITH_CHANGES, CLEAR_ROWS_DONE, DECREMENT_INDEX, DELETE_LIST_CHANGES, FETCH_ALL_LISTS, FETCH_LIST_CHANGES, FETCH_LIST_DATA, INCREMENT_INDEX,
          LOAD_ALL_LISTS, LOAD_LIST_CHANGES, LOAD_LIST_DATA, LOAD_LIST_DATA_WITH_CHANGES, LOAD_SHUFFLED_DATA, ROW_DONE, SAVE_LIST_CHANGES, SET_LIST_TYPE,
          SHUFFLE_DATA, TOGGLE_LIST_DATA, UPDATE_BUILDING_WORDS, UPDATE_DEFINITION, UPDATE_LIST, UPDATE_SUPPORT_WORDS, UPDATE_WORD } from './TYPES'
 
@@ -8,6 +8,10 @@ export const clearListDataWithChanges = () => ({
 
 export const clearRowsDone = () => ({
   type: CLEAR_ROWS_DONE
+})
+
+export const decrementIndex = () => ({
+  type: DECREMENT_INDEX
 })
 
 export const deleteListChanges = () => ({
@@ -26,6 +30,10 @@ export const fetchListChanges = () => ({
 export const fetchListData = (id) => ({
   type: FETCH_LIST_DATA,
   id
+})
+
+export const incrementIndex = () => ({
+  type: INCREMENT_INDEX
 })
 
 export const loadAllLists = (data) => ({
