@@ -24,9 +24,6 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
     $('middle').classList.add('slide-right')
 
     setTimeout(() => {
-      $('right-text').innerHTML = data[index].word
-      $('middle-text').innerHTML = data[index - 1].word
-      $('left-text').innerHTML = index > 1 ? data[index - 2].word : ''
       $('left').style.transition = 'transform 0s'
       $('left').classList.remove('slide-origin')
       $('middle').style.transition = 'transform 0s'
@@ -54,9 +51,6 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
     $('middle').classList.add('slide-left')
 
     setTimeout(() => {
-      $('left-text').innerHTML = data[index].word
-      $('middle-text').innerHTML = data[index + 1].word
-      $('right-text').innerHTML = index < data.length - 2 ? data[index + 2].word : ''
       $('right').style.transition = 'transform 0s'
       $('right').classList.remove('slide-origin')
       $('middle').style.transition = 'transform 0s'
@@ -116,7 +110,8 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
             </h1>
           </div>
           <div className='back align-center'>
-            <h1>2</h1>
+            <h1>
+            </h1>
           </div>
         </div>
 
@@ -127,7 +122,9 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
             </h1>
           </div>
           <div className='back align-center'>
-            <h1>2</h1>
+            <h1>
+              {data.length > 0 ? data[index].definition : ''}
+            </h1>
           </div>
         </div>
 
@@ -138,7 +135,8 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
             </h1>
           </div>
           <div className='back align-center'>
-            <h1>2</h1>
+            <h1>
+            </h1>
           </div>
         </div>
       </section>
@@ -158,12 +156,23 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
       </div>
 
       <div className='flashcard-count align-center'>
-        <p>
-          {index + 1} of {data.length}
-        </p>
+        <div className='form-group index-container align-center'>
+          <input type='text' className='form-control input-sm' value={index} id='index-input' />
+        </div>
+        of {data.length}
       </div>
     </div>
   )
 }
+
+// <div className='container'>
+//   <div className='row'>
+//     <div className='form-group col-xs-1'>
+//       <input type='text' className='form-control' value={index} id='index-input' /> of {data.length}
+//     </div>
+//   </div>
+// </div>
+
+
 
 export default Flashcards
