@@ -4,7 +4,7 @@ import React from 'react'
 // import Loader from 'react-loader'
 import { $ } from '../../../resources/js/util'
 
-const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
+const Flashcards = ({ data, displayIndex, index, decrementIndex, incrementIndex, updateIndex }) => {
   let animationStatus = 'SET'
 
   const prev = () => {
@@ -155,11 +155,11 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
         </div>
       </div>
 
-      <div className='flashcard-count align-center'>
-        <div className='form-group index-container align-center'>
-          <input type='text' className='form-control input-sm' value={index} id='index-input' />
+      <div className='form-inline align-center'>
+        <div className='form-group index-container'>
+          <input type='text' className='form-control input-sm' id='index' value={displayIndex} onChange={updateIndex} />
+          &nbsp;&nbsp;of {data.length}
         </div>
-        of {data.length}
       </div>
     </div>
   )
@@ -172,7 +172,5 @@ const Flashcards = ({ data, index, decrementIndex, incrementIndex }) => {
 //     </div>
 //   </div>
 // </div>
-
-
 
 export default Flashcards

@@ -1,12 +1,14 @@
 'use strict'
 
 import { connect } from 'react-redux'
-import { decrementIndex, incrementIndex } from '../actions/actionCreators'
+import { decrementIndex, incrementIndex, updateIndex } from '../actions/actionCreators'
 import Flashcards from '../components/Flashcards'
 
 const mapStateToProps = (state, ownProps) => ({
   data: state.flashcards.shuffledData,
-  index: state.flashcards.index
+  displayIndex: state.flashcards.displayIndex,
+  index: state.flashcards.index,
+  size: state.flashcards.shuffledData.length
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -16,6 +18,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   incrementIndex: () => {
     dispatch(incrementIndex())
+  },
+
+  updateIndex: (e) => {
+    dispatch(updateIndex(e.target.value))
   }
 })
 
